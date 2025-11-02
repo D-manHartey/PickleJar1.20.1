@@ -1,0 +1,6 @@
+{
+  "parent": "item/generarted",
+  "textures": {
+    "layer0": "the-pickle-jar:item/picklolium"
+  }
+}

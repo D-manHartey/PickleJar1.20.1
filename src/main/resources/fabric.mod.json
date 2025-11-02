@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "the-pickle-jar",
+	"version": "${version}",
+	"name": "The Pickle Jar",
+	"description": "The Green Man has manifested a pickle jar with chaotic powers, unveil it to bring chaos to the world",
+	"authors": [
+		"D-man Hartey"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "ARR",
+	"icon": "assets/the-pickle-jar/icon.png",
+	"environment": "*",
+	"entrypoints": {
+      "client": [
+        "net.dman.thepicklejar.ThePickleJarClient"
+      ],
+      "fabric-datagen": [
+        "net.dman.thepicklejar.ThePickleJarDataGenerator"
+      ],
+      "main": [
+        "net.dman.thepicklejar.ThePickleJar"
+      ]
+    },
+	"mixins": [
+		"the-pickle-jar.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.17.2",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
