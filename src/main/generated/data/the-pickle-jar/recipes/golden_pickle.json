@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "the-pickle-jar:picklolium"
+    },
+    "G": {
+      "item": "minecraft:gold_block"
+    },
+    "P": {
+      "item": "the-pickle-jar:pickle"
+    }
+  },
+  "pattern": [
+    "DGD",
+    "GPG",
+    "DGD"
+  ],
+  "result": {
+    "item": "the-pickle-jar:golden_pickle"
+  },
+  "show_notification": true
+}

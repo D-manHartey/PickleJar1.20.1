@@ -1,3 +1,23 @@
 {
-  "item.the-pickle-jar.picklolium": "Picklolium"
+  "item.the-pickle-jar.picklolium": "Picklolium",
+  "item.the-pickle-jar.rawpick": "Raw Picklolium",
+  "item.the-pickle-jar.broken_telephone": "Broken Telephone",
+  "item.the-pickle-jar.toon_steel": "Toon Steel",
+  "item.the-pickle-jar.rad_pick": "Radioactive Picklolium",
+
+  "item.the-pickle-jar.inkblot_mallet": "InkBlot Mallet",
+
+  "block.the-pickle-jar.picklolium_deposit": "Picklolium Deposit",
+
+  "block.the-pickle-jar.picklolium_block": "Block of Picklolium",
+
+  "item.the-pickle-jar.pickle": "Pickle",
+  "item.the-pickle-jar.golden_pickle": "Golden Pickle",
+  "item.the-pickle-jar.gherkin_soul": "Gherkin Soul",
+
+  "tooltip.the-pickle-jar.broken_telephone.tooltip": "Something powerful is inside, unusable...for now",
+  "tooltip.the-pickle-jar.toon_steel.tooltip": "Listen closely, there's raggidy music inside",
+  "tooltip.the-pickle-jar.rad_pick.tooltip": "Best not to hold it for too long",
+
+  "itemgroup.picklejar": "Pickle Jar"
 }
