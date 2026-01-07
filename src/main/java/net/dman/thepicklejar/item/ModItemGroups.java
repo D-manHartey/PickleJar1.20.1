@@ -21,6 +21,7 @@ public class ModItemGroups {
                         entries.add(ModItems.RADIOACTIVE_PICKLOLIUM);
 
                         entries.add(ModItems.INKBLOT_MALLET);
+                        entries.add(ModItems.RAGGIDY_SCYTHE);
 
                         entries.add(ModItems.BROKEN_TELEPHONE);
 

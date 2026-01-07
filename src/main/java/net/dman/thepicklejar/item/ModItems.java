@@ -28,6 +28,7 @@ public class ModItems {
     public static final Item GHERKIN_SOUL = registerItem("gherkin_soul", new Item(new FabricItemSettings()));
 
     public static final Item INKBLOT_MALLET = registerItem("inkblot_mallet", new Item(new FabricItemSettings().maxCount(1)));
+    public static final Item RAGGIDY_SCYTHE = registerItem("raggidy_scythe", new Item(new FabricItemSettings().maxCount(1)));
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries) {
         entries.add(PICKLOLIUM);
