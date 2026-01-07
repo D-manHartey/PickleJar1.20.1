@@ -104,5 +104,45 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.TOON_STEEL), conditionsFromItem(ModItems.TOON_STEEL))
                 .criterion(hasItem(ModItems.RADIOACTIVE_PICKLOLIUM), conditionsFromItem(ModItems.RADIOACTIVE_PICKLOLIUM))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.RAGGIDY_SCYTHE)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.TOON_HELMET, 1)
+                .pattern("TRT")
+                .pattern("T T")
+                .pattern("   ")
+                .input('T', ModItems.TOON_STEEL)
+                .input('R', ModItems.RADIOACTIVE_PICKLOLIUM)
+                .criterion(hasItem(ModItems.TOON_STEEL), conditionsFromItem(ModItems.TOON_STEEL))
+                .criterion(hasItem(ModItems.RADIOACTIVE_PICKLOLIUM), conditionsFromItem(ModItems.RADIOACTIVE_PICKLOLIUM))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.TOON_HELMET)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.TOON_CHESTPLATE, 1)
+                .pattern("T T")
+                .pattern("TRT")
+                .pattern("RTR")
+                .input('T', ModItems.TOON_STEEL)
+                .input('R', ModItems.RADIOACTIVE_PICKLOLIUM)
+                .criterion(hasItem(ModItems.TOON_STEEL), conditionsFromItem(ModItems.TOON_STEEL))
+                .criterion(hasItem(ModItems.RADIOACTIVE_PICKLOLIUM), conditionsFromItem(ModItems.RADIOACTIVE_PICKLOLIUM))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.TOON_CHESTPLATE)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.TOON_LEGGINGS, 1)
+                .pattern("TRT")
+                .pattern("R R")
+                .pattern("T T")
+                .input('T', ModItems.TOON_STEEL)
+                .input('R', ModItems.RADIOACTIVE_PICKLOLIUM)
+                .criterion(hasItem(ModItems.TOON_STEEL), conditionsFromItem(ModItems.TOON_STEEL))
+                .criterion(hasItem(ModItems.RADIOACTIVE_PICKLOLIUM), conditionsFromItem(ModItems.RADIOACTIVE_PICKLOLIUM))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.TOON_LEGGINGS)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.TOON_BOOTS, 1)
+                .pattern("   ")
+                .pattern("T T")
+                .pattern("R R")
+                .input('T', ModItems.TOON_STEEL)
+                .input('R', ModItems.RADIOACTIVE_PICKLOLIUM)
+                .criterion(hasItem(ModItems.TOON_STEEL), conditionsFromItem(ModItems.TOON_STEEL))
+                .criterion(hasItem(ModItems.RADIOACTIVE_PICKLOLIUM), conditionsFromItem(ModItems.RADIOACTIVE_PICKLOLIUM))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.TOON_BOOTS)));
     }
 }

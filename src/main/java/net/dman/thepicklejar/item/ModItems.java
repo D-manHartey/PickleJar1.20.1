@@ -31,7 +31,7 @@ public class ModItems {
             new RaggidyScytheItem(ModToolMaterial.RADIATED, 8, -2.4f, new FabricItemSettings()));
 
     public static final Item TOON_HELMET = registerItem("toon_helmet",
-            new ArmorItem(ModArmorMaterials.TOONPROT, ArmorItem.Type.HELMET, new FabricItemSettings()));
+            new ModArmorItem(ModArmorMaterials.TOONPROT, ArmorItem.Type.HELMET, new FabricItemSettings()));
     public static final Item TOON_CHESTPLATE = registerItem("toon_chestplate",
             new ArmorItem(ModArmorMaterials.TOONPROT, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
     public static final Item TOON_LEGGINGS = registerItem("toon_leggings",
