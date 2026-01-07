@@ -1,9 +1,7 @@
 package net.dman.thepicklejar.item;
 
 import net.dman.thepicklejar.ThePickleJar;
-import net.dman.thepicklejar.item.custom.BrokenTelephoneItem;
-import net.dman.thepicklejar.item.custom.RadioactivePickItem;
-import net.dman.thepicklejar.item.custom.ToonSteelItem;
+import net.dman.thepicklejar.item.custom.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -16,7 +14,6 @@ import net.minecraft.util.Identifier;
 public class ModItems {
     public static final Item PICKLOLIUM = registerItem("picklolium", new Item (new FabricItemSettings()));
     public static final Item RAW_PICKLOLIUM = registerItem("rawpick", new Item(new FabricItemSettings()));
-
     public static final Item TOON_STEEL = registerItem("toon_steel", new ToonSteelItem(new FabricItemSettings()));
     public static final Item RADIOACTIVE_PICKLOLIUM = registerItem("rad_pick", new RadioactivePickItem(new FabricItemSettings()));
 
@@ -27,12 +24,16 @@ public class ModItems {
 
     public static final Item GHERKIN_SOUL = registerItem("gherkin_soul", new Item(new FabricItemSettings()));
 
-    public static final Item INKBLOT_MALLET = registerItem("inkblot_mallet", new Item(new FabricItemSettings().maxCount(1)));
-    public static final Item RAGGIDY_SCYTHE = registerItem("raggidy_scythe", new Item(new FabricItemSettings().maxCount(1)));
+    public static final Item INKBLOT_MALLET = registerItem("inkblot_mallet",
+            new InkblotMalletItem(ModToolMaterial.TOON, 10, -3.2f, new FabricItemSettings()));
+    public static final Item RAGGIDY_SCYTHE = registerItem("raggidy_scythe",
+            new RaggidyScytheItem(ModToolMaterial.RADIATED, 8, -2.4f, new FabricItemSettings()));
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries) {
         entries.add(PICKLOLIUM);
         entries.add(RAW_PICKLOLIUM);
+        entries.add(TOON_STEEL);
+        entries.add(RADIOACTIVE_PICKLOLIUM);
     }
 
     private static Item registerItem(String name, Item item) {

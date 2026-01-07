@@ -17,6 +17,7 @@ import java.util.function.Consumer;
 public class ModRecipeProvider extends FabricRecipeProvider {
     private static final List<ItemConvertible> PICKLOLIUM_SMELTABLES = List.of(ModItems.RAW_PICKLOLIUM,
             ModBlocks.PICKLOLIUM_DEPOSIT);
+    private static final List<ItemConvertible> TOON_SMELTABLES = List.of(ModItems.TOON_STEEL);
 
     public ModRecipeProvider(FabricDataOutput output) {
         super(output);
@@ -28,6 +29,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 0.7f, 200, "picklejar");
         offerBlasting(exporter, PICKLOLIUM_SMELTABLES, RecipeCategory.MISC, ModItems.PICKLOLIUM,
                 0.7f, 100, "picklejar");
+        offerBlasting(exporter, TOON_SMELTABLES, RecipeCategory.MISC, ModItems.RADIOACTIVE_PICKLOLIUM,
+                0.7f, 8400, "picklejar");
 
         offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.PICKLOLIUM, RecipeCategory.DECORATIONS,
                 ModBlocks.PICKLOLIUM_BLOCK);
@@ -77,5 +80,29 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.EMERALD), conditionsFromItem(Items.EMERALD))
                 .criterion(hasItem(Items.DIAMOND), conditionsFromItem(Items.DIAMOND))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.TOON_STEEL)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.INKBLOT_MALLET, 1)
+                .pattern("TRT")
+                .pattern("TST")
+                .pattern(" S ")
+                .input('S', Items.STICK)
+                .input('T', ModItems.TOON_STEEL)
+                .input('R', ModItems.RADIOACTIVE_PICKLOLIUM)
+                .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
+                .criterion(hasItem(ModItems.TOON_STEEL), conditionsFromItem(ModItems.TOON_STEEL))
+                .criterion(hasItem(ModItems.RADIOACTIVE_PICKLOLIUM), conditionsFromItem(ModItems.RADIOACTIVE_PICKLOLIUM))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.INKBLOT_MALLET)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.RAGGIDY_SCYTHE, 1)
+                .pattern(" RT")
+                .pattern(" SR")
+                .pattern("S R")
+                .input('S', Items.STICK)
+                .input('T', ModItems.TOON_STEEL)
+                .input('R', ModItems.RADIOACTIVE_PICKLOLIUM)
+                .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
+                .criterion(hasItem(ModItems.TOON_STEEL), conditionsFromItem(ModItems.TOON_STEEL))
+                .criterion(hasItem(ModItems.RADIOACTIVE_PICKLOLIUM), conditionsFromItem(ModItems.RADIOACTIVE_PICKLOLIUM))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.RAGGIDY_SCYTHE)));
     }
 }
