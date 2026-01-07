@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
+import net.minecraft.item.ArmorItem;
 
 public class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricDataOutput output) {
@@ -30,6 +31,11 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.PICKLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.GOLDEN_PICKLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.GHERKIN_SOUL, Models.GENERATED);
+
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.TOON_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.TOON_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.TOON_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.TOON_BOOTS));
 
     }
 }

@@ -8,6 +8,11 @@
   "item.the-pickle-jar.inkblot_mallet": "InkBlot Mallet",
   "item.the-pickle-jar.raggidy_scythe": "Raggidy Scythe",
 
+  "item.the-pickle-jar.toon_helmet": "Galea Atramentaria",
+  "item.the-pickle-jar.toon_chestplate": "Lorica Maculosa Atramentaria",
+  "item.the-pickle-jar.toon_leggings": "Bracae maculosae",
+  "item.the-pickle-jar.toon_boots": "Calcei Atramentarii",
+
   "block.the-pickle-jar.picklolium_deposit": "Picklolium Deposit",
 
   "block.the-pickle-jar.picklolium_block": "Block of Picklolium",

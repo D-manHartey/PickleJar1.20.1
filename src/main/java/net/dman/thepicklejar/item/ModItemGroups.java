@@ -23,6 +23,11 @@ public class ModItemGroups {
                         entries.add(ModItems.INKBLOT_MALLET);
                         entries.add(ModItems.RAGGIDY_SCYTHE);
 
+                        entries.add(ModItems.TOON_HELMET);
+                        entries.add(ModItems.TOON_CHESTPLATE);
+                        entries.add(ModItems.TOON_LEGGINGS);
+                        entries.add(ModItems.TOON_BOOTS);
+
                         entries.add(ModItems.BROKEN_TELEPHONE);
 
                         entries.add(ModItems.PICKLE);
