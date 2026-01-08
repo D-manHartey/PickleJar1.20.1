@@ -17,7 +17,7 @@ import java.util.Map;
 public class ModArmorItem extends ArmorItem {
     private static final Map<ArmorMaterial, StatusEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, StatusEffectInstance>())
-                    .put(ModArmorMaterials.TOONPROT, new StatusEffectInstance(StatusEffects.STRENGTH, 200, 2,
+                    .put(ModArmorMaterials.TOONPROT, new StatusEffectInstance(StatusEffects.STRENGTH, 200, 1,
                             false, false, true)).build();
 
     public ModArmorItem(ArmorMaterial material, Type type, Settings settings) {
