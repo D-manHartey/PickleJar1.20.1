@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:sea_pickle"
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    }
+  },
+  "pattern": [
+    "   ",
+    "PS ",
+    "   "
+  ],
+  "result": {
+    "count": 2,
+    "item": "the-pickle-jar:pickle"
+  },
+  "show_notification": true
+}

@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
@@ -144,5 +145,15 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.TOON_STEEL), conditionsFromItem(ModItems.TOON_STEEL))
                 .criterion(hasItem(ModItems.RADIOACTIVE_PICKLOLIUM), conditionsFromItem(ModItems.RADIOACTIVE_PICKLOLIUM))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.TOON_BOOTS)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.PICKLE, 2)
+                .pattern("   ")
+                .pattern("PS ")
+                .pattern("   ")
+                .input('P', Items.SEA_PICKLE)
+                .input('S', Items.SUGAR)
+                .criterion(hasItem(Items.SEA_PICKLE), conditionsFromItem(Items.SEA_PICKLE))
+                .criterion(hasItem(Items.SUGAR), conditionsFromItem(Items.SUGAR))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.PICKLE)));
     }
 }

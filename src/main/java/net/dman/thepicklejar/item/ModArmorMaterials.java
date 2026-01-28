@@ -10,8 +10,8 @@ import net.minecraft.sound.SoundEvents;
 import java.util.function.Supplier;
 
 public enum ModArmorMaterials implements ArmorMaterial {
-    TOONPROT("toon_armor", 25, new int[] { 3, 8, 6, 3 }, 19,
-            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2f, 0.2f, () -> Ingredient.ofItems(ModItems.TOON_STEEL))
+    TOONPROT("toon_armor", 33, new int[] { 3, 7, 5, 2 }, 19,
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2f, 0.0f, () -> Ingredient.ofItems(ModItems.TOON_STEEL))
     ;
 
     private final String name;
