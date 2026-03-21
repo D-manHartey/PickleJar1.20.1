@@ -1,6 +1,7 @@
 package net.dman.thepicklejar.block;
 
 import net.dman.thepicklejar.ThePickleJar;
+import net.dman.thepicklejar.item.custom.PeanutButterCropBlock;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -20,6 +21,9 @@ public class ModBlocks {
 
     public static final Block PICKLOLIUM_BLOCK = registerBlock("picklolium_block",
             new Block(FabricBlockSettings.copyOf(Blocks.NETHERITE_BLOCK).sounds(BlockSoundGroup.SLIME)));
+
+    public static final Block PEANUT_CROP = Registry.register(Registries.BLOCK, new Identifier(ThePickleJar.MOD_ID, "peanut_crop"),
+            new PeanutButterCropBlock(FabricBlockSettings.copyOf(Blocks.WHEAT)));
 
 
     private static Block registerBlock(String name, Block block) {

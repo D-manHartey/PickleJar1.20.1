@@ -3,6 +3,7 @@ package net.dman.thepicklejar.item;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.FoodComponent;
+import net.minecraft.item.FoodComponents;
 
 public class ModFoodComponents {
     public static final FoodComponent PICKLE = new FoodComponent.Builder().hunger(4).saturationModifier(2.5f)
@@ -15,6 +16,8 @@ public class ModFoodComponents {
             .statusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 1000), 1.0f)
             .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 250), 1.0f)
             .statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 250), 1.0f).alwaysEdible().build();
+
+    public static final FoodComponent PEANUT_BUTTER = new FoodComponent.Builder().hunger(3).saturationModifier(2.0f).build();
 
 
 

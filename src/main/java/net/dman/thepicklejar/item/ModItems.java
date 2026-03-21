@@ -1,10 +1,12 @@
 package net.dman.thepicklejar.item;
 
 import net.dman.thepicklejar.ThePickleJar;
+import net.dman.thepicklejar.block.ModBlocks;
 import net.dman.thepicklejar.item.custom.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
@@ -38,6 +40,10 @@ public class ModItems {
             new ArmorItem(ModArmorMaterials.TOONPROT, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
     public static final Item TOON_BOOTS = registerItem("toon_boots",
             new ArmorItem(ModArmorMaterials.TOONPROT, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+
+    public static final Item PEANUT_SEEDS = registerItem("peanut_seeds",
+            new AliasedBlockItem(ModBlocks.PEANUT_CROP, new FabricItemSettings()));
+    public static final Item PEANUT_BUTTER = registerItem("peanut_butter", new Item(new FabricItemSettings().food(ModFoodComponents.PEANUT_BUTTER)));
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries) {
         entries.add(PICKLOLIUM);

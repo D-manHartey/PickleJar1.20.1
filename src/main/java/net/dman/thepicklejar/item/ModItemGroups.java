@@ -34,6 +34,9 @@ public class ModItemGroups {
                         entries.add(ModItems.GOLDEN_PICKLE);
                         entries.add(ModItems.GHERKIN_SOUL);
 
+                        entries.add(ModItems.PEANUT_SEEDS);
+                        entries.add(ModItems.PEANUT_BUTTER);
+
                         entries.add(ModBlocks.PICKLOLIUM_DEPOSIT);
 
                         entries.add(ModBlocks.PICKLOLIUM_BLOCK);
