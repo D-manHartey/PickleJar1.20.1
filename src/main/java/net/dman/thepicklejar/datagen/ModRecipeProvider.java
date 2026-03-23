@@ -18,7 +18,8 @@ import java.util.function.Consumer;
 public class ModRecipeProvider extends FabricRecipeProvider {
     private static final List<ItemConvertible> PICKLOLIUM_SMELTABLES = List.of(ModItems.RAW_PICKLOLIUM,
             ModBlocks.PICKLOLIUM_DEPOSIT);
-    private static final List<ItemConvertible> TOON_SMELTABLES = List.of(ModItems.TOON_STEEL);
+    private static final List<ItemConvertible> CHUTNEY_SMELTABLES = List.of(ModItems.RAW_CHUTNEY,
+            ModBlocks.CHUTNEY_DEPOSIT);
 
     public ModRecipeProvider(FabricDataOutput output) {
         super(output);
@@ -30,11 +31,16 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 0.7f, 200, "picklejar");
         offerBlasting(exporter, PICKLOLIUM_SMELTABLES, RecipeCategory.MISC, ModItems.PICKLOLIUM,
                 0.7f, 100, "picklejar");
-        offerBlasting(exporter, TOON_SMELTABLES, RecipeCategory.MISC, ModItems.RADIOACTIVE_PICKLOLIUM,
-                0.7f, 8400, "picklejar");
+        offerSmelting(exporter, CHUTNEY_SMELTABLES, RecipeCategory.MISC, ModItems.MOLTEN_CHUTNEY,
+                0.8f, 350, "picklejar");
+        offerBlasting(exporter, CHUTNEY_SMELTABLES, RecipeCategory.MISC, ModItems.MOLTEN_CHUTNEY,
+                0.8f, 200, "picklejar");
+
 
         offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.PICKLOLIUM, RecipeCategory.DECORATIONS,
                 ModBlocks.PICKLOLIUM_BLOCK);
+        offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.MOLTEN_CHUTNEY, RecipeCategory.DECORATIONS,
+                ModBlocks.CHUTNEY_BLOCK);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.GOLDEN_PICKLE, 1)
                 .pattern("DGD")
@@ -81,6 +87,16 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.EMERALD), conditionsFromItem(Items.EMERALD))
                 .criterion(hasItem(Items.DIAMOND), conditionsFromItem(Items.DIAMOND))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.TOON_STEEL)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.RADIOACTIVE_PICKLOLIUM, 1)
+                .pattern("PPP")
+                .pattern("PCC")
+                .pattern("CC ")
+                .input('P', ModItems.PICKLOLIUM)
+                .input('C', ModItems.MOLTEN_CHUTNEY)
+                .criterion(hasItem(ModItems.PICKLOLIUM), conditionsFromItem(ModItems.PICKLOLIUM))
+                .criterion(hasItem(ModItems.MOLTEN_CHUTNEY), conditionsFromItem(ModItems.MOLTEN_CHUTNEY))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.RADIOACTIVE_PICKLOLIUM)));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.INKBLOT_MALLET, 1)
                 .pattern("TRT")
@@ -155,5 +171,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.SEA_PICKLE), conditionsFromItem(Items.SEA_PICKLE))
                 .criterion(hasItem(Items.SUGAR), conditionsFromItem(Items.SUGAR))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.PICKLE)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.PICKLE_ALFREDO, 1)
+                .pattern("   ")
+                .pattern("PW ")
+                .pattern(" B ")
+                .input('P', ModItems.PICKLE)
+                .input('W', Items.WHEAT)
+                .input('B', ModItems.PEANUT_BUTTER)
+                .criterion(hasItem(ModItems.PICKLE), conditionsFromItem(ModItems.PICKLE))
+                .criterion(hasItem(Items.WHEAT), conditionsFromItem(Items.WHEAT))
+                .criterion(hasItem(ModItems.PEANUT_BUTTER), conditionsFromItem(ModItems.PEANUT_BUTTER))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.PICKLE_ALFREDO)));
     }
 }

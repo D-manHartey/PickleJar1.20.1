@@ -18,9 +18,14 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 public class ModBlocks {
     public static final Block PICKLOLIUM_DEPOSIT = registerBlock("picklolium_deposit",
             new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.ANCIENT_DEBRIS).sounds(BlockSoundGroup.SLIME).strength(35.0f), UniformIntProvider.create(4, 7)));
-
     public static final Block PICKLOLIUM_BLOCK = registerBlock("picklolium_block",
             new Block(FabricBlockSettings.copyOf(Blocks.NETHERITE_BLOCK).sounds(BlockSoundGroup.SLIME)));
+
+    public static final Block CHUTNEY_DEPOSIT = registerBlock("chutney_deposit",
+            new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.ANCIENT_DEBRIS).sounds(BlockSoundGroup.CORAL).strength(35.0f), UniformIntProvider.create(3, 6)));
+    public static final Block CHUTNEY_BLOCK = registerBlock("chutney_block",
+            new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.NETHERITE_BLOCK).sounds(BlockSoundGroup.CORAL)));
+
 
     public static final Block PEANUT_CROP = Registry.register(Registries.BLOCK, new Identifier(ThePickleJar.MOD_ID, "peanut_crop"),
             new PeanutButterCropBlock(FabricBlockSettings.copyOf(Blocks.WHEAT)));

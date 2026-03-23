@@ -19,11 +19,14 @@ public class ModItems {
     public static final Item RAW_PICKLOLIUM = registerItem("rawpick", new Item(new FabricItemSettings()));
     public static final Item TOON_STEEL = registerItem("toon_steel", new ToonSteelItem(new FabricItemSettings()));
     public static final Item RADIOACTIVE_PICKLOLIUM = registerItem("rad_pick", new RadioactivePickItem(new FabricItemSettings()));
+    public static final Item RAW_CHUTNEY = registerItem("raw_chutney", new Item(new FabricItemSettings()));
+    public static final Item MOLTEN_CHUTNEY = registerItem("molten_chutney", new Item(new FabricItemSettings()));
 
     public static final Item BROKEN_TELEPHONE = registerItem("broken_telephone", new BrokenTelephoneItem(new FabricItemSettings()));
 
     public static final Item PICKLE = registerItem("pickle", new Item(new FabricItemSettings().food(ModFoodComponents.PICKLE)));
     public static final Item GOLDEN_PICKLE = registerItem("golden_pickle", new Item(new FabricItemSettings().food(ModFoodComponents.GOLDEN_PICKLE)));
+    public static final Item PICKLE_ALFREDO = registerItem("pickle_alfredo", new Item(new FabricItemSettings().food(ModFoodComponents.PICKLE_ALFREDO)));
 
     public static final Item GHERKIN_SOUL = registerItem("gherkin_soul", new Item(new FabricItemSettings()));
 

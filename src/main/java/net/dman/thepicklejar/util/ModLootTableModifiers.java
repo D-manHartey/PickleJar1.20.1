@@ -19,6 +19,8 @@ import java.util.List;
 public class ModLootTableModifiers {
     public static final Identifier DROWNED_ID =
             new Identifier("minecraft", "entities/drowned");
+    public static final Identifier GRASS_ID =
+            new Identifier("minecraft", "blocks/grass");
 
     public static final Identifier SUSPICIOUS_SAND_ID =
             new Identifier("minecraft", "archaeology/desert_pyramid");
@@ -35,6 +37,17 @@ public class ModLootTableModifiers {
 
                 tableBuilder.pool(poolBuilder.build());
             }
+
+                    if (GRASS_ID.equals(id)) {
+                        LootPool.Builder poolBuilder = LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1))
+                                .conditionally(RandomChanceLootCondition.builder(0.30f)) // Drops 30% of the time
+                                .with(ItemEntry.builder(ModItems.PEANUT_SEEDS))
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
+
+                        tableBuilder.pool(poolBuilder.build());
+                    }
+
         });
 
         LootTableEvents.REPLACE.register((resourceManager, lootManager, id, original, source) -> {

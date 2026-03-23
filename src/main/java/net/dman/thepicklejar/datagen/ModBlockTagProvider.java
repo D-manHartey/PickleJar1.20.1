@@ -20,22 +20,32 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
                 .add(ModBlocks.PICKLOLIUM_DEPOSIT)
-                .add(ModBlocks.PICKLOLIUM_BLOCK);
+                .add(ModBlocks.PICKLOLIUM_BLOCK)
+                .add(ModBlocks.CHUTNEY_BLOCK)
+                .add(ModBlocks.CHUTNEY_DEPOSIT);
 
         getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL)
                 .add(ModBlocks.PICKLOLIUM_DEPOSIT)
-                .add(ModBlocks.PICKLOLIUM_BLOCK);
+                .add(ModBlocks.PICKLOLIUM_BLOCK)
+                .add(ModBlocks.CHUTNEY_BLOCK)
+                .add(ModBlocks.CHUTNEY_DEPOSIT);
 
         getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
                 .add(ModBlocks.PICKLOLIUM_DEPOSIT)
-                .add(ModBlocks.PICKLOLIUM_BLOCK);
+                .add(ModBlocks.PICKLOLIUM_BLOCK)
+                .add(ModBlocks.CHUTNEY_BLOCK)
+                .add(ModBlocks.CHUTNEY_DEPOSIT);
 
         getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.PICKLOLIUM_DEPOSIT)
-                .add(ModBlocks.PICKLOLIUM_BLOCK);
+                .add(ModBlocks.PICKLOLIUM_BLOCK)
+                .add(ModBlocks.CHUTNEY_BLOCK)
+                .add(ModBlocks.CHUTNEY_DEPOSIT);
 
         getOrCreateTagBuilder(TagKey.of(RegistryKeys.BLOCK, new Identifier("fabric", "needs_tool_level_4")))
                 .add(ModBlocks.PICKLOLIUM_DEPOSIT)
-                .add(ModBlocks.PICKLOLIUM_BLOCK);
+                .add(ModBlocks.PICKLOLIUM_BLOCK)
+                .add(ModBlocks.CHUTNEY_BLOCK)
+                .add(ModBlocks.CHUTNEY_DEPOSIT);
     }
 }

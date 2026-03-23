@@ -10,5 +10,8 @@ public class ModOreGeneration {
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(),
                 GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.PICKLOLIUM_DEPOSIT_PLACED_KEY);
 
+        BiomeModifications.addFeature(BiomeSelectors.foundInTheNether(),
+                GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.CHUTNEY_DEPOSIT_PLACED_KEY);
+
     }
 }

@@ -18,16 +18,23 @@ import java.util.List;
 
 public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> PICKLOLIUM_DEPOSIT_KEY = registerKey("picklolium_deposit");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> CHUTNEY_DEPOSIT_KEY = registerKey("chutney_deposit");
 
     public static void boostrap(Registerable<ConfiguredFeature<?, ?>> context) {
         RuleTest stoneReplacables = new TagMatchRuleTest(BlockTags.STONE_ORE_REPLACEABLES);
         RuleTest deepslateReplacables = new TagMatchRuleTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
+        RuleTest netherReplacables = new TagMatchRuleTest(BlockTags.BASE_STONE_NETHER);
 
         List<OreFeatureConfig.Target> overworldPickloliumDeposit =
                 List.of(OreFeatureConfig.createTarget(stoneReplacables, ModBlocks.PICKLOLIUM_DEPOSIT.getDefaultState()),
                         OreFeatureConfig.createTarget(deepslateReplacables, ModBlocks.PICKLOLIUM_DEPOSIT.getDefaultState()));
 
+        List<OreFeatureConfig.Target> netherChutneyDeposit =
+                List.of(OreFeatureConfig.createTarget(netherReplacables, ModBlocks.CHUTNEY_DEPOSIT.getDefaultState()));
+
+
         register(context, PICKLOLIUM_DEPOSIT_KEY, Feature.ORE, new OreFeatureConfig(overworldPickloliumDeposit, 5));
+        register(context, CHUTNEY_DEPOSIT_KEY, Feature.ORE, new OreFeatureConfig(netherChutneyDeposit, 3));
     }
 
 

@@ -4,6 +4,8 @@
   "item.the-pickle-jar.broken_telephone": "Broken Telephone",
   "item.the-pickle-jar.toon_steel": "Toon Steel",
   "item.the-pickle-jar.rad_pick": "Radioactive Picklolium",
+  "item.the-pickle-jar.raw_chutney": "Raw Chutney",
+  "item.the-pickle-jar.molten_chutney": "Molten Chutney",
 
   "item.the-pickle-jar.inkblot_mallet": "InkBlot Mallet",
   "item.the-pickle-jar.raggidy_scythe": "Raggidy Scythe",
@@ -14,12 +16,14 @@
   "item.the-pickle-jar.toon_boots": "Calcei Atramentarii",
 
   "block.the-pickle-jar.picklolium_deposit": "Picklolium Deposit",
-
   "block.the-pickle-jar.picklolium_block": "Block of Picklolium",
+  "block.the-pickle-jar.chutney_deposit": "Chutney Deposit",
+  "block.the-pickle-jar.chutney_block": "Block of Chutney",
 
   "item.the-pickle-jar.pickle": "Pickle",
   "item.the-pickle-jar.golden_pickle": "Golden Pickle",
   "item.the-pickle-jar.gherkin_soul": "Gherkin Soul",
+  "item.the-pickle-jar.pickle_alfredo": "Pickle Alfredo",
 
   "item.the-pickle-jar.peanut_seeds": "Peanut Seeds",
   "item.the-pickle-jar.peanut_butter": "Peanut Butter",

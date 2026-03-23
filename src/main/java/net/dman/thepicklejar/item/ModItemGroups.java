@@ -19,6 +19,9 @@ public class ModItemGroups {
                         entries.add(ModItems.RAW_PICKLOLIUM);
                         entries.add(ModItems.TOON_STEEL);
                         entries.add(ModItems.RADIOACTIVE_PICKLOLIUM);
+                        entries.add(ModItems.RAW_CHUTNEY);
+                        entries.add(ModItems.MOLTEN_CHUTNEY);
+
 
                         entries.add(ModItems.INKBLOT_MALLET);
                         entries.add(ModItems.RAGGIDY_SCYTHE);
@@ -33,13 +36,16 @@ public class ModItemGroups {
                         entries.add(ModItems.PICKLE);
                         entries.add(ModItems.GOLDEN_PICKLE);
                         entries.add(ModItems.GHERKIN_SOUL);
+                        entries.add(ModItems.PICKLE_ALFREDO);
 
                         entries.add(ModItems.PEANUT_SEEDS);
                         entries.add(ModItems.PEANUT_BUTTER);
 
                         entries.add(ModBlocks.PICKLOLIUM_DEPOSIT);
-
                         entries.add(ModBlocks.PICKLOLIUM_BLOCK);
+                        entries.add(ModBlocks.CHUTNEY_BLOCK);
+                        entries.add(ModBlocks.CHUTNEY_DEPOSIT);
+
 
 
                     }).build());

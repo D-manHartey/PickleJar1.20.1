@@ -19,6 +19,8 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.PICKLOLIUM_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.PICKLOLIUM_DEPOSIT);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CHUTNEY_BLOCK);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CHUTNEY_DEPOSIT);
 
         blockStateModelGenerator.registerCrop(ModBlocks.PEANUT_CROP, PeanutButterCropBlock.AGE, 0, 1, 2, 3, 4, 5);
 
@@ -30,11 +32,17 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.RAW_PICKLOLIUM, Models.GENERATED);
         itemModelGenerator.register(ModItems.RADIOACTIVE_PICKLOLIUM, Models.GENERATED);
         itemModelGenerator.register(ModItems.TOON_STEEL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RAW_CHUTNEY, Models.GENERATED);
+        itemModelGenerator.register(ModItems.MOLTEN_CHUTNEY, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.BROKEN_TELEPHONE, Models.GENERATED);
+
         itemModelGenerator.register(ModItems.PICKLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.GOLDEN_PICKLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.GHERKIN_SOUL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PICKLE_ALFREDO, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.PEANUT_BUTTER, Models.GENERATED);
 
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.TOON_HELMET));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.TOON_CHESTPLATE));

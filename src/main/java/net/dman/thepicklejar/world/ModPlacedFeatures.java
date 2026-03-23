@@ -16,12 +16,16 @@ import java.util.List;
 
 public class ModPlacedFeatures {
     public static final RegistryKey<PlacedFeature> PICKLOLIUM_DEPOSIT_PLACED_KEY = registerKey("picklolium_deposit_placed");
+    public static final RegistryKey<PlacedFeature> CHUTNEY_DEPOSIT_PLACED_KEY = registerKey("chutney_deposit_placed");
 
     public static void boostrap(Registerable<PlacedFeature> context) {
         var configuredFeatureRegistryEntryLookup = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
 
         register(context, PICKLOLIUM_DEPOSIT_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.PICKLOLIUM_DEPOSIT_KEY),
                 ModOrePlacement.modifiersWithCount(5, // Veins per Chunk
+                        HeightRangePlacementModifier.uniform(YOffset.fixed(-80), YOffset.fixed(80))));
+        register(context, CHUTNEY_DEPOSIT_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.CHUTNEY_DEPOSIT_KEY),
+                ModOrePlacement.modifiersWithCount(3, // Veins per Chunk
                         HeightRangePlacementModifier.uniform(YOffset.fixed(-80), YOffset.fixed(80))));
 
     }

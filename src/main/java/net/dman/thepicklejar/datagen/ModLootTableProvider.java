@@ -25,8 +25,10 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
     @Override
     public void generate() {
         addDrop(ModBlocks.PICKLOLIUM_BLOCK);
+        addDrop(ModBlocks.CHUTNEY_BLOCK);
 
         addDrop(ModBlocks.PICKLOLIUM_DEPOSIT, copperLikeOreDrops(ModBlocks.PICKLOLIUM_DEPOSIT, ModItems.RAW_PICKLOLIUM));
+        addDrop(ModBlocks.CHUTNEY_DEPOSIT, copperLikeOreDrops(ModBlocks.CHUTNEY_DEPOSIT, ModItems.RAW_CHUTNEY));
 
         BlockStatePropertyLootCondition.Builder builder = BlockStatePropertyLootCondition.builder(ModBlocks.PEANUT_CROP).properties(StatePredicate.Builder.create()
                 .exactMatch(PeanutButterCropBlock.AGE, 5));
@@ -39,7 +41,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
                         ItemEntry.builder(item)
                                 .apply(SetCountLootFunction
                                         .builder(UniformLootNumberProvider
-                                                .create(2.0F, 5.0F)))
+                                                .create(1.0F, 1.0F)))
                                 .apply(ApplyBonusLootFunction.oreDrops(Enchantments.FORTUNE))));
     }
 }

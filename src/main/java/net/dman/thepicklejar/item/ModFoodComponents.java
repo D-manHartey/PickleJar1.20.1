@@ -19,6 +19,7 @@ public class ModFoodComponents {
 
     public static final FoodComponent PEANUT_BUTTER = new FoodComponent.Builder().hunger(3).saturationModifier(2.0f).build();
 
+    public static final FoodComponent PICKLE_ALFREDO = new FoodComponent.Builder().hunger(6).saturationModifier(3.0f).build();
 
 
 }
