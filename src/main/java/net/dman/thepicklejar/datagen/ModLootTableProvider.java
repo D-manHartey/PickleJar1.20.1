@@ -44,6 +44,9 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
                                 .exactMatch(TeaLeavesCropBlock.AGE, 8)));
         addDrop(ModBlocks.TEA_LEAVES_CROP, cropDrops(ModBlocks.TEA_LEAVES_CROP, ModItems.GREEN_TEA_LEAVES, ModItems.TEA_LEAF_SEEDS, builder2));
 
+        addDrop(ModBlocks.GREEN_CHRYSANTHEMUM);
+        addPottedPlantDrops(ModBlocks.POTTED_GREEN_CHRYSANTHEMUM);
+
     }
 
     public LootTable.Builder copperLikeOreDrops(Block drop, Item item) {

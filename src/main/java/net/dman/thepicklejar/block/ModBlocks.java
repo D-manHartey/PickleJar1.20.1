@@ -5,9 +5,8 @@ import net.dman.thepicklejar.block.custom.PeanutButterCropBlock;
 import net.dman.thepicklejar.block.custom.TeaLeavesCropBlock;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ExperienceDroppingBlock;
+import net.minecraft.block.*;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -32,6 +31,12 @@ public class ModBlocks {
             new PeanutButterCropBlock(FabricBlockSettings.copyOf(Blocks.WHEAT)));
     public static final Block TEA_LEAVES_CROP = Registry.register(Registries.BLOCK, new Identifier(ThePickleJar.MOD_ID, "tea_leaves_crop"),
             new TeaLeavesCropBlock(FabricBlockSettings.copyOf(Blocks.WHEAT)));
+
+    public static final Block GREEN_CHRYSANTHEMUM = registerBlock("green_chrysanthemum",
+            new FlowerBlock(StatusEffects.INSTANT_HEALTH, 3,
+                    FabricBlockSettings.copyOf(Blocks.ALLIUM).nonOpaque().noCollision()));
+    public static final Block POTTED_GREEN_CHRYSANTHEMUM = Registry.register(Registries.BLOCK, new Identifier(ThePickleJar.MOD_ID, "potted_green_chrysanthemum"),
+            new FlowerPotBlock(GREEN_CHRYSANTHEMUM,  FabricBlockSettings.copyOf(Blocks.POTTED_ALLIUM).nonOpaque()));
 
 
     private static Block registerBlock(String name, Block block) {

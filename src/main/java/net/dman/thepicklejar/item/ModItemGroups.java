@@ -44,6 +44,8 @@ public class ModItemGroups {
                         entries.add(ModItems.TEA_LEAF_SEEDS);
                         entries.add(ModItems.GREEN_TEA_LEAVES);
 
+                        entries.add(ModBlocks.GREEN_CHRYSANTHEMUM);
+
                         entries.add(ModBlocks.PICKLOLIUM_DEPOSIT);
                         entries.add(ModBlocks.PICKLOLIUM_BLOCK);
                         entries.add(ModBlocks.CHUTNEY_BLOCK);
