@@ -1,14 +1,16 @@
 package net.dman.thepicklejar.datagen;
 
 import net.dman.thepicklejar.block.ModBlocks;
+import net.dman.thepicklejar.block.custom.TeaLeavesCropBlock;
 import net.dman.thepicklejar.item.ModItems;
-import net.dman.thepicklejar.item.custom.PeanutButterCropBlock;
+import net.dman.thepicklejar.block.custom.PeanutButterCropBlock;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.loot.LootTable;
+import net.minecraft.loot.condition.AnyOfLootCondition;
 import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.entry.LootPoolEntry;
@@ -33,6 +35,14 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         BlockStatePropertyLootCondition.Builder builder = BlockStatePropertyLootCondition.builder(ModBlocks.PEANUT_CROP).properties(StatePredicate.Builder.create()
                 .exactMatch(PeanutButterCropBlock.AGE, 5));
         addDrop(ModBlocks.PEANUT_CROP, cropDrops(ModBlocks.PEANUT_CROP, ModItems.PEANUT_BUTTER, ModItems.PEANUT_SEEDS, builder));
+
+
+        AnyOfLootCondition.Builder builder2 =
+                BlockStatePropertyLootCondition.builder(ModBlocks.TEA_LEAVES_CROP).properties(StatePredicate.Builder.create()
+                        .exactMatch(TeaLeavesCropBlock.AGE, 7))
+                        .or(BlockStatePropertyLootCondition.builder(ModBlocks.TEA_LEAVES_CROP).properties(StatePredicate.Builder.create()
+                                .exactMatch(TeaLeavesCropBlock.AGE, 8)));
+        addDrop(ModBlocks.TEA_LEAVES_CROP, cropDrops(ModBlocks.TEA_LEAVES_CROP, ModItems.GREEN_TEA_LEAVES, ModItems.TEA_LEAF_SEEDS, builder2));
 
     }
 

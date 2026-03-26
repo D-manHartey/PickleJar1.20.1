@@ -27,6 +27,7 @@ public class ModItems {
     public static final Item PICKLE = registerItem("pickle", new Item(new FabricItemSettings().food(ModFoodComponents.PICKLE)));
     public static final Item GOLDEN_PICKLE = registerItem("golden_pickle", new Item(new FabricItemSettings().food(ModFoodComponents.GOLDEN_PICKLE)));
     public static final Item PICKLE_ALFREDO = registerItem("pickle_alfredo", new Item(new FabricItemSettings().food(ModFoodComponents.PICKLE_ALFREDO)));
+    public static final Item CUP_O_GREEN_TEA = registerItem("cup_green_tea", new Item(new FabricItemSettings().food(ModFoodComponents.CUP_O_GREEN_TEA)));
 
     public static final Item GHERKIN_SOUL = registerItem("gherkin_soul", new Item(new FabricItemSettings()));
 
@@ -48,11 +49,18 @@ public class ModItems {
             new AliasedBlockItem(ModBlocks.PEANUT_CROP, new FabricItemSettings()));
     public static final Item PEANUT_BUTTER = registerItem("peanut_butter", new Item(new FabricItemSettings().food(ModFoodComponents.PEANUT_BUTTER)));
 
+    public static final Item GREEN_TEA_LEAVES = registerItem("green_tea_leaves", new Item(new FabricItemSettings()));
+    public static final Item TEA_LEAF_SEEDS = registerItem("tea_leaf_seeds",
+            new AliasedBlockItem(ModBlocks.TEA_LEAVES_CROP, new FabricItemSettings()));
+
+
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries) {
         entries.add(PICKLOLIUM);
         entries.add(RAW_PICKLOLIUM);
         entries.add(TOON_STEEL);
         entries.add(RADIOACTIVE_PICKLOLIUM);
+        entries.add(RAW_CHUTNEY);
+        entries.add(MOLTEN_CHUTNEY);
     }
 
     private static Item registerItem(String name, Item item) {

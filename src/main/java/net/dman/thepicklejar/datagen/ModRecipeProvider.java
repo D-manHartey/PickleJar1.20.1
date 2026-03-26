@@ -1,14 +1,19 @@
 package net.dman.thepicklejar.datagen;
 
+import net.dman.thepicklejar.ThePickleJar;
 import net.dman.thepicklejar.block.ModBlocks;
 import net.dman.thepicklejar.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.SmokingRecipe;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.util.Identifier;
 
@@ -20,6 +25,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             ModBlocks.PICKLOLIUM_DEPOSIT);
     private static final List<ItemConvertible> CHUTNEY_SMELTABLES = List.of(ModItems.RAW_CHUTNEY,
             ModBlocks.CHUTNEY_DEPOSIT);
+    private static final List<ItemConvertible> TEA_SMELTABLES = List.of(ModItems.GREEN_TEA_LEAVES,
+            ModItems.CUP_O_GREEN_TEA);
 
     public ModRecipeProvider(FabricDataOutput output) {
         super(output);
@@ -35,6 +42,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 0.8f, 350, "picklejar");
         offerBlasting(exporter, CHUTNEY_SMELTABLES, RecipeCategory.MISC, ModItems.MOLTEN_CHUTNEY,
                 0.8f, 200, "picklejar");
+        offerSmelting(exporter, TEA_SMELTABLES, RecipeCategory.FOOD, ModItems.CUP_O_GREEN_TEA,
+                0.4f, 150, "picklejar");
+
+        // hella fast brew
+        CookingRecipeJsonBuilder.createSmoking(Ingredient.ofItems(ModItems.GREEN_TEA_LEAVES), RecipeCategory.FOOD, ModItems.CUP_O_GREEN_TEA, 0.3f, 50)
+                .criterion(hasItem(ModItems.GREEN_TEA_LEAVES), conditionsFromItem(ModItems.CUP_O_GREEN_TEA))
+                .offerTo(exporter, new Identifier(ThePickleJar.MOD_ID, "green_tea_brewing"));
+        //slow ass brew
+        CookingRecipeJsonBuilder.createCampfireCooking(Ingredient.ofItems(ModItems.GREEN_TEA_LEAVES), RecipeCategory.FOOD, ModItems.CUP_O_GREEN_TEA, 0.3f, 500)
+                .criterion(hasItem(ModItems.GREEN_TEA_LEAVES), conditionsFromItem(ModItems.CUP_O_GREEN_TEA))
+                .offerTo(exporter, new Identifier(ThePickleJar.MOD_ID, "campfire_tea_brew"));
 
 
         offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.PICKLOLIUM, RecipeCategory.DECORATIONS,

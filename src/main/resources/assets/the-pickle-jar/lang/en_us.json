@@ -24,9 +24,12 @@
   "item.the-pickle-jar.golden_pickle": "Golden Pickle",
   "item.the-pickle-jar.gherkin_soul": "Gherkin Soul",
   "item.the-pickle-jar.pickle_alfredo": "Pickle Alfredo",
+  "item.the-pickle-jar.cup_green_tea": "Cup of Green Tea",
 
   "item.the-pickle-jar.peanut_seeds": "Peanut Seeds",
   "item.the-pickle-jar.peanut_butter": "Peanut Butter",
+  "item.the-pickle-jar.tea_leaf_seeds": "Tea Leaf Seeds",
+  "item.the-pickle-jar.green_tea_leaves": "Green Tea Leaves",
 
   "tooltip.the-pickle-jar.broken_telephone.tooltip": "Something powerful is inside, unusable...for now",
   "tooltip.the-pickle-jar.toon_steel.tooltip": "Listen closely, there's raggidy music inside",

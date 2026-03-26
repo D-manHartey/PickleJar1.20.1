@@ -1,8 +1,9 @@
 package net.dman.thepicklejar.datagen;
 
 import net.dman.thepicklejar.block.ModBlocks;
+import net.dman.thepicklejar.block.custom.TeaLeavesCropBlock;
 import net.dman.thepicklejar.item.ModItems;
-import net.dman.thepicklejar.item.custom.PeanutButterCropBlock;
+import net.dman.thepicklejar.block.custom.PeanutButterCropBlock;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
@@ -23,6 +24,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CHUTNEY_DEPOSIT);
 
         blockStateModelGenerator.registerCrop(ModBlocks.PEANUT_CROP, PeanutButterCropBlock.AGE, 0, 1, 2, 3, 4, 5);
+        blockStateModelGenerator.registerCrop(ModBlocks.TEA_LEAVES_CROP, TeaLeavesCropBlock.AGE, 0, 1, 2, 3, 4, 5, 6, 7, 8);
 
     }
 
@@ -41,8 +43,9 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.GOLDEN_PICKLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.GHERKIN_SOUL, Models.GENERATED);
         itemModelGenerator.register(ModItems.PICKLE_ALFREDO, Models.GENERATED);
-
+        itemModelGenerator.register(ModItems.CUP_O_GREEN_TEA, Models.GENERATED);
         itemModelGenerator.register(ModItems.PEANUT_BUTTER, Models.GENERATED);
+        itemModelGenerator.register(ModItems.GREEN_TEA_LEAVES, Models.GENERATED);
 
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.TOON_HELMET));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.TOON_CHESTPLATE));

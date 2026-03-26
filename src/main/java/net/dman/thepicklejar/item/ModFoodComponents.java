@@ -17,9 +17,12 @@ public class ModFoodComponents {
             .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 250), 1.0f)
             .statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 250), 1.0f).alwaysEdible().build();
 
-    public static final FoodComponent PEANUT_BUTTER = new FoodComponent.Builder().hunger(3).saturationModifier(2.0f).build();
+    public static final FoodComponent PEANUT_BUTTER = new FoodComponent.Builder().hunger(3).saturationModifier(2.0f).alwaysEdible().build();
 
-    public static final FoodComponent PICKLE_ALFREDO = new FoodComponent.Builder().hunger(6).saturationModifier(3.0f).build();
+    public static final FoodComponent PICKLE_ALFREDO = new FoodComponent.Builder().hunger(6).saturationModifier(3.0f).alwaysEdible().build();
+
+    public static final FoodComponent CUP_O_GREEN_TEA = new FoodComponent.Builder().hunger(2).saturationModifier(4.5f)
+            .statusEffect(new StatusEffectInstance(StatusEffects.HASTE, 2000), 1.0f).alwaysEdible().build();
 
 
 }

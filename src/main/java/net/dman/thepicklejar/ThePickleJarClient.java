@@ -9,6 +9,7 @@ public class ThePickleJarClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PEANUT_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.TEA_LEAVES_CROP, RenderLayer.getCutout());
 
     }
 }

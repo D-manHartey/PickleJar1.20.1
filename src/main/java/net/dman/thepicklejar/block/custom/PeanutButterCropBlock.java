@@ -1,4 +1,4 @@
-package net.dman.thepicklejar.item.custom;
+package net.dman.thepicklejar.block.custom;
 
 import net.dman.thepicklejar.item.ModItems;
 import net.minecraft.block.Block;
