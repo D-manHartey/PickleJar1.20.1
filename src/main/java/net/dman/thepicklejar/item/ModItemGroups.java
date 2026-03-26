@@ -50,6 +50,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.PICKLOLIUM_BLOCK);
                         entries.add(ModBlocks.CHUTNEY_BLOCK);
                         entries.add(ModBlocks.CHUTNEY_DEPOSIT);
+                        entries.add(ModBlocks.PHIL_BLOCK);
 
 
 

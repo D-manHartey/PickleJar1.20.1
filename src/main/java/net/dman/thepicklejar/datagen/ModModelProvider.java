@@ -22,6 +22,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.PICKLOLIUM_DEPOSIT);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CHUTNEY_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CHUTNEY_DEPOSIT);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.PHIL_BLOCK);
 
         blockStateModelGenerator.registerCrop(ModBlocks.PEANUT_CROP, PeanutButterCropBlock.AGE, 0, 1, 2, 3, 4, 5);
         blockStateModelGenerator.registerCrop(ModBlocks.TEA_LEAVES_CROP, TeaLeavesCropBlock.AGE, 0, 1, 2, 3, 4, 5, 6, 7, 8);

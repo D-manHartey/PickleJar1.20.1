@@ -5,6 +5,8 @@ import net.dman.thepicklejar.block.ModBlocks;
 import net.dman.thepicklejar.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
@@ -201,5 +203,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.WHEAT), conditionsFromItem(Items.WHEAT))
                 .criterion(hasItem(ModItems.PEANUT_BUTTER), conditionsFromItem(ModItems.PEANUT_BUTTER))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.PICKLE_ALFREDO)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.PHIL_BLOCK, 1)
+                .pattern("DDD")
+                .pattern("CDP")
+                .pattern("DDD")
+                .input('D', Blocks.MUD)
+                .input('C', ModItems.PICKLOLIUM)
+                .input('P', ModItems.MOLTEN_CHUTNEY)
+                .criterion(hasItem(Blocks.MUD), conditionsFromItem(Blocks.MUD))
+                .criterion(hasItem(ModItems.PICKLOLIUM), conditionsFromItem(ModItems.PICKLOLIUM))
+                .criterion(hasItem(ModItems.MOLTEN_CHUTNEY), conditionsFromItem(ModItems.MOLTEN_CHUTNEY))
+                .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.PHIL_BLOCK)));
     }
 }
