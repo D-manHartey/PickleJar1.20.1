@@ -110,11 +110,13 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModBlocks.PHIL_BLOCK), conditionsFromItem(ModBlocks.PHIL_BLOCK))
                 .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.PHIL_BUTTON)));
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PHIL_WALL, 6)
-                .pattern("PPP")
-                .pattern("PPP")
+                .pattern("PMP")
+                .pattern("PMP")
                 .pattern("   ")
                 .input('P', ModBlocks.PHIL_BLOCK)
+                .input('M', Blocks.MUD)
                 .criterion(hasItem(ModBlocks.PHIL_BLOCK), conditionsFromItem(ModBlocks.PHIL_BLOCK))
+                .criterion(hasItem(Blocks.MUD), conditionsFromItem(Blocks.MUD))
                 .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.PHIL_WALL)));
         //building blocks end
 
