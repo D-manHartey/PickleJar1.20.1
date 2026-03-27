@@ -22,7 +22,17 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.PICKLOLIUM_DEPOSIT);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CHUTNEY_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CHUTNEY_DEPOSIT);
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.PHIL_BLOCK);
+        BlockStateModelGenerator.BlockTexturePool PhilPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.PHIL_BLOCK);
+
+        PhilPool.button(ModBlocks.PHIL_BUTTON);
+        PhilPool.stairs(ModBlocks.PHIL_STAIRS);
+        PhilPool.slab(ModBlocks.PHIL_SLAB);
+        PhilPool.pressurePlate(ModBlocks.PHIL_PRESSURE_PLATE);
+        PhilPool.fence(ModBlocks.PHIL_FENCE);
+        PhilPool.fenceGate(ModBlocks.PHIL_FENCE_GATE);
+        PhilPool.wall(ModBlocks.PHIL_WALL);
+        blockStateModelGenerator.registerDoor(ModBlocks.PHIL_DOOR);
+        blockStateModelGenerator.registerTrapdoor(ModBlocks.PHIL_TRAPDOOR);
 
         blockStateModelGenerator.registerCrop(ModBlocks.PEANUT_CROP, PeanutButterCropBlock.AGE, 0, 1, 2, 3, 4, 5);
         blockStateModelGenerator.registerCrop(ModBlocks.TEA_LEAVES_CROP, TeaLeavesCropBlock.AGE, 0, 1, 2, 3, 4, 5, 6, 7, 8);

@@ -47,5 +47,12 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.PICKLOLIUM_BLOCK)
                 .add(ModBlocks.CHUTNEY_BLOCK)
                 .add(ModBlocks.CHUTNEY_DEPOSIT);
+
+        getOrCreateTagBuilder(BlockTags.FENCES)
+                .add(ModBlocks.PHIL_FENCE);
+        getOrCreateTagBuilder(BlockTags.FENCE_GATES)
+                .add(ModBlocks.PHIL_FENCE_GATE);
+        getOrCreateTagBuilder(BlockTags.WALLS)
+                .add(ModBlocks.PHIL_WALL);
     }
 }

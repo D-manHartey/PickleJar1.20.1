@@ -30,6 +30,17 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.CHUTNEY_BLOCK);
         addDrop(ModBlocks.PHIL_BLOCK);
 
+        addDrop(ModBlocks.PHIL_BUTTON);
+        addDrop(ModBlocks.PHIL_FENCE);
+        addDrop(ModBlocks.PHIL_FENCE_GATE);
+        addDrop(ModBlocks.PHIL_PRESSURE_PLATE);
+        addDrop(ModBlocks.PHIL_TRAPDOOR);
+        addDrop(ModBlocks.PHIL_STAIRS);
+        addDrop(ModBlocks.PHIL_WALL);
+
+        addDrop(ModBlocks.PHIL_DOOR, doorDrops(ModBlocks.PHIL_DOOR));
+        addDrop(ModBlocks.PHIL_SLAB, slabDrops(ModBlocks.PHIL_SLAB));
+
         addDrop(ModBlocks.PICKLOLIUM_DEPOSIT, copperLikeOreDrops(ModBlocks.PICKLOLIUM_DEPOSIT, ModItems.RAW_PICKLOLIUM));
         addDrop(ModBlocks.CHUTNEY_DEPOSIT, copperLikeOreDrops(ModBlocks.CHUTNEY_DEPOSIT, ModItems.RAW_CHUTNEY));
 
@@ -55,7 +66,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
                         ItemEntry.builder(item)
                                 .apply(SetCountLootFunction
                                         .builder(UniformLootNumberProvider
-                                                .create(1.0F, 1.0F)))
+                                                .create(1.0F, 2.0F)))
                                 .apply(ApplyBonusLootFunction.oreDrops(Enchantments.FORTUNE))));
     }
 }

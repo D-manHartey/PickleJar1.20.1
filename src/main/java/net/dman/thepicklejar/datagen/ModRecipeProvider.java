@@ -8,14 +8,14 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.SmokingRecipe;
+import net.minecraft.recipe.StonecuttingRecipe;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.util.Identifier;
 
@@ -47,20 +47,77 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerSmelting(exporter, TEA_SMELTABLES, RecipeCategory.FOOD, ModItems.CUP_O_GREEN_TEA,
                 0.4f, 150, "picklejar");
 
-        // hella fast brew
+        //hella fast brew
         CookingRecipeJsonBuilder.createSmoking(Ingredient.ofItems(ModItems.GREEN_TEA_LEAVES), RecipeCategory.FOOD, ModItems.CUP_O_GREEN_TEA, 0.3f, 50)
                 .criterion(hasItem(ModItems.GREEN_TEA_LEAVES), conditionsFromItem(ModItems.CUP_O_GREEN_TEA))
                 .offerTo(exporter, new Identifier(ThePickleJar.MOD_ID, "green_tea_brewing"));
         //slow ass brew
         CookingRecipeJsonBuilder.createCampfireCooking(Ingredient.ofItems(ModItems.GREEN_TEA_LEAVES), RecipeCategory.FOOD, ModItems.CUP_O_GREEN_TEA, 0.3f, 500)
                 .criterion(hasItem(ModItems.GREEN_TEA_LEAVES), conditionsFromItem(ModItems.CUP_O_GREEN_TEA))
-                .offerTo(exporter, new Identifier(ThePickleJar.MOD_ID, "campfire_tea_brew"));
+                .offerTo(exporter, new Identifier(ThePickleJar.MOD_ID, "campfire_brew"));
 
 
         offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.PICKLOLIUM, RecipeCategory.DECORATIONS,
                 ModBlocks.PICKLOLIUM_BLOCK);
         offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.MOLTEN_CHUTNEY, RecipeCategory.DECORATIONS,
                 ModBlocks.CHUTNEY_BLOCK);
+
+        //building blocks start
+
+        offerStonecuttingRecipe(exporter,RecipeCategory.BUILDING_BLOCKS, ModBlocks.PHIL_STAIRS, ModBlocks.PHIL_BLOCK, 4);
+        offerStonecuttingRecipe(exporter,RecipeCategory.BUILDING_BLOCKS, ModBlocks.PHIL_WALL, ModBlocks.PHIL_BLOCK, 6);
+        offerStonecuttingRecipe(exporter,RecipeCategory.BUILDING_BLOCKS, ModBlocks.PHIL_BUTTON, ModBlocks.PHIL_BLOCK, 3);
+        offerStonecuttingRecipe(exporter,RecipeCategory.BUILDING_BLOCKS, ModBlocks.PHIL_SLAB, ModBlocks.PHIL_BLOCK, 6);
+
+        createStairsRecipe(ModBlocks.PHIL_STAIRS, Ingredient.ofItems(ModBlocks.PHIL_BLOCK))
+                .criterion(hasItem(ModBlocks.PHIL_BLOCK), conditionsFromItem(ModBlocks.PHIL_BLOCK))
+                        .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.PHIL_STAIRS)));
+        createSlabRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PHIL_SLAB, Ingredient.ofItems(ModBlocks.PHIL_BLOCK))
+                .criterion(hasItem(ModBlocks.PHIL_BLOCK), conditionsFromItem(ModBlocks.PHIL_BLOCK))
+                .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.PHIL_SLAB)));
+        createPressurePlateRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PHIL_PRESSURE_PLATE, Ingredient.ofItems(ModBlocks.PHIL_BLOCK))
+                .criterion(hasItem(ModBlocks.PHIL_BLOCK), conditionsFromItem(ModBlocks.PHIL_BLOCK))
+                .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.PHIL_PRESSURE_PLATE)));
+        createDoorRecipe(ModBlocks.PHIL_DOOR, Ingredient.ofItems(ModBlocks.PHIL_BLOCK))
+                .criterion(hasItem(ModBlocks.PHIL_BLOCK), conditionsFromItem(ModBlocks.PHIL_BLOCK))
+                .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.PHIL_DOOR)));
+        createTrapdoorRecipe(ModBlocks.PHIL_TRAPDOOR, Ingredient.ofItems(ModBlocks.PHIL_BLOCK))
+                .criterion(hasItem(ModBlocks.PHIL_BLOCK), conditionsFromItem(ModBlocks.PHIL_BLOCK))
+                .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.PHIL_TRAPDOOR)));
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PHIL_FENCE, 3)
+                .pattern("PSP")
+                .pattern("PSP")
+                .pattern("   ")
+                .input('P', ModBlocks.PHIL_BLOCK)
+                .input('S', Items.STICK)
+                .criterion(hasItem(ModBlocks.PHIL_BLOCK), conditionsFromItem(ModBlocks.PHIL_BLOCK))
+                .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
+                .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.PHIL_FENCE)));
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PHIL_FENCE_GATE, 2)
+                .pattern("SPS")
+                .pattern("SPS")
+                .pattern("   ")
+                .input('P', ModBlocks.PHIL_BLOCK)
+                .input('S', Items.STICK)
+                .criterion(hasItem(ModBlocks.PHIL_BLOCK), conditionsFromItem(ModBlocks.PHIL_BLOCK))
+                .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
+                .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.PHIL_FENCE_GATE)));
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PHIL_BUTTON, 1)
+                .pattern(" P ")
+                .pattern("   ")
+                .pattern("   ")
+                .input('P', ModBlocks.PHIL_BLOCK)
+                .criterion(hasItem(ModBlocks.PHIL_BLOCK), conditionsFromItem(ModBlocks.PHIL_BLOCK))
+                .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.PHIL_BUTTON)));
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PHIL_WALL, 6)
+                .pattern("PPP")
+                .pattern("PPP")
+                .pattern("   ")
+                .input('P', ModBlocks.PHIL_BLOCK)
+                .criterion(hasItem(ModBlocks.PHIL_BLOCK), conditionsFromItem(ModBlocks.PHIL_BLOCK))
+                .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.PHIL_WALL)));
+        //building blocks end
+
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.GOLDEN_PICKLE, 1)
                 .pattern("DGD")
@@ -205,15 +262,16 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.PICKLE_ALFREDO)));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.PHIL_BLOCK, 1)
-                .pattern("DDD")
-                .pattern("CDP")
-                .pattern("DDD")
-                .input('D', Blocks.MUD)
+                .pattern("MMM")
+                .pattern("CMP")
+                .pattern("MMM")
+                .input('M', Blocks.MUD)
                 .input('C', ModItems.PICKLOLIUM)
                 .input('P', ModItems.MOLTEN_CHUTNEY)
                 .criterion(hasItem(Blocks.MUD), conditionsFromItem(Blocks.MUD))
                 .criterion(hasItem(ModItems.PICKLOLIUM), conditionsFromItem(ModItems.PICKLOLIUM))
                 .criterion(hasItem(ModItems.MOLTEN_CHUTNEY), conditionsFromItem(ModItems.MOLTEN_CHUTNEY))
                 .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.PHIL_BLOCK)));
+
     }
 }

@@ -15,6 +15,16 @@
   "item.the-pickle-jar.toon_leggings": "Bracae maculosae",
   "item.the-pickle-jar.toon_boots": "Calcei Atramentarii",
 
+  "block.the-pickle-jar.phil_stairs": "Stairway of Phil",
+  "block.the-pickle-jar.phil_slab": "Slab'o'Phil",
+  "block.the-pickle-jar.phil_button": "Pressable Phil",
+  "block.the-pickle-jar.phil_pressure_plate": "Steppable Phil",
+  "block.the-pickle-jar.phil_fence": "Farmfence Phil",
+  "block.the-pickle-jar.phil_fence_gate": "Farmdoor Phil",
+  "block.the-pickle-jar.phil_wall": "Great Wall of Phil",
+  "block.the-pickle-jar.phil_door": "Doorway to Phil",
+  "block.the-pickle-jar.phil_trapdoor": "Booby-trapdoor Phil",
+
   "block.the-pickle-jar.picklolium_deposit": "Picklolium Deposit",
   "block.the-pickle-jar.picklolium_block": "Block of Picklolium",
   "block.the-pickle-jar.chutney_deposit": "Chutney Deposit",

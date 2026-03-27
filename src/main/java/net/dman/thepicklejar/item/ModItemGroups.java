@@ -52,7 +52,15 @@ public class ModItemGroups {
                         entries.add(ModBlocks.CHUTNEY_DEPOSIT);
                         entries.add(ModBlocks.PHIL_BLOCK);
 
-
+                        entries.add(ModBlocks.PHIL_STAIRS);
+                        entries.add(ModBlocks.PHIL_SLAB);
+                        entries.add(ModBlocks.PHIL_BUTTON);
+                        entries.add(ModBlocks.PHIL_PRESSURE_PLATE);
+                        entries.add(ModBlocks.PHIL_FENCE);
+                        entries.add(ModBlocks.PHIL_FENCE_GATE);
+                        entries.add(ModBlocks.PHIL_WALL);
+                        entries.add(ModBlocks.PHIL_DOOR);
+                        entries.add(ModBlocks.PHIL_TRAPDOOR);
 
                     }).build());
 
