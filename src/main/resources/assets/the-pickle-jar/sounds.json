@@ -10,5 +10,23 @@
     "sounds": [
       "the-pickle-jar.phil_block_break"
     ]
+  },
+  "phil_block_hit": {
+    "subtitle": "sounds.the-pickle-jar.phil_block_hit",
+    "sounds": [
+      "the-pickle-jar.phil_block_hit"
+    ]
+  },
+  "phil_block_fall": {
+    "subtitle": "sounds.the-pickle-jar.phil_block_fall",
+    "sounds": [
+      "the-pickle-jar.phil_block_fall"
+    ]
+  },
+  "phil_block_step": {
+    "subtitle": "sounds.the-pickle-jar.phil_block_step",
+    "sounds": [
+      "the-pickle-jar.phil_block_step"
+    ]
   }
 }
