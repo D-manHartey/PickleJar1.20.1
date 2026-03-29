@@ -1,0 +1,14 @@
+{
+  "phil_block_place": {
+    "subtitle": "sounds.the-pickle-jar.phil_block_place",
+    "sounds": [
+      "the-pickle-jar.phil_block_place"
+    ]
+  },
+  "phil_block_break": {
+    "subtitle": "sounds.the-pickle-jar.phil_block_break",
+    "sounds": [
+      "the-pickle-jar.phil_block_break"
+    ]
+  }
+}

@@ -52,5 +52,8 @@
   "tooltip.the-pickle-jar.inkblot_mallet": "A song of justice plays within",
   "tooltip.the-pickle-jar.raggidy_scythe": "A weight of guilt pressures you",
 
+  "sounds.the-pickle-jar.phil_block_place": "Philing it up, HEURK",
+  "sounds.the-pickle-jar.phil_block_place": "PHIL'LL BE BACK",
+
   "itemgroup.picklejar": "Pickle Jar"
 }

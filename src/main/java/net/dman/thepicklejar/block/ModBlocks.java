@@ -4,6 +4,7 @@ import net.dman.thepicklejar.ThePickleJar;
 import net.dman.thepicklejar.block.custom.PeanutButterCropBlock;
 import net.dman.thepicklejar.block.custom.PhilBlock;
 import net.dman.thepicklejar.block.custom.TeaLeavesCropBlock;
+import net.dman.thepicklejar.sound.ModSounds;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
@@ -38,7 +39,7 @@ public class ModBlocks {
             new FlowerPotBlock(GREEN_CHRYSANTHEMUM,  FabricBlockSettings.copyOf(Blocks.POTTED_ALLIUM).nonOpaque()));
 
     public static final Block PHIL_BLOCK = registerBlock("phil_block",
-            new PhilBlock(FabricBlockSettings.copyOf(Blocks.ANVIL)));
+            new PhilBlock(FabricBlockSettings.copyOf(Blocks.ANVIL).sounds(ModSounds.PHIL_BLOCK_SOUNDS)));
 
     public static final Block PHIL_STAIRS = registerBlock("phil_stairs",
             new StairsBlock(ModBlocks.PHIL_BLOCK.getDefaultState(), FabricBlockSettings.copyOf(Blocks.SHROOMLIGHT)));

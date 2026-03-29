@@ -3,6 +3,7 @@ package net.dman.thepicklejar;
 import net.dman.thepicklejar.block.ModBlocks;
 import net.dman.thepicklejar.item.ModItemGroups;
 import net.dman.thepicklejar.item.ModItems;
+import net.dman.thepicklejar.sound.ModSounds;
 import net.dman.thepicklejar.util.ModCustomTrades;
 import net.dman.thepicklejar.util.ModLootTableModifiers;
 import net.dman.thepicklejar.villager.ModVillagers;
@@ -29,6 +30,7 @@ public class ThePickleJar implements ModInitializer {
         ModCustomTrades.registerCustomTrades();
 
         ModVillagers.registerVillagers();
+        ModSounds.registerSounds();
 
         ModWorldGeneration.generateModWorldGen();
 	}
