@@ -5,6 +5,7 @@ import net.dman.thepicklejar.item.ModItemGroups;
 import net.dman.thepicklejar.item.ModItems;
 import net.dman.thepicklejar.util.ModCustomTrades;
 import net.dman.thepicklejar.util.ModLootTableModifiers;
+import net.dman.thepicklejar.villager.ModVillagers;
 import net.dman.thepicklejar.world.gen.ModWorldGeneration;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -26,6 +27,8 @@ public class ThePickleJar implements ModInitializer {
 
         ModLootTableModifiers.modifyLootTables();
         ModCustomTrades.registerCustomTrades();
+
+        ModVillagers.registerVillagers();
 
         ModWorldGeneration.generateModWorldGen();
 	}

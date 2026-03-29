@@ -2,6 +2,7 @@ package net.dman.thepicklejar.util;
 
 import net.dman.thepicklejar.block.ModBlocks;
 import net.dman.thepicklejar.item.ModItems;
+import net.dman.thepicklejar.villager.ModVillagers;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -72,6 +73,14 @@ public class ModCustomTrades {
                     factories.add((entity, random) -> new TradeOffer(
                             new ItemStack(ModItems.TOON_STEEL, 1),
                             new ItemStack(Items.EMERALD, 6),
+                            9, 5, 0.05f));
+
+                });
+        TradeOfferHelper.registerVillagerOffers(ModVillagers.ZANY_WORSHIPPER, 1,
+                factories -> {
+                    factories.add((entity, random) -> new TradeOffer(
+                            new ItemStack(Items.EMERALD, 10),
+                            new ItemStack(ModItems.GOLDEN_PICKLE, 2),
                             9, 5, 0.05f));
 
                 });
