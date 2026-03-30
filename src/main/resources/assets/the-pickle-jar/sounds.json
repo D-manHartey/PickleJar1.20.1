@@ -28,5 +28,41 @@
     "sounds": [
       "the-pickle-jar:block/phil_block/phil_block_fall"
     ]
+  },
+  "inkblot_mallet_hit_1": {
+    "subtitle": "sounds.the-pickle-jar.inkblot_mallet_hit_1",
+    "sounds": [
+      "the-pickle-jar:item/inkblot_mallet/inkblot_mallet_hit_1"
+    ]
+  },
+  "inkblot_mallet_hit_2": {
+    "subtitle": "sounds.the-pickle-jar.inkblot_mallet_hit_2",
+    "sounds": [
+      "the-pickle-jar:item/inkblot_mallet/inkblot_mallet_hit_2"
+    ]
+  },
+  "inkblot_mallet_hit_3": {
+    "subtitle": "sounds.the-pickle-jar.inkblot_mallet_hit_3",
+    "sounds": [
+      "the-pickle-jar:item/inkblot_mallet/inkblot_mallet_hit_3"
+    ]
+  },
+  "raggidy_scythe_hit_1": {
+    "subtitle": "sounds.the-pickle-jar.raggidy_scythe_hit_1",
+    "sounds": [
+      "the-pickle-jar:item/raggidy_scythe/raggidy_scythe_hit_1"
+    ]
+  },
+  "raggidy_scythe_hit_2": {
+    "subtitle": "sounds.the-pickle-jar.raggidy_scythe_hit_2",
+    "sounds": [
+      "the-pickle-jar:item/raggidy_scythe/raggidy_scythe_hit_2"
+    ]
+  },
+  "raggidy_scythe_hit_3": {
+    "subtitle": "sounds.the-pickle-jar.raggidy_scythe_hit_3",
+    "sounds": [
+      "the-pickle-jar:item/raggidy_scythe/raggidy_scythe_hit_3"
+    ]
   }
 }

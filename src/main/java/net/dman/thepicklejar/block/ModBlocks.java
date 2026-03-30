@@ -42,9 +42,9 @@ public class ModBlocks {
             new PhilBlock(FabricBlockSettings.copyOf(Blocks.MUD).sounds(ModSounds.PHIL_BLOCK_SOUNDS)));
 
     public static final Block PHIL_STAIRS = registerBlock("phil_stairs",
-            new StairsBlock(ModBlocks.PHIL_BLOCK.getDefaultState(), FabricBlockSettings.copyOf(Blocks.SHROOMLIGHT)));
+            new StairsBlock(ModBlocks.PHIL_BLOCK.getDefaultState(), FabricBlockSettings.copyOf(Blocks.SHROOMLIGHT).sounds(ModSounds.PHIL_BLOCK_SOUNDS)));
     public static final Block PHIL_SLAB = registerBlock("phil_slab",
-            new SlabBlock(FabricBlockSettings.copyOf(Blocks.SHROOMLIGHT)));
+            new SlabBlock(FabricBlockSettings.copyOf(Blocks.SHROOMLIGHT).sounds(ModSounds.PHIL_BLOCK_SOUNDS)));
 
     public static final Block PHIL_BUTTON = registerBlock("phil_button",
             new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OCHRE_FROGLIGHT), BlockSetType.MANGROVE, 10, true));

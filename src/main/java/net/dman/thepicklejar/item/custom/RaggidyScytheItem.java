@@ -2,6 +2,7 @@ package net.dman.thepicklejar.item.custom;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import net.dman.thepicklejar.sound.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.item.TooltipContext;
@@ -16,8 +17,11 @@ import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.Vanishable;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -63,6 +67,20 @@ public class RaggidyScytheItem extends SwordItem implements Vanishable {
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        if (!attacker.getWorld().isClient) {
+            SoundEvent[] hitSounds = {
+                    ModSounds.RAGGIDY_SCYTHE_HIT_1,
+                    ModSounds.RAGGIDY_SCYTHE_HIT_2,
+                    ModSounds.RAGGIDY_SCYTHE_HIT_3
+            };
+
+            Random random = attacker.getRandom();
+            SoundEvent soundToPlay = hitSounds[random.nextInt(hitSounds.length)];
+
+            attacker.getWorld().playSound(null, target.getX(), target.getY(), target.getZ(),
+                    soundToPlay, SoundCategory.PLAYERS, 1.0f, 1.0f);
+        }
+
         stack.damage(1, attacker, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
         return true;
     }

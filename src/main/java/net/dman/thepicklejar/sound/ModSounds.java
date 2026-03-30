@@ -9,6 +9,14 @@ import net.minecraft.util.Identifier;
 
 public class ModSounds {
 
+    public static final SoundEvent INKBLOT_MALLET_HIT_1 = registerSoundEvent("inkblot_mallet_hit_1");
+    public static final SoundEvent INKBLOT_MALLET_HIT_2 = registerSoundEvent("inkblot_mallet_hit_2");
+    public static final SoundEvent INKBLOT_MALLET_HIT_3 = registerSoundEvent("inkblot_mallet_hit_3");
+
+    public static final SoundEvent RAGGIDY_SCYTHE_HIT_1 = registerSoundEvent("raggidy_scythe_hit_1");
+    public static final SoundEvent RAGGIDY_SCYTHE_HIT_2 = registerSoundEvent("raggidy_scythe_hit_2");
+    public static final SoundEvent RAGGIDY_SCYTHE_HIT_3 = registerSoundEvent("raggidy_scythe_hit_3");
+
     public static final SoundEvent PHIL_BLOCK_BREAK= registerSoundEvent("phil_block_break");
     public static final SoundEvent PHIL_BLOCK_STEP = registerSoundEvent("phil_block_step");
     public static final SoundEvent PHIL_BLOCK_PLACE = registerSoundEvent("phil_block_place");

@@ -82,6 +82,10 @@ public class ModCustomTrades {
                             new ItemStack(Items.EMERALD, 10),
                             new ItemStack(ModItems.GOLDEN_PICKLE, 2),
                             9, 5, 0.05f));
+                    factories.add((entity, random) -> new TradeOffer(
+                            new ItemStack(Items.EMERALD, 2),
+                            new ItemStack(ModBlocks.GREEN_CHRYSANTHEMUM, 1),
+                            15, 3, 0.03f));
 
                 });
     }
