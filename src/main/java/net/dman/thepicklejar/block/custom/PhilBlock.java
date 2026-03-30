@@ -29,4 +29,10 @@ public class PhilBlock extends Block {
         world.playSound(player, pos, SoundEvents.ENTITY_PIGLIN_ANGRY, SoundCategory.BLOCKS, 1f, 1f);
         return ActionResult.SUCCESS;
     }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
+        tooltip.add(Text.literal("I...wha...th...what's even the POINT of this block?!?"));
+        super.appendTooltip(stack, world, tooltip, options);
+    }
 }
