@@ -39,7 +39,7 @@ public class ModBlocks {
             new FlowerPotBlock(GREEN_CHRYSANTHEMUM,  FabricBlockSettings.copyOf(Blocks.POTTED_ALLIUM).nonOpaque()));
 
     public static final Block PHIL_BLOCK = registerBlock("phil_block",
-            new PhilBlock(FabricBlockSettings.copyOf(Blocks.ANVIL).sounds(ModSounds.PHIL_BLOCK_SOUNDS)));
+            new PhilBlock(FabricBlockSettings.copyOf(Blocks.MUD).sounds(ModSounds.PHIL_BLOCK_SOUNDS)));
 
     public static final Block PHIL_STAIRS = registerBlock("phil_stairs",
             new StairsBlock(ModBlocks.PHIL_BLOCK.getDefaultState(), FabricBlockSettings.copyOf(Blocks.SHROOMLIGHT)));

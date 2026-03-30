@@ -1,32 +1,32 @@
 {
-  "phil_block_place": {
-    "subtitle": "sounds.the-pickle-jar.phil_block_place",
-    "sounds": [
-      "the-pickle-jar.phil_block_place"
-    ]
-  },
   "phil_block_break": {
     "subtitle": "sounds.the-pickle-jar.phil_block_break",
     "sounds": [
-      "the-pickle-jar.phil_block_break"
-    ]
-  },
-  "phil_block_hit": {
-    "subtitle": "sounds.the-pickle-jar.phil_block_hit",
-    "sounds": [
-      "the-pickle-jar.phil_block_hit"
-    ]
-  },
-  "phil_block_fall": {
-    "subtitle": "sounds.the-pickle-jar.phil_block_fall",
-    "sounds": [
-      "the-pickle-jar.phil_block_fall"
+      "the-pickle-jar:block/phil_block/phil_block_break"
     ]
   },
   "phil_block_step": {
     "subtitle": "sounds.the-pickle-jar.phil_block_step",
     "sounds": [
-      "the-pickle-jar.phil_block_step"
+      "the-pickle-jar:block/phil_block/phil_block_step"
+    ]
+  },
+  "phil_block_place": {
+    "subtitle": "sounds.the-pickle-jar.phil_block_place",
+    "sounds": [
+      "the-pickle-jar:block/phil_block/phil_block_place"
+    ]
+  },
+  "phil_block_hit": {
+    "subtitle": "sounds.the-pickle-jar.phil_block_hit",
+    "sounds": [
+      "the-pickle-jar:block/phil_block/phil_block_hit"
+    ]
+  },
+  "phil_block_fall": {
+    "subtitle": "sounds.the-pickle-jar.phil_block_fall",
+    "sounds": [
+      "the-pickle-jar:block/phil_block/phil_block_fall"
     ]
   }
 }

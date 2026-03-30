@@ -41,6 +41,8 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.PHIL_DOOR, doorDrops(ModBlocks.PHIL_DOOR));
         addDrop(ModBlocks.PHIL_SLAB, slabDrops(ModBlocks.PHIL_SLAB));
 
+
+
         addDrop(ModBlocks.PICKLOLIUM_DEPOSIT, copperLikeOreDrops(ModBlocks.PICKLOLIUM_DEPOSIT, ModItems.RAW_PICKLOLIUM));
         addDrop(ModBlocks.CHUTNEY_DEPOSIT, copperLikeOreDrops(ModBlocks.CHUTNEY_DEPOSIT, ModItems.RAW_CHUTNEY));
 
