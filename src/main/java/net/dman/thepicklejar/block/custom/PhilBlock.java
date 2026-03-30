@@ -24,8 +24,8 @@ public class PhilBlock extends Block {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-
+    public ActionResult onUse(BlockState state, World world, BlockPos pos,
+                              PlayerEntity player, Hand hand, BlockHitResult hit) {
         world.playSound(player, pos, SoundEvents.ENTITY_PIGLIN_ANGRY, SoundCategory.BLOCKS, 1f, 1f);
         return ActionResult.SUCCESS;
     }
