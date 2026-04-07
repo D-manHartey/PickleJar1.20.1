@@ -62,7 +62,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.PHIL_DOOR);
                         entries.add(ModBlocks.PHIL_TRAPDOOR);
 
-                        entries.add(ModBlocks.GIADINIERA_ALTAR);
+                        entries.add(ModBlocks.GIARDINIERA_ALTAR);
 
                     }).build());
 

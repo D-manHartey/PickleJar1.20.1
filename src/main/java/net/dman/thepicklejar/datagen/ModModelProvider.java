@@ -40,7 +40,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.GREEN_CHRYSANTHEMUM, ModBlocks.POTTED_GREEN_CHRYSANTHEMUM,
                 BlockStateModelGenerator.TintType.NOT_TINTED);
 
-        blockStateModelGenerator.registerSimpleState(ModBlocks.GIADINIERA_ALTAR);
+        blockStateModelGenerator.registerSimpleState(ModBlocks.GIARDINIERA_ALTAR);
     }
 
     @Override

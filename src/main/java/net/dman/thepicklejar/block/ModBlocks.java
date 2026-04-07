@@ -65,7 +65,7 @@ public class ModBlocks {
     public static final Block PHIL_TRAPDOOR = registerBlock("phil_trapdoor",
             new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.MANGROVE_TRAPDOOR), BlockSetType.MANGROVE));
 
-    public static final Block GIADINIERA_ALTAR = registerBlock("giadiniera_altar",
+    public static final Block GIARDINIERA_ALTAR = registerBlock("giardiniera_altar",
             new GiardinieraAltarBlock(FabricBlockSettings.copyOf(Blocks.ENCHANTING_TABLE).nonOpaque()));
 
 

@@ -12,7 +12,7 @@ public class ModBlockEntities {
     public static final BlockEntityType<GiardinieraAltarBlockEntity> GIARDINIERA_ALTAR_BLOCK_ENTITY =
             Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(ThePickleJar.MOD_ID, "giardiniera_altar_be"),
                     FabricBlockEntityTypeBuilder.create(GiardinieraAltarBlockEntity::new,
-                            ModBlocks.GIADINIERA_ALTAR).build());
+                            ModBlocks.GIARDINIERA_ALTAR).build());
 
     public static void registerBlockEntities() {
         ThePickleJar.LOGGER.info("Registering Block Entities for " + ThePickleJar.MOD_ID);
