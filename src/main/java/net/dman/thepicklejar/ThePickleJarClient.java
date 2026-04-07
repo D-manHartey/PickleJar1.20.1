@@ -2,7 +2,6 @@ package net.dman.thepicklejar;
 
 import net.dman.thepicklejar.block.ModBlocks;
 import net.dman.thepicklejar.screen.GiardinieraAltarScreen;
-import net.dman.thepicklejar.screen.GiardinieraAltarScreenHandler;
 import net.dman.thepicklejar.screen.ModScreenHandlers;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
