@@ -1,8 +1,13 @@
 package net.dman.thepicklejar;
 
 import net.dman.thepicklejar.block.ModBlocks;
+import net.dman.thepicklejar.screen.GiardinieraAltarScreen;
+import net.dman.thepicklejar.screen.GiardinieraAltarScreenHandler;
+import net.dman.thepicklejar.screen.ModScreenHandlers;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 
 public class ThePickleJarClient implements ClientModInitializer {
@@ -17,5 +22,6 @@ public class ThePickleJarClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PHIL_DOOR, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PHIL_TRAPDOOR, RenderLayer.getCutout());
 
+        HandledScreens.register(ModScreenHandlers.GIARDINIERA_ALTAR_SCREEN_HANDLER, GiardinieraAltarScreen::new);
     }
 }

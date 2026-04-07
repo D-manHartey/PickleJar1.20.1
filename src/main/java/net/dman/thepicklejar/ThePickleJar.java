@@ -1,8 +1,10 @@
 package net.dman.thepicklejar;
 
 import net.dman.thepicklejar.block.ModBlocks;
+import net.dman.thepicklejar.block.entity.ModBlockEntities;
 import net.dman.thepicklejar.item.ModItemGroups;
 import net.dman.thepicklejar.item.ModItems;
+import net.dman.thepicklejar.screen.ModScreenHandlers;
 import net.dman.thepicklejar.sound.ModSounds;
 import net.dman.thepicklejar.util.ModCustomTrades;
 import net.dman.thepicklejar.util.ModLootTableModifiers;
@@ -31,6 +33,9 @@ public class ThePickleJar implements ModInitializer {
 
         ModVillagers.registerVillagers();
         ModSounds.registerSounds();
+
+        ModBlockEntities.registerBlockEntities();
+        ModScreenHandlers.registerScreenHandlers();
 
         ModWorldGeneration.generateModWorldGen();
 	}

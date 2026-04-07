@@ -1,6 +1,7 @@
 package net.dman.thepicklejar.block;
 
 import net.dman.thepicklejar.ThePickleJar;
+import net.dman.thepicklejar.block.custom.GiardinieraAltarBlock;
 import net.dman.thepicklejar.block.custom.PeanutButterCropBlock;
 import net.dman.thepicklejar.block.custom.PhilBlock;
 import net.dman.thepicklejar.block.custom.TeaLeavesCropBlock;
@@ -63,6 +64,9 @@ public class ModBlocks {
             new DoorBlock(FabricBlockSettings.copyOf(Blocks.MANGROVE_DOOR), BlockSetType.MANGROVE));
     public static final Block PHIL_TRAPDOOR = registerBlock("phil_trapdoor",
             new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.MANGROVE_TRAPDOOR), BlockSetType.MANGROVE));
+
+    public static final Block GIADINIERA_ALTAR = registerBlock("giadiniera_altar",
+            new GiardinieraAltarBlock(FabricBlockSettings.copyOf(Blocks.ENCHANTING_TABLE).nonOpaque()));
 
 
     private static Block registerBlock(String name, Block block) {
