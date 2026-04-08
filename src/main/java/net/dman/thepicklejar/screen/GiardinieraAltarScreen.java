@@ -35,6 +35,10 @@ public class GiardinieraAltarScreen extends HandledScreen<GiardinieraAltarScreen
         super.init();
         titleX = (backgroundWidth - textRenderer.getWidth(title)) / 2;
         titleY = 5;
+
+        // Hide the player inventory label
+        playerInventoryTitleX = 10000; // Moves it off-screen
+        playerInventoryTitleY = 10000;
     }
 
     @Override
@@ -61,6 +65,7 @@ public class GiardinieraAltarScreen extends HandledScreen<GiardinieraAltarScreen
         // Animations drawn AFTER slots so they appear on top
         int x = (width - backgroundWidth) / 2;
         int y = (height - backgroundHeight) / 2;
+        context.drawText(textRenderer, title, x + titleX, y + titleY,0x008000, false);
 
         renderProgressArrows(context, x, y);
         renderFuelIndicator(context, x, y);
@@ -89,21 +94,21 @@ public class GiardinieraAltarScreen extends HandledScreen<GiardinieraAltarScreen
         // Left arrow: GUI (30, 43), sprite (179, 180), size 45x76 — fills downward
         int leftH = scaleProgress(LEFT_ARROW_H);
         context.drawTexture(TEXTURE,
-                x + 30, y + 43,
+                x + 30, y + 39,
                 179, 180,
                 LEFT_ARROW_W, leftH);
 
         // Middle arrow: GUI (79, 43), sprite (181, 93), size 19x52 — fills downward
         int midH = scaleProgress(MIDDLE_ARROW_H);
         context.drawTexture(TEXTURE,
-                x + 79, y + 43,
+                x + 79, y + 38,
                 181, 93,
                 MIDDLE_ARROW_W, midH);
 
         // Right arrow: GUI (103, 43), sprite (211, 103), size 44x76 — fills downward
         int rightH = scaleProgress(RIGHT_ARROW_H);
         context.drawTexture(TEXTURE,
-                x + 103, y + 43,
+                x + 103, y + 39,
                 211, 103,
                 RIGHT_ARROW_W, rightH);
     }
@@ -114,11 +119,11 @@ public class GiardinieraAltarScreen extends HandledScreen<GiardinieraAltarScreen
         RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
 
-        // Eyes: GUI (204, 21), sprite (209, 92), size 22x10 — fills left to right
-        int eyesW = scaleFuel(EYES_W);
+        // Eyes: GUI (204, 21), sprite (209, 92), size 22x10 — fills downward
+        int eyesH = scaleFuel(EYES_H);
         context.drawTexture(TEXTURE,
-                x + 204, y + 21,
-                209, 92,
-                eyesW, EYES_H);
+                x + 204, y + 17 + (EYES_H - eyesH),
+                209, 92 + (EYES_H - eyesH),
+                EYES_W, eyesH);
     }
 }
