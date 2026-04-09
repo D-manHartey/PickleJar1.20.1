@@ -251,18 +251,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.SUGAR), conditionsFromItem(Items.SUGAR))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.PICKLE)));
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.PICKLE_ALFREDO, 1)
-                .pattern("   ")
-                .pattern("PW ")
-                .pattern(" B ")
-                .input('P', ModItems.PICKLE)
-                .input('W', Items.WHEAT)
-                .input('B', ModItems.PEANUT_BUTTER)
-                .criterion(hasItem(ModItems.PICKLE), conditionsFromItem(ModItems.PICKLE))
-                .criterion(hasItem(Items.WHEAT), conditionsFromItem(Items.WHEAT))
-                .criterion(hasItem(ModItems.PEANUT_BUTTER), conditionsFromItem(ModItems.PEANUT_BUTTER))
-                .offerTo(exporter, new Identifier(getRecipeName(ModItems.PICKLE_ALFREDO)));
-
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.PHIL_BLOCK, 1)
                 .pattern("MMM")
                 .pattern("CMP")

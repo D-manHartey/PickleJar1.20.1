@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.PropertyDelegate;
@@ -169,7 +170,7 @@ public class GiardinieraAltarBlockEntity extends BlockEntity implements
         this.removeStack(INGREDIENT_SLOT_2, 1);
         this.removeStack(INGREDIENT_SLOT_3, 1);
 
-        ItemStack result = new ItemStack(ModItems.GOLDEN_PICKLE);
+        ItemStack result = new ItemStack(ModItems.PICKLE_ALFREDO);
 
         if (this.getStack(OUTPUT_SLOT).isEmpty()) {
             this.setStack(OUTPUT_SLOT, result);
@@ -187,10 +188,10 @@ public class GiardinieraAltarBlockEntity extends BlockEntity implements
     }
 
     private boolean hasRecipe() {
-        ItemStack result = new ItemStack(ModItems.GOLDEN_PICKLE);
-        boolean hasInput1 = getStack(INGREDIENT_SLOT_1).getItem() == ModItems.PICKLE;
+        ItemStack result = new ItemStack(ModItems.PICKLE_ALFREDO);
+        boolean hasInput1 = getStack(INGREDIENT_SLOT_1).getItem() == Items.WHEAT;
         boolean hasInput2 = getStack(INGREDIENT_SLOT_2).getItem() == ModItems.PICKLE;
-        boolean hasInput3 = getStack(INGREDIENT_SLOT_3).getItem() == ModItems.PICKLE;
+        boolean hasInput3 = getStack(INGREDIENT_SLOT_3).getItem() == ModItems.PEANUT_BUTTER;
 
         return hasInput1 && hasInput2 && hasInput3 && canInsertAmountIntoOutputSlot(result) &&
                 canInsertItemIntoOutputSlot(result.getItem());

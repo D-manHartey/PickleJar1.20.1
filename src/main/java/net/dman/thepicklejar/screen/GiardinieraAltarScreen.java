@@ -13,6 +13,12 @@ import net.minecraft.util.Identifier;
 public class GiardinieraAltarScreen extends HandledScreen<GiardinieraAltarScreenHandler> {
     private static final Identifier TEXTURE = new Identifier(ThePickleJar.MOD_ID, "textures/gui/giardiniera_altar_gui.png");
 
+    private static final int MAIN_PANEL_W = 178;
+    private static final int MAIN_PANEL_H = 240;
+    private static final int FUEL_PANEL_W = 75;
+    private static final int FUEL_PANEL_H = 81;
+    private static final int TOTAL_BACKGROUND_W = MAIN_PANEL_W + FUEL_PANEL_W;
+
     // Sprite sizes (from texture sheet)
     private static final int LEFT_ARROW_W   = 45;
     private static final int LEFT_ARROW_H   = 76;
@@ -26,8 +32,8 @@ public class GiardinieraAltarScreen extends HandledScreen<GiardinieraAltarScreen
 
     public GiardinieraAltarScreen(GiardinieraAltarScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
-        this.backgroundWidth = 178;
-        this.backgroundHeight = 240;
+        this.backgroundWidth = TOTAL_BACKGROUND_W;
+        this.backgroundHeight = MAIN_PANEL_H;
     }
 
     @Override
@@ -37,6 +43,8 @@ public class GiardinieraAltarScreen extends HandledScreen<GiardinieraAltarScreen
         titleY = 5;
 
         // Hide the player inventory label
+        titleY = 10000;
+        titleX = 10000;
         playerInventoryTitleX = 10000; // Moves it off-screen
         playerInventoryTitleY = 10000;
     }
@@ -50,11 +58,11 @@ public class GiardinieraAltarScreen extends HandledScreen<GiardinieraAltarScreen
         int y = (height - backgroundHeight) / 2;
 
         // Draw main green GUI panel: texture (0, 4), size 178x222
-        context.drawTexture(TEXTURE, x, y, 0, 4, backgroundWidth, backgroundHeight);
+        context.drawTexture(TEXTURE, x, y, 0, 4, MAIN_PANEL_W, MAIN_PANEL_H);
 
         // Draw red fuel panel: texture (178, 8), size 75x81
         // Positioned immediately to the right of the green panel
-        context.drawTexture(TEXTURE, x + backgroundWidth, y + 4, 178, 8, 75, 81);
+        context.drawTexture(TEXTURE, x + MAIN_PANEL_W, y + 4, 178, 8, FUEL_PANEL_W, FUEL_PANEL_H);
     }
 
     @Override
