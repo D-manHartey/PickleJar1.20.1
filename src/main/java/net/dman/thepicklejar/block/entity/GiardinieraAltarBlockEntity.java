@@ -1,6 +1,7 @@
 package net.dman.thepicklejar.block.entity;
 
 import net.dman.thepicklejar.item.ModItems;
+import net.dman.thepicklejar.recipe.GiardinieraAltarRecipe;
 import net.dman.thepicklejar.screen.GiardinieraAltarScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
@@ -8,9 +9,9 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.PropertyDelegate;
@@ -21,6 +22,10 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
+
+import static org.apache.logging.log4j.core.appender.rolling.action.PathCondition.copy;
 
 public class GiardinieraAltarBlockEntity extends BlockEntity implements
         ExtendedScreenHandlerFactory, ImplementedInventory {
@@ -166,11 +171,16 @@ public class GiardinieraAltarBlockEntity extends BlockEntity implements
     }
 
     private void craftItem() {
+        Optional<GiardinieraAltarRecipe> recipe = getCurrentRecipe();
+        if (recipe.isEmpty() || this.world == null) {
+            return;
+        }
+
+        ItemStack result = recipe.get().getOutput(this.world.getRegistryManager()).copy();
+
         this.removeStack(INGREDIENT_SLOT_1, 1);
         this.removeStack(INGREDIENT_SLOT_2, 1);
         this.removeStack(INGREDIENT_SLOT_3, 1);
-
-        ItemStack result = new ItemStack(ModItems.PICKLE_ALFREDO);
 
         if (this.getStack(OUTPUT_SLOT).isEmpty()) {
             this.setStack(OUTPUT_SLOT, result);
@@ -188,19 +198,37 @@ public class GiardinieraAltarBlockEntity extends BlockEntity implements
     }
 
     private boolean hasRecipe() {
-        ItemStack result = new ItemStack(ModItems.PICKLE_ALFREDO);
-        boolean hasInput1 = getStack(INGREDIENT_SLOT_1).getItem() == Items.WHEAT;
-        boolean hasInput2 = getStack(INGREDIENT_SLOT_2).getItem() == ModItems.PICKLE;
-        boolean hasInput3 = getStack(INGREDIENT_SLOT_3).getItem() == ModItems.PEANUT_BUTTER;
+        Optional<GiardinieraAltarRecipe> recipe = getCurrentRecipe();
+        if (recipe.isEmpty() || this.world == null) {
+            return false;
+        }
 
-        return hasInput1 && hasInput2 && hasInput3 && canInsertAmountIntoOutputSlot(result) &&
-                canInsertItemIntoOutputSlot(result.getItem());
+        ItemStack result = recipe.get().getOutput(this.world.getRegistryManager());
+        return canInsertAmountIntoOutputSlot(result)
+                && canInsertItemIntoOutputSlot(result.getItem());
+    }
+
+    private Optional<GiardinieraAltarRecipe> getCurrentRecipe() {
+        if (this.world == null) {
+            return Optional.empty();
+        }
+
+        SimpleInventory inv = new SimpleInventory(this.size());
+        for (int i = 0; i < this.size(); i++) {
+            inv.setStack(i, this.getStack(i));
+        }
+
+        return this.world.getRecipeManager().getFirstMatch(
+                GiardinieraAltarRecipe.Type.INSTANCE,
+                inv,
+                this.world
+        );
     }
 
 
-
     private boolean canInsertItemIntoOutputSlot(Item item) {
-        return this.getStack(OUTPUT_SLOT).getItem() == item || this.getStack(OUTPUT_SLOT).isEmpty();
+        return this.getStack(OUTPUT_SLOT).isEmpty()
+                || this.getStack(OUTPUT_SLOT).getItem() == item;
     }
 
     private boolean canInsertAmountIntoOutputSlot(ItemStack result) {
@@ -208,8 +236,4 @@ public class GiardinieraAltarBlockEntity extends BlockEntity implements
                 getStack(OUTPUT_SLOT).getMaxCount();
     }
 
-    private boolean isOutputSlotEmptyOrReceivable() {
-        return this.getStack(OUTPUT_SLOT).isEmpty() || this.getStack(OUTPUT_SLOT).getCount() <
-                this.getStack(OUTPUT_SLOT).getMaxCount();
-    }
 }

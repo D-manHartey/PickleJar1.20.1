@@ -1,0 +1,12 @@
+{
+  "type": "the-pickle-jar:giardiniera_altering",
+  "ingredients": [
+    { "item": "the-pickle-jar:peanut_butter" },
+    { "item": "the-pickle-jar:pickle" },
+    { "item": "minecraft:wheat" }
+  ],
+  "output": {
+    "item": "the-pickle-jar:pickle_alfredo",
+    "count": 1
+  }
+}

@@ -4,6 +4,7 @@ import net.dman.thepicklejar.block.ModBlocks;
 import net.dman.thepicklejar.block.entity.ModBlockEntities;
 import net.dman.thepicklejar.item.ModItemGroups;
 import net.dman.thepicklejar.item.ModItems;
+import net.dman.thepicklejar.recipe.ModRecipes;
 import net.dman.thepicklejar.screen.ModScreenHandlers;
 import net.dman.thepicklejar.sound.ModSounds;
 import net.dman.thepicklejar.util.ModCustomTrades;
@@ -25,6 +26,8 @@ public class ThePickleJar implements ModInitializer {
 
         ModItems.registerModItems();
         ModBlocks.registerModBlocks();
+
+        ModRecipes.registerRecipes();
 
         FuelRegistry.INSTANCE.add(ModItems.GHERKIN_SOUL, 4000);
 
