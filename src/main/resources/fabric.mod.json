@@ -15,14 +15,17 @@
 	"icon": "assets/the-pickle-jar/icon.png",
 	"environment": "*",
 	"entrypoints": {
+      "main": [
+        "net.dman.thepicklejar.ThePickleJar"
+      ],
       "client": [
         "net.dman.thepicklejar.ThePickleJarClient"
       ],
       "fabric-datagen": [
         "net.dman.thepicklejar.ThePickleJarDataGenerator"
       ],
-      "main": [
-        "net.dman.thepicklejar.ThePickleJar"
+      "rei_client": [
+        "net.dman.thepicklejar.compat.ThePickleJarREIClientPlugin"
       ]
     },
 	"mixins": [
