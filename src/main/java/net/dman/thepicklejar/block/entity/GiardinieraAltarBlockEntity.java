@@ -14,6 +14,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -24,8 +27,6 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
-
-import static org.apache.logging.log4j.core.appender.rolling.action.PathCondition.copy;
 
 public class GiardinieraAltarBlockEntity extends BlockEntity implements
         ExtendedScreenHandlerFactory, ImplementedInventory {
@@ -74,6 +75,20 @@ public class GiardinieraAltarBlockEntity extends BlockEntity implements
                 return 4;
             }
         };
+    }
+
+    public ItemStack getRenderStack() {
+        if (this.getStack(OUTPUT_SLOT).isEmpty()) {
+            return this.getStack(INGREDIENT_SLOT_2);
+        } else {
+            return this.getStack(OUTPUT_SLOT);
+        }
+    }
+
+    @Override
+    public void markDirty() {
+        world.updateListeners(pos, getCachedState(), getCachedState(), 3);
+        super.markDirty();
     }
 
     @Override
@@ -236,4 +251,13 @@ public class GiardinieraAltarBlockEntity extends BlockEntity implements
                 getStack(OUTPUT_SLOT).getMaxCount();
     }
 
+    @Override
+    public @Nullable Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return createNbt();
+    }
 }
