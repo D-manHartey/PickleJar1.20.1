@@ -16,10 +16,10 @@ import net.minecraft.world.poi.PointOfInterestType;
 
 public class ModVillagers {
 
-    public static final RegistryKey<PointOfInterestType> PHIL_POI_KEY = poiKey("philpoi");
-    public static final PointOfInterestType PHIL_POI = registerPoi("philpoi", ModBlocks.PHIL_BLOCK);
+    public static final RegistryKey<PointOfInterestType> GIARDINIERA_ALTAR_POI_KEY = poiKey("giardiniera_altar_poi");
+    public static final PointOfInterestType GIARDINIERA_ALTAR_POI = registerPoi("giardiniera_altar_poi", ModBlocks.GIARDINIERA_ALTAR);
 
-    public static final VillagerProfession ZANY_WORSHIPPER = registerProfession("zany_worshipper", PHIL_POI_KEY);
+    public static final VillagerProfession ZANY_WORSHIPPER = registerProfession("zany_worshipper", GIARDINIERA_ALTAR_POI_KEY);
 
     private static VillagerProfession registerProfession(String name, RegistryKey<PointOfInterestType> type) {
         return Registry.register(Registries.VILLAGER_PROFESSION, new Identifier(ThePickleJar.MOD_ID, name),
