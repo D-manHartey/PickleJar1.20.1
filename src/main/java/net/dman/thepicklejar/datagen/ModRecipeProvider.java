@@ -121,7 +121,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         //building blocks end
 
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.GOLDEN_PICKLE, 1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, ModItems.GOLDEN_PICKLE, 1)
                 .pattern("DGD")
                 .pattern("GPG")
                 .pattern("DGD")
@@ -177,7 +177,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.MOLTEN_CHUTNEY), conditionsFromItem(ModItems.MOLTEN_CHUTNEY))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.RADIOACTIVE_PICKLOLIUM)));
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.INKBLOT_MALLET, 1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.INKBLOT_MALLET, 1)
                 .pattern("TRT")
                 .pattern("TST")
                 .pattern(" S ")
@@ -189,7 +189,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.RADIOACTIVE_PICKLOLIUM), conditionsFromItem(ModItems.RADIOACTIVE_PICKLOLIUM))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.INKBLOT_MALLET)));
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.RAGGIDY_SCYTHE, 1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.RAGGIDY_SCYTHE, 1)
                 .pattern(" RT")
                 .pattern(" SR")
                 .pattern("S R")
@@ -201,7 +201,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.RADIOACTIVE_PICKLOLIUM), conditionsFromItem(ModItems.RADIOACTIVE_PICKLOLIUM))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.RAGGIDY_SCYTHE)));
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.TOON_HELMET, 1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.TOON_HELMET, 1)
                 .pattern("TRT")
                 .pattern("T T")
                 .pattern("   ")
@@ -211,7 +211,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.RADIOACTIVE_PICKLOLIUM), conditionsFromItem(ModItems.RADIOACTIVE_PICKLOLIUM))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.TOON_HELMET)));
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.TOON_CHESTPLATE, 1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.TOON_CHESTPLATE, 1)
                 .pattern("T T")
                 .pattern("TRT")
                 .pattern("RTR")
@@ -221,7 +221,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.RADIOACTIVE_PICKLOLIUM), conditionsFromItem(ModItems.RADIOACTIVE_PICKLOLIUM))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.TOON_CHESTPLATE)));
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.TOON_LEGGINGS, 1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.TOON_LEGGINGS, 1)
                 .pattern("TRT")
                 .pattern("R R")
                 .pattern("T T")
@@ -231,7 +231,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.RADIOACTIVE_PICKLOLIUM), conditionsFromItem(ModItems.RADIOACTIVE_PICKLOLIUM))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.TOON_LEGGINGS)));
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.TOON_BOOTS, 1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.TOON_BOOTS, 1)
                 .pattern("   ")
                 .pattern("T T")
                 .pattern("R R")
@@ -241,7 +241,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.RADIOACTIVE_PICKLOLIUM), conditionsFromItem(ModItems.RADIOACTIVE_PICKLOLIUM))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.TOON_BOOTS)));
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.PICKLE, 2)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, ModItems.PICKLE, 2)
                 .pattern("   ")
                 .pattern("PS ")
                 .pattern("   ")
@@ -251,7 +251,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.SUGAR), conditionsFromItem(Items.SUGAR))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.PICKLE)));
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.PHIL_BLOCK, 1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PHIL_BLOCK, 1)
                 .pattern("MMM")
                 .pattern("CMP")
                 .pattern("MMM")
@@ -262,6 +262,20 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.PICKLOLIUM), conditionsFromItem(ModItems.PICKLOLIUM))
                 .criterion(hasItem(ModItems.MOLTEN_CHUTNEY), conditionsFromItem(ModItems.MOLTEN_CHUTNEY))
                 .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.PHIL_BLOCK)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.GIARDINIERA_ALTAR, 1)
+                .pattern("RGR")
+                .pattern("HPH")
+                .pattern("PPP")
+                .input('G', ModItems.GOLDEN_PICKLE)
+                .input('H', ModBlocks.PHIL_BLOCK)
+                .input('P', ModBlocks.PICKLOLIUM_BLOCK)
+                .input('R', ModItems.RADIOACTIVE_PICKLOLIUM)
+                .criterion(hasItem(ModItems.GOLDEN_PICKLE), conditionsFromItem(ModItems.GOLDEN_PICKLE))
+                .criterion(hasItem(ModBlocks.PHIL_BLOCK), conditionsFromItem(ModBlocks.PHIL_BLOCK))
+                .criterion(hasItem(ModBlocks.PICKLOLIUM_BLOCK), conditionsFromItem(ModBlocks.PICKLOLIUM_BLOCK))
+                .criterion(hasItem(ModItems.RADIOACTIVE_PICKLOLIUM), conditionsFromItem(ModItems.RADIOACTIVE_PICKLOLIUM))
+                .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.GIARDINIERA_ALTAR)));
 
     }
 }
