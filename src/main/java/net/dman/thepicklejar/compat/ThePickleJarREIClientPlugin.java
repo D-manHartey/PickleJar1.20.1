@@ -21,7 +21,9 @@ public class ThePickleJarREIClientPlugin implements REIClientPlugin {
 
     @Override
     public void registerDisplays(DisplayRegistry registry) {
-        registry.registerRecipeFiller(GiardinieraAltarRecipe.class, GiardinieraAltarRecipe.Type.INSTANCE,
+        registry.registerRecipeFiller(
+                GiardinieraAltarRecipe.class,
+                GiardinieraAltarRecipe.Type.INSTANCE,
                 GiardinieraAltarDisplay::new);
     }
 

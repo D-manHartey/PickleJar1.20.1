@@ -16,8 +16,10 @@ public class GiardinieraAltarDisplay extends BasicDisplay {
         super(inputs, outputs);
     }
 
-    public GiardinieraAltarDisplay(RecipeEntry<GiardinieraAltarRecipe> recipe) {
-        super(getInputList(recipe.value()), List.of(EntryIngredient.of(EntryStacks.of(recipe.value().getResult(null)))));
+    public GiardinieraAltarDisplay(GiardinieraAltarRecipe recipe) {
+        super(EntryIngredients.ofIngredients(recipe.getIngredients()),
+                List.of(EntryIngredients.of(recipe.getOutput(null)))
+        );
     }
 
     private static List<EntryIngredient> getInputList(GiardinieraAltarRecipe recipe) {

@@ -23,6 +23,8 @@ public class GiardinieraAltarCategory implements DisplayCategory<BasicDisplay> {
     public static final CategoryIdentifier<GiardinieraAltarDisplay> GIARDINIERA_ALTAR =
             CategoryIdentifier.of(ThePickleJar.MOD_ID, "giardiniera_altering");
 
+    private static final int GUI_WIDTH = 178;
+    private static final int GUI_HEIGHT = 122;
 
     @Override
     public CategoryIdentifier<? extends BasicDisplay> getCategoryIdentifier() {
@@ -41,16 +43,23 @@ public class GiardinieraAltarCategory implements DisplayCategory<BasicDisplay> {
 
     @Override
     public List<Widget> setupDisplay(BasicDisplay display, Rectangle bounds) {
-        final Point startPoint = new Point(bounds.getCenterX() - 87, bounds.getCenterY() - 35);
+        final Point startPoint = new Point(
+                bounds.getCenterX() - GUI_WIDTH / 2, bounds.getCenterY() - GUI_HEIGHT / 2);
+
         List<Widget> widgets = new LinkedList<>();
-        widgets.add(Widgets.createTexturedWidget(TEXTURE, new Rectangle(startPoint.x, startPoint.y, 175, 82)));
+        widgets.add(Widgets.createTexturedWidget(TEXTURE,
+                new Rectangle(startPoint.x, startPoint.y, GUI_WIDTH, GUI_HEIGHT),
+                        0, 4,
+                GUI_WIDTH, GUI_HEIGHT,
+                256, 256
+                ));
 
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 26, startPoint.y + 17))
                 .entries(display.getInputEntries().get(0)));
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 81, startPoint.y + 17))
-                .entries(display.getInputEntries().get(0)));
+                .entries(display.getInputEntries().get(1)));
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 135, startPoint.y + 17))
-                .entries(display.getInputEntries().get(0)));
+                .entries(display.getInputEntries().get(2)));
 
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 81, startPoint.y + 97))
                 .markOutput().entries(display.getOutputEntries().get(0)));
@@ -60,6 +69,6 @@ public class GiardinieraAltarCategory implements DisplayCategory<BasicDisplay> {
 
     @Override
     public int getDisplayHeight() {
-        return 90;
+        return 130;
     }
 }
