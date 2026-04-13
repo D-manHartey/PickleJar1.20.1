@@ -16,7 +16,7 @@ import net.minecraft.util.math.RotationAxis;
 
 public class GiardinieraAltarBlockEntityRenderer implements BlockEntityRenderer<GiardinieraAltarBlockEntity> {
     private static final float RENDER_Y = 0.88f;
-    private static final float SCALE = 0.5f;
+    private static final float SCALE = 0.25f;
 
     private final ItemRenderer itemRenderer;
 
