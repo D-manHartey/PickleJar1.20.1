@@ -64,6 +64,13 @@ public class ModItemGroups {
 
                         entries.add(ModBlocks.GIARDINIERA_ALTAR);
 
+                        entries.add(ModItems.JARRED_MIND);
+                        entries.add(ModItems.JARRED_SPACE);
+                        entries.add(ModItems.JARRED_REALITY);
+                        entries.add(ModItems.JARRED_POWER);
+                        entries.add(ModItems.JARRED_TIME);
+                        entries.add(ModItems.JARRED_SOUL);
+
                     }).build());
 
 

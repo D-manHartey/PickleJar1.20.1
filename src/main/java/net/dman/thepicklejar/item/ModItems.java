@@ -53,6 +53,13 @@ public class ModItems {
     public static final Item TEA_LEAF_SEEDS = registerItem("tea_leaf_seeds",
             new AliasedBlockItem(ModBlocks.TEA_LEAVES_CROP, new FabricItemSettings()));
 
+    public static final Item JARRED_MIND = registerItem("jarred_mind", new Item(new FabricItemSettings()));
+    public static final Item JARRED_SPACE = registerItem("jarred_space", new Item(new FabricItemSettings()));
+    public static final Item JARRED_REALITY = registerItem("jarred_reality", new Item(new FabricItemSettings()));
+    public static final Item JARRED_POWER = registerItem("jarred_power", new Item(new FabricItemSettings()));
+    public static final Item JARRED_TIME = registerItem("jarred_time", new Item(new FabricItemSettings()));
+    public static final Item JARRED_SOUL = registerItem("jarred_soul", new Item(new FabricItemSettings()));
+
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries) {
         entries.add(PICKLOLIUM);

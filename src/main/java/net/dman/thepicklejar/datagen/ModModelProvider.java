@@ -67,5 +67,12 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.TOON_LEGGINGS));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.TOON_BOOTS));
 
+        itemModelGenerator.register(ModItems.JARRED_MIND, Models.GENERATED);
+        itemModelGenerator.register(ModItems.JARRED_SPACE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.JARRED_REALITY, Models.GENERATED);
+        itemModelGenerator.register(ModItems.JARRED_POWER, Models.GENERATED);
+        itemModelGenerator.register(ModItems.JARRED_TIME, Models.GENERATED);
+        itemModelGenerator.register(ModItems.JARRED_SOUL, Models.GENERATED);
+
     }
 }
