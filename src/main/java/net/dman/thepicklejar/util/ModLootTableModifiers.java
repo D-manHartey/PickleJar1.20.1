@@ -17,6 +17,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ModLootTableModifiers {
+    public static final Identifier BLAZE_ID =
+            new Identifier("minecraft", "entities/blaze");
     public static final Identifier DROWNED_ID =
             new Identifier("minecraft", "entities/drowned");
     public static final Identifier GRASS_ID =
@@ -47,6 +49,17 @@ public class ModLootTableModifiers {
 
                         tableBuilder.pool(poolBuilder.build());
                     }
+
+            if (BLAZE_ID.equals(id)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .conditionally(RandomChanceLootCondition.builder(0.35f)) // Drops 35% of the time
+                        .with(ItemEntry.builder(ModItems.SALSA_SOUL))
+                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
+
+                tableBuilder.pool(poolBuilder.build());
+            }
+
 
         });
 

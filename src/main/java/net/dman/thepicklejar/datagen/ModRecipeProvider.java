@@ -120,7 +120,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.PHIL_WALL)));
         //building blocks end
 
-
+        // Normal Recipes
         ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, ModItems.GOLDEN_PICKLE, 1)
                 .pattern("DGD")
                 .pattern("GPG")

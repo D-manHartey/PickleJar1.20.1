@@ -166,7 +166,7 @@ public class GiardinieraAltarScreenHandler extends ScreenHandler {
             if (stack.isEmpty()) return false;
 
             return stack.getItem() ==
-                    ModItems.GHERKIN_SOUL;
+                    ModItems.SALSA_SOUL;
         }
     }
 }

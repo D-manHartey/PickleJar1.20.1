@@ -29,7 +29,8 @@ public class ThePickleJar implements ModInitializer {
 
         ModRecipes.registerRecipes();
 
-        FuelRegistry.INSTANCE.add(ModItems.GHERKIN_SOUL, 4000);
+        FuelRegistry.INSTANCE.add(ModItems.GHERKIN_SOUL, 3500);
+        FuelRegistry.INSTANCE.add(ModItems.SALSA_SOUL, 5500);
 
         ModLootTableModifiers.modifyLootTables();
         ModCustomTrades.registerCustomTrades();

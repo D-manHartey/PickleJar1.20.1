@@ -1,11 +1,12 @@
 {
   "item.the-pickle-jar.picklolium": "Picklolium",
   "item.the-pickle-jar.rawpick": "Raw Picklolium",
-  "item.the-pickle-jar.broken_telephone": "Broken Telephone",
   "item.the-pickle-jar.toon_steel": "Toon Steel",
   "item.the-pickle-jar.rad_pick": "Radioactive Picklolium",
   "item.the-pickle-jar.raw_chutney": "Raw Chutney",
   "item.the-pickle-jar.molten_chutney": "Molten Chutney",
+
+  "item.the-pickle-jar.broken_telephone": "Broken Telephone",
 
   "item.the-pickle-jar.inkblot_mallet": "InkBlot Mallet",
   "item.the-pickle-jar.raggidy_scythe": "Raggidy Scythe",
@@ -33,9 +34,11 @@
 
   "item.the-pickle-jar.pickle": "Pickle",
   "item.the-pickle-jar.golden_pickle": "Golden Pickle",
-  "item.the-pickle-jar.gherkin_soul": "Gherkin Soul",
   "item.the-pickle-jar.pickle_alfredo": "Pickle Alfredo",
   "item.the-pickle-jar.cup_green_tea": "Cup of Green Tea",
+
+  "item.the-pickle-jar.gherkin_soul": "Gherkin Soul",
+  "item.the-pickle-jar.salsa_soul": "Salsa Soul",
 
   "item.the-pickle-jar.peanut_seeds": "Peanut Seeds",
   "item.the-pickle-jar.peanut_butter": "Peanut Butter",

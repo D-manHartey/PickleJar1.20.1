@@ -15,6 +15,8 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModItems {
+
+    // Metal
     public static final Item PICKLOLIUM = registerItem("picklolium", new Item (new FabricItemSettings()));
     public static final Item RAW_PICKLOLIUM = registerItem("rawpick", new Item(new FabricItemSettings()));
     public static final Item TOON_STEEL = registerItem("toon_steel", new ToonSteelItem(new FabricItemSettings()));
@@ -22,20 +24,28 @@ public class ModItems {
     public static final Item RAW_CHUTNEY = registerItem("raw_chutney", new Item(new FabricItemSettings()));
     public static final Item MOLTEN_CHUTNEY = registerItem("molten_chutney", new Item(new FabricItemSettings()));
 
+    // WIP stuff
     public static final Item BROKEN_TELEPHONE = registerItem("broken_telephone", new BrokenTelephoneItem(new FabricItemSettings()));
 
+
+    // Food
     public static final Item PICKLE = registerItem("pickle", new Item(new FabricItemSettings().food(ModFoodComponents.PICKLE)));
     public static final Item GOLDEN_PICKLE = registerItem("golden_pickle", new Item(new FabricItemSettings().food(ModFoodComponents.GOLDEN_PICKLE)));
     public static final Item PICKLE_ALFREDO = registerItem("pickle_alfredo", new Item(new FabricItemSettings().food(ModFoodComponents.PICKLE_ALFREDO)));
     public static final Item CUP_O_GREEN_TEA = registerItem("cup_green_tea", new Item(new FabricItemSettings().food(ModFoodComponents.CUP_O_GREEN_TEA)));
 
-    public static final Item GHERKIN_SOUL = registerItem("gherkin_soul", new Item(new FabricItemSettings()));
 
+    // Fuel Sources
+    public static final Item GHERKIN_SOUL = registerItem("gherkin_soul", new Item(new FabricItemSettings()));
+    public static final Item SALSA_SOUL = registerItem("salsa_soul", new Item(new FabricItemSettings()));
+
+    // Weapons
     public static final Item INKBLOT_MALLET = registerItem("inkblot_mallet",
             new InkblotMalletItem(ModToolMaterial.TOON, 10, -3.2f, new FabricItemSettings()));
     public static final Item RAGGIDY_SCYTHE = registerItem("raggidy_scythe",
             new RaggidyScytheItem(ModToolMaterial.RADIATED, 8, -2.4f, new FabricItemSettings()));
 
+    // Armor
     public static final Item TOON_HELMET = registerItem("toon_helmet",
             new ModArmorItem(ModArmorMaterials.TOONPROT, ArmorItem.Type.HELMET, new FabricItemSettings()));
     public static final Item TOON_CHESTPLATE = registerItem("toon_chestplate",
@@ -45,6 +55,7 @@ public class ModItems {
     public static final Item TOON_BOOTS = registerItem("toon_boots",
             new ArmorItem(ModArmorMaterials.TOONPROT, ArmorItem.Type.BOOTS, new FabricItemSettings()));
 
+    // Crops
     public static final Item PEANUT_SEEDS = registerItem("peanut_seeds",
             new AliasedBlockItem(ModBlocks.PEANUT_CROP, new FabricItemSettings()));
     public static final Item PEANUT_BUTTER = registerItem("peanut_butter", new Item(new FabricItemSettings().food(ModFoodComponents.PEANUT_BUTTER)));
@@ -53,12 +64,15 @@ public class ModItems {
     public static final Item TEA_LEAF_SEEDS = registerItem("tea_leaf_seeds",
             new AliasedBlockItem(ModBlocks.TEA_LEAVES_CROP, new FabricItemSettings()));
 
+    // Eternal Jarred Energy
     public static final Item JARRED_MIND = registerItem("jarred_mind", new Item(new FabricItemSettings()));
     public static final Item JARRED_SPACE = registerItem("jarred_space", new Item(new FabricItemSettings()));
     public static final Item JARRED_REALITY = registerItem("jarred_reality", new Item(new FabricItemSettings()));
     public static final Item JARRED_POWER = registerItem("jarred_power", new Item(new FabricItemSettings()));
     public static final Item JARRED_TIME = registerItem("jarred_time", new Item(new FabricItemSettings()));
     public static final Item JARRED_SOUL = registerItem("jarred_soul", new Item(new FabricItemSettings()));
+
+    // Eternal Pickles
 
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries) {

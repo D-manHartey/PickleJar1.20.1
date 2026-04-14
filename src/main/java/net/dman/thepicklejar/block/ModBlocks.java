@@ -19,6 +19,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 
 public class ModBlocks {
+    // Metal Blocks
     public static final Block PICKLOLIUM_DEPOSIT = registerBlock("picklolium_deposit",
             new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.ANCIENT_DEBRIS).sounds(BlockSoundGroup.SLIME).strength(35.0f), UniformIntProvider.create(4, 7)));
     public static final Block PICKLOLIUM_BLOCK = registerBlock("picklolium_block",
@@ -28,17 +29,20 @@ public class ModBlocks {
     public static final Block CHUTNEY_BLOCK = registerBlock("chutney_block",
             new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.NETHERITE_BLOCK).sounds(BlockSoundGroup.CORAL)));
 
+    // Crop Blocks
     public static final Block PEANUT_CROP = Registry.register(Registries.BLOCK, new Identifier(ThePickleJar.MOD_ID, "peanut_crop"),
             new PeanutButterCropBlock(FabricBlockSettings.copyOf(Blocks.WHEAT)));
     public static final Block TEA_LEAVES_CROP = Registry.register(Registries.BLOCK, new Identifier(ThePickleJar.MOD_ID, "tea_leaves_crop"),
             new TeaLeavesCropBlock(FabricBlockSettings.copyOf(Blocks.WHEAT)));
 
+    // Flowers
     public static final Block GREEN_CHRYSANTHEMUM = registerBlock("green_chrysanthemum",
             new FlowerBlock(StatusEffects.INSTANT_HEALTH, 3,
                     FabricBlockSettings.copyOf(Blocks.ALLIUM).nonOpaque().noCollision()));
     public static final Block POTTED_GREEN_CHRYSANTHEMUM = Registry.register(Registries.BLOCK, new Identifier(ThePickleJar.MOD_ID, "potted_green_chrysanthemum"),
             new FlowerPotBlock(GREEN_CHRYSANTHEMUM,  FabricBlockSettings.copyOf(Blocks.POTTED_ALLIUM).nonOpaque()));
 
+    // Phil Section
     public static final Block PHIL_BLOCK = registerBlock("phil_block",
             new PhilBlock(FabricBlockSettings.copyOf(Blocks.MUD).sounds(ModSounds.PHIL_BLOCK_SOUNDS)));
 
@@ -65,6 +69,7 @@ public class ModBlocks {
     public static final Block PHIL_TRAPDOOR = registerBlock("phil_trapdoor",
             new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.MANGROVE_TRAPDOOR), BlockSetType.MANGROVE));
 
+    // Ultimate Workstation
     public static final Block GIARDINIERA_ALTAR = registerBlock("giardiniera_altar",
             new GiardinieraAltarBlock(FabricBlockSettings.copyOf(Blocks.ENCHANTING_TABLE).nonOpaque()));
 

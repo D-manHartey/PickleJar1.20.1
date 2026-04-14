@@ -172,7 +172,7 @@ public class GiardinieraAltarBlockEntity extends BlockEntity implements
 
     private boolean hasFuelInSlot() {
         return !this.getStack(FUEL_SLOT).isEmpty() && this.getStack(FUEL_SLOT).getItem() ==
-                ModItems.GHERKIN_SOUL; // put Fuel Item later
+                ModItems.SALSA_SOUL; // put Fuel Item later
     }
 
     private void consumeFuel() {
