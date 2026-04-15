@@ -1,11 +1,9 @@
 package net.dman.thepicklejar.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.dman.thepicklejar.ThePickleJar;
 import net.dman.thepicklejar.util.PlayerAbilityManager;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.render.GameRenderer;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -56,13 +54,12 @@ public class EternalPickleBowlSelectionScreen extends Screen {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        this.renderBackground(matrices);
+        this.renderBackground(context);
 
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        this.client.getTextureManager().bindForSetup(TEXTURE);
+        this.client.getTextureManager().bindTexture(TEXTURE);
 
         // Main GUI panel
-        drawTexture(matrices, this.guiLeft, this.guiTop, 0, 0, PANEL_WIDTH, PANEL_HEIGHT, 256, 256);
+        context.drawTexture(TEXTURE, this.guiLeft, this.guiTop, 0, 0, PANEL_WIDTH, PANEL_HEIGHT, 256, 256);
 
         // Draw pickle slots
         for (int i = 0; i < 6; i++) {
@@ -70,18 +67,18 @@ public class EternalPickleBowlSelectionScreen extends Screen {
             int slotY = this.guiTop + SLOT_Y[i];
 
             // Draw slot background (light gray)
-            fill(matrices, slotX, slotY, slotX + 16, slotY + 16, 0xFF8B8B8B);
+            context.fill( slotX, slotY, slotX + 16, slotY + 16, 0xFF8B8B8B);
 
             // Draw pickle sprite
-            drawTexture(matrices, slotX, slotY, SPRITE_X[i], SPRITE_Y[i], SPRITE_WIDTH, SPRITE_HEIGHT, 256, 256);
+            context.drawTexture(TEXTURE, slotX, slotY, SPRITE_X[i], SPRITE_Y[i], SPRITE_WIDTH, SPRITE_HEIGHT, 256, 256);
 
             // Highlight if hovering
             if (mouseX >= slotX && mouseX < slotX + 16 && mouseY >= slotY && mouseY < slotY + 16) {
-                fill(matrices, slotX, slotY, slotX + 16, slotY + 16, 0x4400FF00);
+                context.fill( slotX, slotY, slotX + 16, slotY + 16, 0x4400FF00);
             }
         }
 
-        super.render(matrices, mouseX, mouseY, delta);
+        super.render(context, mouseX, mouseY, delta);
     }
 
     @Override

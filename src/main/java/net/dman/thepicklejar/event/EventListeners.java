@@ -30,9 +30,9 @@ public class EventListeners {
         });
 
         // Register attack event for Life Steal
-        ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register((serverWorld, entity, livingEntity) -> {
+        ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register((world, entity, killedEntity) -> {
             if (entity instanceof PlayerEntity player && killedEntity instanceof LivingEntity) {
-                LifeStealManager.handleAttack(player, (LivingEntity)killedEntity);
+                LifeStealManager.handleAttack(player, (LivingEntity) killedEntity);
             }
         });
 
@@ -46,7 +46,7 @@ public class EventListeners {
      */
     public static void executeSpaceTeleport(World world, PlayerEntity user) {
         // Raycast to find the block the player is looking at (max 100 blocks)
-        HitResult hitResult = user.raycast(100.0D, 0.0F, false);
+        HitResult hitResult = user.raycast(100.0d, 0.0f, false);
 
         if (hitResult.getType() == HitResult.Type.BLOCK) {
             BlockHitResult blockHit = (BlockHitResult) hitResult;

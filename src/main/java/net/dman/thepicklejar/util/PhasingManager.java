@@ -71,7 +71,7 @@ public class PhasingManager {
             player.setVelocity(player.getVelocity().x, -0.2, player.getVelocity().z);
         }
         // If they are jumping, let them rise up
-        else if (player.jumping) {
+        else if (player.getVelocity().y > 0.1) {
             player.setVelocity(player.getVelocity().x, 0.2, player.getVelocity().z);
         }
         // Otherwise, if there is a solid block below them and they are moving down, stop them from falling
