@@ -92,7 +92,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.POWER_PICKLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.MIND_PICKLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.REALITY_PICKLE, Models.GENERATED);
-        itemModelGenerator.register(ModItems.MIND_PICKLE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.TIME_PICKLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.SOUL_PICKLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.SPACE_PICKLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.ETERNAL_BOWL, Models.GENERATED);
