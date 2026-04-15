@@ -1,4 +1,10 @@
 package net.dman.thepicklejar.item.custom;
 
-public class EternalBowlItem {
+import net.minecraft.item.Item;
+
+public class EternalBowlItem extends Item {
+    public EternalBowlItem(Settings settings) {
+        super(settings.maxCount(1));
+        // Unstackable
+    }
 }

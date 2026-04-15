@@ -84,6 +84,16 @@ public class ModItemGroups {
                         entries.add(ModItems.JARRED_TIME);
                         entries.add(ModItems.JARRED_SOUL);
 
+                        // Eternal Pickles & Bowl
+                        entries.add(ModItems.POWER_PICKLE);
+                        entries.add(ModItems.MIND_PICKLE);
+                        entries.add(ModItems.REALITY_PICKLE);
+                        entries.add(ModItems.SOUL_PICKLE);
+                        entries.add(ModItems.TIME_PICKLE);
+                        entries.add(ModItems.SPACE_PICKLE);
+                        entries.add(ModItems.ETERNAL_BOWL);
+                        entries.add(ModItems.ETERNAL_PICKLE_BOWL);
+
                     }).build());
 
 

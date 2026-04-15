@@ -2,6 +2,8 @@ package net.dman.thepicklejar;
 
 import net.dman.thepicklejar.block.ModBlocks;
 import net.dman.thepicklejar.block.entity.ModBlockEntities;
+import net.dman.thepicklejar.event.EventListeners;
+import net.dman.thepicklejar.event.ServerTickEvent;
 import net.dman.thepicklejar.item.ModItemGroups;
 import net.dman.thepicklejar.item.ModItems;
 import net.dman.thepicklejar.recipe.ModRecipes;
@@ -42,5 +44,8 @@ public class ThePickleJar implements ModInitializer {
         ModScreenHandlers.registerScreenHandlers();
 
         ModWorldGeneration.generateModWorldGen();
+
+        ServerTickEvent.registerEvents();
+        EventListeners.registerEvents();
 	}
 }

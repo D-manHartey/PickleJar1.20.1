@@ -277,5 +277,28 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.RADIOACTIVE_PICKLOLIUM), conditionsFromItem(ModItems.RADIOACTIVE_PICKLOLIUM))
                 .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.GIARDINIERA_ALTAR)));
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ETERNAL_PICKLE_BOWL, 1)
+                .pattern("SGP")
+                .pattern("REO")
+                .pattern("T M")
+                .input('G', ModItems.GOLDEN_PICKLE)
+                .input('P', ModItems.POWER_PICKLE)
+                .input('O', ModItems.SOUL_PICKLE)
+                .input('S', ModItems.SPACE_PICKLE)
+                .input('R', ModItems.REALITY_PICKLE)
+                .input('T', ModItems.TIME_PICKLE)
+                .input('M', ModItems.MIND_PICKLE)
+                .input('E', ModItems.ETERNAL_BOWL)
+                .criterion(hasItem(ModItems.GOLDEN_PICKLE), conditionsFromItem(ModItems.GOLDEN_PICKLE))
+                .criterion(hasItem(ModItems.POWER_PICKLE), conditionsFromItem(ModItems.POWER_PICKLE))
+                .criterion(hasItem(ModItems.SOUL_PICKLE), conditionsFromItem(ModItems.SOUL_PICKLE))
+                .criterion(hasItem(ModItems.SPACE_PICKLE), conditionsFromItem(ModItems.SPACE_PICKLE))
+                .criterion(hasItem(ModItems.REALITY_PICKLE), conditionsFromItem(ModItems.REALITY_PICKLE))
+                .criterion(hasItem(ModItems.TIME_PICKLE), conditionsFromItem(ModItems.TIME_PICKLE))
+                .criterion(hasItem(ModItems.MIND_PICKLE), conditionsFromItem(ModItems.MIND_PICKLE))
+                .criterion(hasItem(ModItems.ETERNAL_BOWL), conditionsFromItem(ModItems.ETERNAL_BOWL))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.ETERNAL_PICKLE_BOWL)));
+
+
     }
 }

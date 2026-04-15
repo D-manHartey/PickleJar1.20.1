@@ -73,6 +73,24 @@ public class ModItems {
     public static final Item JARRED_SOUL = registerItem("jarred_soul", new Item(new FabricItemSettings()));
 
     // Eternal Pickles
+    public static final Item POWER_PICKLE = registerItem("power_pickle",
+            new EternalPickles.PowerPickle(new FabricItemSettings()));
+    public static final Item MIND_PICKLE = registerItem("mind_pickle",
+            new EternalPickles.MindPickle(new FabricItemSettings()));
+    public static final Item REALITY_PICKLE = registerItem("reality_pickle",
+            new EternalPickles.RealityPickle(new FabricItemSettings()));
+    public static final Item SOUL_PICKLE = registerItem("soul_pickle",
+            new EternalPickles.SoulPickle(new FabricItemSettings()));
+    public static final Item TIME_PICKLE = registerItem("time_pickle",
+            new EternalPickles.TimePickle(new FabricItemSettings()));
+    public static final Item SPACE_PICKLE = registerItem("space_pickle",
+            new EternalPickles.SpacePickle(new FabricItemSettings()));
+
+    // Eternal Bowl
+    public static final Item ETERNAL_BOWL = registerItem("eternal_bowl",
+            new EternalBowlItem(new FabricItemSettings()));
+    public static final Item ETERNAL_PICKLE_BOWL = registerItem("eternal_pickle_bowl",
+            new EternalPickleBowlItem(new FabricItemSettings()));
 
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries) {
