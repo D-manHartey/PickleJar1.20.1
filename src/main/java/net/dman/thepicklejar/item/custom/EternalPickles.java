@@ -3,6 +3,7 @@ package net.dman.thepicklejar.item.custom;
 import net.dman.thepicklejar.item.ModItems;
 import net.dman.thepicklejar.util.LifeStealManager;
 import net.dman.thepicklejar.util.PlayerAbilityManager;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -193,7 +194,7 @@ public class EternalPickles {
 
     private static void triggerPowerAbility(ServerPlayerEntity player) {
         // ABILITY: Strength III for 10 seconds
-        player.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 200, 2, false, false, true));
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 300, 2, false, false, true));
     }
 
     private static void triggerMindAbility(ServerPlayerEntity player) {
@@ -213,7 +214,7 @@ public class EternalPickles {
 
     private static void triggerTimeAbility(ServerPlayerEntity player) {
         // ABILITY: Speed III for 30 seconds
-        player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 600, 2, false, false, true));
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 800, 3, false, false, true));
     }
 
     private static void triggerSpaceAbility(ServerPlayerEntity player) {
@@ -223,7 +224,7 @@ public class EternalPickles {
             player.teleport(
                     (net.minecraft.server.world.ServerWorld) player.getWorld(),
                     targetBlock.getX() + 0.5,
-                    targetBlock.getY() + 1,
+                    targetBlock.getY() + 0,
                     targetBlock.getZ() + 0.5,
                     0,
                     0
@@ -240,7 +241,7 @@ public class EternalPickles {
         net.minecraft.util.math.Vec3d playerPos = player.getPos();
 
         int mobCount = 20;
-        double radius = 5.0; // Distance from player
+        double radius = 6.0; // Distance from player
 
         for (int i = 0; i < mobCount; i++) {
             double angle = (Math.PI * 2 / mobCount) * i;
@@ -253,31 +254,31 @@ public class EternalPickles {
 
             try {
                 switch (mobType) {
-                    case 0: // Zombie
-                        net.minecraft.entity.mob.ZombieEntity zombie = new net.minecraft.entity.mob.ZombieEntity(
-                                net.minecraft.entity.EntityType.ZOMBIE,
+                    case 0: // Piglin
+                        net.minecraft.entity.mob.PiglinEntity piglin = new net.minecraft.entity.mob.PiglinEntity(
+                                EntityType.PIGLIN,
                                 player.getWorld()
                         );
-                        zombie.setPosition(x, y, z);
-                        player.getWorld().spawnEntity(zombie);
+                        piglin.setPosition(x, y, z);
+                        player.getWorld().spawnEntity(piglin);
                         break;
 
-                    case 1: // Skeleton
-                        net.minecraft.entity.mob.SkeletonEntity skeleton = new net.minecraft.entity.mob.SkeletonEntity(
-                                net.minecraft.entity.EntityType.SKELETON,
+                    case 1: // Vindicator
+                        net.minecraft.entity.mob.VindicatorEntity vindicator = new net.minecraft.entity.mob.VindicatorEntity(
+                                EntityType.VINDICATOR,
                                 player.getWorld()
                         );
-                        skeleton.setPosition(x, y, z);
-                        player.getWorld().spawnEntity(skeleton);
+                        vindicator.setPosition(x, y, z);
+                        player.getWorld().spawnEntity(vindicator);
                         break;
 
-                    case 2: // Creeper
-                        net.minecraft.entity.mob.CreeperEntity creeper = new net.minecraft.entity.mob.CreeperEntity(
-                                net.minecraft.entity.EntityType.CREEPER,
+                    case 2: // Evoker
+                        net.minecraft.entity.mob.EvokerEntity evoker = new net.minecraft.entity.mob.EvokerEntity(
+                                EntityType.EVOKER,
                                 player.getWorld()
                         );
-                        creeper.setPosition(x, y, z);
-                        player.getWorld().spawnEntity(creeper);
+                        evoker.setPosition(x, y, z);
+                        player.getWorld().spawnEntity(evoker);
                         break;
                 }
             } catch (Exception e) {

@@ -67,11 +67,46 @@ public class EventListeners {
         } else {
             // If looking at air, teleport 100 blocks in that direction
             Vec3d lookVec = user.getRotationVec(1.0f).normalize().multiply(100.0d);
-            user.requestTeleport(user.getX() + lookVec.x, user.getY() + lookVec.y, user.getZ() + lookVec.z);
+            Vec3d teleportPos = user.getPos().add(lookVec);
+
+            // Find the nearest solid block below the teleport destination
+            BlockPos safePos = findSafeBlock(world, new BlockPos(
+                    (int) teleportPos.x,
+                    (int) teleportPos.y,
+                    (int) teleportPos.z
+            ));
+
+            if (safePos != null) {
+                // Teleport to the safe block position (on top of it)
+                user.requestTeleport(safePos.getX() + 0.5, safePos.getY() + 1.0, safePos.getZ() + 0.5);
+            } else {
+                // Fallback: teleport to the original position if no safe block found
+                user.requestTeleport(teleportPos.x, teleportPos.y, teleportPos.z);
+            }
 
             world.playSound(null, user.getX(), user.getY(), user.getZ(),
                     SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f);
         }
+    }
+
+    /*
+     * Find a safe block to teleport to by searching downward from the target position
+     * Returns the top of a solid block, or null if no solid block found within 256 blocks
+     */
+    private static BlockPos findSafeBlock(World world, BlockPos startPos) {
+        // Search downward from the start position for up to 256 blocks
+        for (int y = startPos.getY(); y >= startPos.getY() - -256; y--) {
+            BlockPos checkPos = new BlockPos(startPos.getX(), y, startPos.getZ());
+
+            // Check if the block is solid and the block above is air (safe to stand on)
+            if (world.getBlockState(checkPos).isFullCube(world, checkPos) &&
+            !world.getBlockState(checkPos.up()).isAir()) {
+                return checkPos;
+            }
+        }
+
+        // No safe block found, return null
+        return null;
     }
 
     /*

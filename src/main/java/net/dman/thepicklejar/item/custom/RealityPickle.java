@@ -3,9 +3,7 @@ package net.dman.thepicklejar.item.custom;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.PiglinEntity;
-import net.minecraft.entity.mob.VindicatorEntity;
-import net.minecraft.entity.mob.WitherSkeletonEntity;
+import net.minecraft.entity.mob.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.Vec3d;
@@ -63,9 +61,9 @@ public class RealityPickle extends EternalPickleItem{
                         break;
 
                     case 2: // Wither Skeleton
-                        WitherSkeletonEntity witherSkeleton = new WitherSkeletonEntity(EntityType.WITHER_SKELETON, player.getWorld());
-                        witherSkeleton.setPosition(x, y, z);
-                        player.getWorld().spawnEntity(witherSkeleton);
+                        EvokerEntity evoker = new EvokerEntity(EntityType.EVOKER, player.getWorld());
+                        evoker.setPosition(x, y, z);
+                        player.getWorld().spawnEntity(evoker);
                         break;
                 }
             }
