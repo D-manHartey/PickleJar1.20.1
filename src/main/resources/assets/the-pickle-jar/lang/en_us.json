@@ -80,6 +80,7 @@
   "sounds.the-pickle-jar.phil_block_fall": "BANZAI",
 
   "key.thepicklejar.activate_ability": "Pickle-Power",
+  "category.thepicklejar.gameplay": "PickleJar Gameplay",
 
   "itemgroup.picklejar": "Pickle Jar"
 }

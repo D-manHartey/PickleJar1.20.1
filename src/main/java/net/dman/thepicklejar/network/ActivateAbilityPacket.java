@@ -2,6 +2,7 @@ package net.dman.thepicklejar.network;
 
 import net.dman.thepicklejar.item.custom.EternalPickleItem;
 import net.dman.thepicklejar.item.custom.EternalPickles;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.FabricPacket;
 import net.fabricmc.fabric.api.networking.v1.PacketType;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -56,6 +57,10 @@ public class ActivateAbilityPacket implements FabricPacket {
      */
     public ItemStack getStack() {
         return stack;
+    }
+
+    public void send() {
+        ClientPlayNetworking.send(this);
     }
 
     /**

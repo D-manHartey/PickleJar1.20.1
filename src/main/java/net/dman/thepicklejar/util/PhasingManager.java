@@ -11,16 +11,19 @@ public class PhasingManager {
     // Map to track how long players have been phasing (in ticks)
     private static final Map<UUID, Integer> phasingPlayers = new HashMap<>();
 
-    // 5 minutes phasing = 6000 ticks
-    public static final int MAX_PHASING_TICKS = 6000;
+
+    // 3 minutes phasing = 3600 ticks
+    public static final int MAX_PHASING_TICKS = 3600;
+
 
     /*
-     * Start phasing for a player
+     * Start phasing for a player (spectator-like mode)
      */
     public static void startPhasing(PlayerEntity player) {
         phasingPlayers.put(player.getUuid(), MAX_PHASING_TICKS);
-        player.noClip = true; // Enables noclip
+        player.noClip = true; // Enables noclip - pass through blocks like spectator
     }
+
 
     /*
      * Check if a player is currently phasing
@@ -28,6 +31,7 @@ public class PhasingManager {
     public static boolean isPhasing(PlayerEntity player) {
         return phasingPlayers.containsKey(player.getUuid()) && phasingPlayers.get(player.getUuid()) > 0;
     }
+
 
     /*
      * Tick the phasing duration for all active players
@@ -45,9 +49,12 @@ public class PhasingManager {
         });
     }
 
+
     /*
      * Called every tick for a phasing player to handle movement
      * Needs to be injected via mixin into PlayerEntity.tick() or handled in a tick event
+     *
+     * This enables true spectator-like phasing through blocks
      */
     public static void handlePlayerPhasingTick(PlayerEntity player) {
         if (!isPhasing(player)) {
@@ -58,28 +65,33 @@ public class PhasingManager {
             return;
         }
 
-        // Enable noClip so they can move through blocks
+        // Enable noClip so they can move through blocks (like spectator mode)
         player.noClip = true;
 
-        // Prevent falling through the floor
-        // Check if the block directly below the player's feet is solid
-        BlockPos posBelow = player.getBlockPos().down();
-        boolean isSolidBelow = !player.getWorld().getBlockState(posBelow).isAir();
+        // In spectator mode, players can move freely in all directions
+        // The noClip flag handles collision detection
+        // Movement is controlled by the player's input (WASD keys)
 
-        // If they are crouching, let them sink down slowly
-        if (player.isSneaking()) {
-            player.setVelocity(player.getVelocity().x, -0.2, player.getVelocity().z);
+        // Optional: Add slight gravity compensation if needed
+        // This allows players to stay at their current height without constantly jumping
+        if (player.getVelocity().y < -0.1) {
+            // Reduce falling speed slightly for easier control
+            player.setVelocity(player.getVelocity().x, player.getVelocity().y * 0.95, player.getVelocity().z);
         }
-        // If they are jumping, let them rise up
-        else if (player.getVelocity().y > 0.1) {
-            player.setVelocity(player.getVelocity().x, 0.2, player.getVelocity().z);
-        }
-        // Otherwise, if there is a solid block below them and they are moving down, stop them from falling
-        else if (isSolidBelow && player.getVelocity().y < 0) {
-            player.setVelocity(player.getVelocity().x, 0, player.getVelocity().z);
-            // Snap them to the top of the block below so they don't get stuck halfway
-            player.setPos(player.getX(), posBelow.getY() + 1.0, player.getZ());
-            player.setOnGround(true);
-        }
+    }
+
+    /*
+     * Stop phasing for a player
+     */
+    public static void stopPhasing(PlayerEntity player) {
+        phasingPlayers.remove(player.getUuid());
+        player.noClip = false;
+    }
+
+    /*
+     * Get remaining phasing time in ticks
+     */
+    public static int getRemainingPhasingTime(PlayerEntity player) {
+        return phasingPlayers.getOrDefault(player.getUuid(), 0);
     }
 }

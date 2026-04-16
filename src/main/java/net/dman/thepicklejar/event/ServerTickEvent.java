@@ -20,9 +20,6 @@ public class ServerTickEvent {
             for (PlayerEntity player : world.getPlayers()) {
                 // Tick cooldowns for eternal pickles
                 EternalPickles.tickCooldowns(player);
-
-                // Apply bowl protection effect
-                EternalPickleBowlItem.tickBowlProtection(player);
             }
         });
     }
