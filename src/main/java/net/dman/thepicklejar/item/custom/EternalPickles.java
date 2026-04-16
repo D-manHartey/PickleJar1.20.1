@@ -213,7 +213,7 @@ public class EternalPickles {
     }
 
     private static void triggerTimeAbility(ServerPlayerEntity player) {
-        // ABILITY: Speed III for 30 seconds
+        // ABILITY: Speed IV for 30 seconds
         player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 800, 3, false, false, true));
     }
 

@@ -10,7 +10,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class BrokenTelephoneItem extends Item {
-    public BrokenTelephoneItem(Item.Settings settings) { super(settings); }
+    public BrokenTelephoneItem(Item.Settings settings) { super(settings);
+    }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
