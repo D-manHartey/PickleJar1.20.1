@@ -1,6 +1,7 @@
 package net.dman.thepicklejar.event;
 
 import net.dman.thepicklejar.entity.custom.TimeProjectileEntity;
+import net.dman.thepicklejar.item.custom.EternalPickles;
 import net.dman.thepicklejar.util.LifeStealManager;
 import net.dman.thepicklejar.util.PhasingManager;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
@@ -19,13 +20,14 @@ public class EventListeners {
 
     public static void registerEvents() {
         // Register server tick event for phasing and life steal timers
-        ServerTickEvents.END_SERVER_TICK.register(minecraftServer -> {
+        ServerTickEvents.END_SERVER_TICK.register(server -> {
             PhasingManager.tickPhasing();
             LifeStealManager.tickLifeSteal();
 
             // phasing Movement for all players
-            for (PlayerEntity player : minecraftServer.getPlayerManager().getPlayerList()) {
+            for (PlayerEntity player : server.getPlayerManager().getPlayerList()) {
                 PhasingManager.handlePlayerPhasingTick(player);
+                EternalPickles.tickCooldowns(player);
             }
         });
 

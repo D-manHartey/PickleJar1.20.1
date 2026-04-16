@@ -22,7 +22,7 @@ public class LifeStealManager {
     /*
      * Start life steal for a player
      */
-    public static void startLifeSteal(PlayerEntity player) {
+    public static void enableLifeSteal(PlayerEntity player) {
         lifeStealPlayers.put(player.getUuid(), MAX_LIFESTEAL_TICKS);
     }
 

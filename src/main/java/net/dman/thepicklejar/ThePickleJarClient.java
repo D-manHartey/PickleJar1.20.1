@@ -3,6 +3,7 @@ package net.dman.thepicklejar;
 import net.dman.thepicklejar.block.ModBlocks;
 import net.dman.thepicklejar.block.entity.ModBlockEntities;
 import net.dman.thepicklejar.block.entity.renderer.GiardinieraAltarBlockEntityRenderer;
+import net.dman.thepicklejar.event.KeyEventHandler;
 import net.dman.thepicklejar.screen.GiardinieraAltarScreen;
 import net.dman.thepicklejar.screen.ModScreenHandlers;
 import net.fabricmc.api.ClientModInitializer;
@@ -26,5 +27,8 @@ public class ThePickleJarClient implements ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.GIARDINIERA_ALTAR_SCREEN_HANDLER, GiardinieraAltarScreen::new);
 
         BlockEntityRendererFactories.register(ModBlockEntities.GIARDINIERA_ALTAR_BLOCK_ENTITY, GiardinieraAltarBlockEntityRenderer::new);
+
+        ModKeybindings.registerKeybindings();
+        KeyEventHandler.registerKeyEvents();
     }
 }

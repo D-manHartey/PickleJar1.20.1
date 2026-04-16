@@ -79,5 +79,7 @@
   "sounds.the-pickle-jar.phil_block_step": "steppy step step",
   "sounds.the-pickle-jar.phil_block_fall": "BANZAI",
 
+  "key.thepicklejar.activate_ability": "Pickle-Power",
+
   "itemgroup.picklejar": "Pickle Jar"
 }

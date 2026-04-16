@@ -74,17 +74,17 @@ public class ModItems {
 
     // Eternal Pickles
     public static final Item POWER_PICKLE = registerItem("power_pickle",
-            new EternalPickles.PowerPickle(new FabricItemSettings()));
+            new EternalPickles.PowerPickle(new FabricItemSettings().food(ModFoodComponents.POWER_PICKLE)));
     public static final Item MIND_PICKLE = registerItem("mind_pickle",
-            new EternalPickles.MindPickle(new FabricItemSettings()));
+            new EternalPickles.MindPickle(new FabricItemSettings().food(ModFoodComponents.MIND_PICKLE)));
     public static final Item REALITY_PICKLE = registerItem("reality_pickle",
-            new EternalPickles.RealityPickle(new FabricItemSettings()));
+            new EternalPickles.RealityPickle(new FabricItemSettings().food(ModFoodComponents.REALITY_PICKLE)));
     public static final Item SOUL_PICKLE = registerItem("soul_pickle",
-            new EternalPickles.SoulPickle(new FabricItemSettings()));
+            new EternalPickles.SoulPickle(new FabricItemSettings().food(ModFoodComponents.SOUL_PICKLE)));
     public static final Item TIME_PICKLE = registerItem("time_pickle",
-            new EternalPickles.TimePickle(new FabricItemSettings()));
+            new EternalPickles.TimePickle(new FabricItemSettings().food(ModFoodComponents.TIME_PICKLE)));
     public static final Item SPACE_PICKLE = registerItem("space_pickle",
-            new EternalPickles.SpacePickle(new FabricItemSettings()));
+            new EternalPickles.SpacePickle(new FabricItemSettings().food(ModFoodComponents.SPACE_PICKLE)));
 
     // Eternal Bowl
     public static final Item ETERNAL_BOWL = registerItem("eternal_bowl",
