@@ -5,66 +5,56 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 /*
- * Base class for eternal pickle items
- * Abilities are triggered via keybind (V key)
- * Consequences are applied when eaten
+ * Base class for Eternal Pickle items
+ * Handles both ability activation (via keybind) and eating (consequences)
  */
-public abstract class EternalPickleItem extends Item {
-    public static final int COOLDOWN_TICKS = 70 * 20; // 70 seconds
+public class EternalPickleItem extends Item {
 
     public EternalPickleItem(Settings settings) {
-        super(settings.maxCount(1)); // Unstackable
+        super(settings);
     }
 
     /*
-     * Called when player RIGHT-CLICKS with the pickle
-     * This now ONLY handles eating, not abilities
+     * Called when the item is eaten (right-click to consume)
+     * Applies the consequence effect
      */
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        ItemStack stack = user.getStackInHand(hand);
+    public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
+        if (!world.isClient && user instanceof PlayerEntity player) {
+            // Apply consequence when eaten
+            applyConsequence(player);
 
-        // Checks if player is crouching to open GUI
-        if (user.isSneaking()) {
-            return TypedActionResult.pass(stack);
-        }
-
-        // Allow normal eating behavior
-        // The item will be consumed and finishUsing() will be called
-        return TypedActionResult.pass(stack);
-    }
-
-    /*
-     * Called when the player FINISHES eating/consuming the item
-     * This applies the CONSEQUENCE only
-     */
-    @Override
-    public ItemStack finishUsing(ItemStack stack, World world, net.minecraft.entity.LivingEntity user) {
-        if (user instanceof PlayerEntity player) {
-            if (!world.isClient) {
-                // Apply the consequence when eaten
-                applyConsequence(player);
+            // Decrement stack
+            if (!player.getAbilities().creativeMode) {
+                stack.decrement(1);
             }
         }
 
-        // Call parent to handle normal food consumption
         return super.finishUsing(stack, world, user);
     }
 
     /*
-     * Override this in subclasses to define the ability
-     * Called when player PRESSES THE KEYBIND (V key by default)
+     * Apply the consequence effect for this pickle
+     * Override in subclasses to provide specific consequences
      */
-    protected abstract void useAbility(World world, PlayerEntity user, ItemStack stack);
+    protected void applyConsequence(PlayerEntity player) {
+        // Base implementation - override in subclasses
+    }
 
     /*
-     * Override this in subclasses to define the consequence
-     * Called when player EATS the item
+     * Check if this pickle is on cooldown
      */
-    protected abstract void applyConsequence(PlayerEntity user);
+    protected boolean isOnCooldown(PlayerEntity player, String abilityName) {
+        return EternalPickles.isOnCooldown(player, abilityName);
+    }
+
+    /*
+     * Set cooldown for this pickle's ability
+     */
+    protected void setCooldown(PlayerEntity player, String abilityName) {
+        EternalPickles.setCooldown(player, abilityName);
+    }
 }

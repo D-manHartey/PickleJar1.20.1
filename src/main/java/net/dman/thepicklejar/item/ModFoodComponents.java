@@ -28,46 +28,40 @@ public class ModFoodComponents {
     // Consequences are handled in EternalPickleItem.finishUsing()
     // These FoodComponents only define hunger/saturation restoration
 
-    /*
-     * Power Pickle - Restores minimal hunger
-     * Consequence: Wither I for 30 seconds (handled in EternalPickles.PowerPickle)
-     */
-    public static final FoodComponent POWER_PICKLE =
-            new FoodComponent.Builder().hunger(2).saturationModifier(0.1f).alwaysEdible().build();
+    public static final FoodComponent POWER_PICKLE = new FoodComponent.Builder()
+            .hunger(2)
+            .saturationModifier(0.1f)
+            .alwaysEdible()
+            .build();
 
-    /*
-     * Mind Pickle - Restores minimal hunger
-     * Consequence: Nausea VI for 2 minutes (handled in EternalPickles.MindPickle)
-     */
-    public static final FoodComponent MIND_PICKLE =
-            new FoodComponent.Builder().hunger(2).saturationModifier(0.1f).alwaysEdible().build();
+    public static final FoodComponent MIND_PICKLE = new FoodComponent.Builder()
+            .hunger(2)
+            .saturationModifier(0.1f)
+            .alwaysEdible()
+            .build();
 
-    /*
-     * Reality Pickle - Restores minimal hunger
-     * Consequence: Darkness for 2m 10s (handled in EternalPickles.RealityPickle)
-     */
-    public static final FoodComponent REALITY_PICKLE =
-            new FoodComponent.Builder().hunger(2).saturationModifier(0.1f).alwaysEdible().build();
+    public static final FoodComponent REALITY_PICKLE = new FoodComponent.Builder()
+            .hunger(2)
+            .saturationModifier(0.1f)
+            .alwaysEdible()
+            .build();
 
-    /*
-     * Soul Pickle - Restores minimal hunger
-     * Consequence: Levitation VII for 90 seconds (handled in EternalPickles.SoulPickle)
-     */
-    public static final FoodComponent SOUL_PICKLE =
-            new FoodComponent.Builder().hunger(2).saturationModifier(0.1f).alwaysEdible().build();
+    public static final FoodComponent SOUL_PICKLE = new FoodComponent.Builder()
+            .hunger(2)
+            .saturationModifier(0.1f)
+            .alwaysEdible()
+            .build();
 
-    /*
-     * Time Pickle - Restores minimal hunger
-     * Consequence: Slowness X for 30 seconds (handled in EternalPickles.TimePickle)
-     */
-    public static final FoodComponent TIME_PICKLE =
-            new FoodComponent.Builder().hunger(2).saturationModifier(0.1f).alwaysEdible().build();
+    public static final FoodComponent TIME_PICKLE = new FoodComponent.Builder()
+            .hunger(2)
+            .saturationModifier(0.1f)
+            .alwaysEdible()
+            .build();
 
-    /*
-     * Space Pickle - Restores minimal hunger
-     * Consequence: Teleports to far lands (handled in EternalPickles.SpacePickle)
-     */
-    public static final FoodComponent SPACE_PICKLE =
-            new FoodComponent.Builder().hunger(2).saturationModifier(0.1f).alwaysEdible().build();
+    public static final FoodComponent SPACE_PICKLE = new FoodComponent.Builder()
+            .hunger(2)
+            .saturationModifier(0.1f)
+            .alwaysEdible()
+            .build();
 
 }

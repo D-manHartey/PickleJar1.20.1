@@ -74,17 +74,34 @@ public class ModItems {
 
     // Eternal Pickles
     public static final Item POWER_PICKLE = registerItem("power_pickle",
-            new EternalPickles.PowerPickle(new FabricItemSettings().food(ModFoodComponents.POWER_PICKLE)));
+            new EternalPickles.PowerPickle(new Item.Settings()
+                    .food(ModFoodComponents.POWER_PICKLE)
+                    .maxCount(1)));
+
     public static final Item MIND_PICKLE = registerItem("mind_pickle",
-            new EternalPickles.MindPickle(new FabricItemSettings().food(ModFoodComponents.MIND_PICKLE)));
+            new EternalPickles.MindPickle(new Item.Settings()
+                    .food(ModFoodComponents.MIND_PICKLE)
+                    .maxCount(1)));
+
     public static final Item REALITY_PICKLE = registerItem("reality_pickle",
-            new EternalPickles.RealityPickle(new FabricItemSettings().food(ModFoodComponents.REALITY_PICKLE)));
+            new EternalPickles.RealityPickle(new Item.Settings()
+                    .food(ModFoodComponents.REALITY_PICKLE)
+                    .maxCount(1)));
+
     public static final Item SOUL_PICKLE = registerItem("soul_pickle",
-            new EternalPickles.SoulPickle(new FabricItemSettings().food(ModFoodComponents.SOUL_PICKLE)));
+            new EternalPickles.SoulPickle(new Item.Settings()
+                    .food(ModFoodComponents.SOUL_PICKLE)
+                    .maxCount(1)));
+
     public static final Item TIME_PICKLE = registerItem("time_pickle",
-            new EternalPickles.TimePickle(new FabricItemSettings().food(ModFoodComponents.TIME_PICKLE)));
+            new EternalPickles.TimePickle(new Item.Settings()
+                    .food(ModFoodComponents.TIME_PICKLE)
+                    .maxCount(1)));
+
     public static final Item SPACE_PICKLE = registerItem("space_pickle",
-            new EternalPickles.SpacePickle(new FabricItemSettings().food(ModFoodComponents.SPACE_PICKLE)));
+            new EternalPickles.SpacePickle(new Item.Settings()
+                    .food(ModFoodComponents.SPACE_PICKLE)
+                    .maxCount(1)));
 
     // Eternal Bowl
     public static final Item ETERNAL_BOWL = registerItem("eternal_bowl",

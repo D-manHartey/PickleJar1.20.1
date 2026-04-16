@@ -29,6 +29,7 @@ public class ThePickleJarClient implements ClientModInitializer {
         BlockEntityRendererFactories.register(ModBlockEntities.GIARDINIERA_ALTAR_BLOCK_ENTITY, GiardinieraAltarBlockEntityRenderer::new);
 
         ModKeybindings.registerKeybindings();
+
         KeyEventHandler.registerKeyEvents();
     }
 }

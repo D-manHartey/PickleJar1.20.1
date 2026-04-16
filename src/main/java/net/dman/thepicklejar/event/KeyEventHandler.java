@@ -2,21 +2,22 @@ package net.dman.thepicklejar.event;
 
 import net.dman.thepicklejar.ModKeybindings;
 import net.dman.thepicklejar.item.custom.EternalPickleItem;
-import net.dman.thepicklejar.item.custom.EternalPickles;
+import net.dman.thepicklejar.network.ActivateAbilityPacket;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
-/*
+/**
  * Handles keybinding events for eternal pickle abilities
- * Listens for the ACTIVATE_ABILITY_KEY and triggers abilities
+ * Listens for the ACTIVATE_ABILITY_KEY and sends packet to server
  */
 public class KeyEventHandler {
 
     private static boolean wasKeyPressed = false;
 
-    /*
+    /**
      * Register the key event handler
      * Call this from ThePickleJarClient.onInitializeClient()
      */
@@ -26,7 +27,7 @@ public class KeyEventHandler {
         });
     }
 
-    /*
+    /**
      * Handle ability key presses
      * Called every client tick
      */
@@ -50,43 +51,39 @@ public class KeyEventHandler {
         wasKeyPressed = isKeyPressed;
     }
 
-    /*
+    /**
      * Trigger the ability of the held eternal pickle
+     * Checks main hand and off hand for eternal pickles
      */
     private static void triggerAbility(PlayerEntity player) {
         // Check main hand
         ItemStack mainHand = player.getMainHandStack();
         if (mainHand.getItem() instanceof EternalPickleItem) {
-            triggerPickleAbility(player, mainHand);
+            triggerPickleAbility(mainHand);
             return;
         }
 
         // Check off hand
         ItemStack offHand = player.getOffHandStack();
         if (offHand.getItem() instanceof EternalPickleItem) {
-            triggerPickleAbility(player, offHand);
+            triggerPickleAbility(offHand);
             return;
         }
 
         // No eternal pickle in either hand
     }
 
-    /*
+    /**
      * Trigger the ability for a specific pickle
+     * Sends packet to server to execute the ability
      */
-    private static void triggerPickleAbility(PlayerEntity player, ItemStack stack) {
-        // Only execute on server side
-        if (player.getWorld().isClient) {
-            return;
-        }
-
+    private static void triggerPickleAbility(ItemStack stack) {
         // Get the pickle item
-        if (!(stack.getItem() instanceof EternalPickleItem pickle)) {
+        if (!(stack.getItem() instanceof EternalPickleItem)) {
             return;
         }
 
-        // Trigger the ability through the EternalPickles class
-        // This will call the appropriate useAbility() method
-        EternalPickles.triggerAbilityForItem(player.getWorld(), player, stack, pickle);
+        // Send packet to server to trigger ability
+        ClientPlayNetworking.send(new ActivateAbilityPacket(stack));
     }
 }

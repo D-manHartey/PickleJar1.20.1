@@ -6,6 +6,7 @@ import net.dman.thepicklejar.event.EventListeners;
 import net.dman.thepicklejar.event.ServerTickEvent;
 import net.dman.thepicklejar.item.ModItemGroups;
 import net.dman.thepicklejar.item.ModItems;
+import net.dman.thepicklejar.network.ActivateAbilityPacket;
 import net.dman.thepicklejar.recipe.ModRecipes;
 import net.dman.thepicklejar.screen.ModScreenHandlers;
 import net.dman.thepicklejar.sound.ModSounds;
@@ -47,5 +48,7 @@ public class ThePickleJar implements ModInitializer {
 
         ServerTickEvent.registerEvents();
         EventListeners.registerEvents();
+
+        ActivateAbilityPacket.register();
 	}
 }
