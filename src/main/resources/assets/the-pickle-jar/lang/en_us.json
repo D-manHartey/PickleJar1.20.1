@@ -58,6 +58,7 @@
   "item.the-pickle-jar.soul_pickle": "Soul Pickle",
   "item.the-pickle-jar.time_pickle": "Time Pickle",
   "item.the-pickle-jar.space_pickle": "Space Pickle",
+
   "item.the-pickle-jar.eternal_bowl": "Eternal Bowl",
   "item.the-pickle-jar.eternal_pickle_bowl": "Eternal Pickles",
 
@@ -79,8 +80,9 @@
   "sounds.the-pickle-jar.phil_block_step": "steppy step step",
   "sounds.the-pickle-jar.phil_block_fall": "BANZAI",
 
+  "key.thepicklejar.open_bowl_gui": "Pickle Bowl Menu",
   "key.thepicklejar.activate_ability": "Pickle-Power",
-  "category.thepicklejar.gameplay": "PickleJar Gameplay",
+  "category.thepicklejar.gameplay": "The Pickle Jar",
 
   "itemgroup.picklejar": "Pickle Jar"
 }

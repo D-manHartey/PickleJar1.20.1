@@ -1,51 +1,50 @@
 package net.dman.thepicklejar.event;
 
+import net.dman.thepicklejar.ModKeybindings;
 import net.dman.thepicklejar.item.ModItems;
 import net.dman.thepicklejar.item.custom.EternalPickleItem;
+import net.dman.thepicklejar.network.ActivateAbilityPacket;
 import net.dman.thepicklejar.screen.EternalPickleBowlSelectionScreen;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.ItemStack;
-import org.lwjgl.glfw.GLFW;
 
 /**
  * KeyEventHandler - Handles keybind events for abilities and GUI
+ * FIXED: Uses ModKeybindings instead of registering duplicate keybindings
+ * This prevents the "Attempted to register two key bindings with equal ID" error
  */
 public class KeyEventHandler {
-    // Keybindings
-    public static KeyBinding activateAbilityKey;
-    public static KeyBinding openBowlGuiKey;
+
+    private static boolean wasAbilityKeyPressed = false;
+    private static boolean wasBowlKeyPressed = false;
 
     /**
-     * Register keybindings and event listeners
+     * Register keybinding event listeners
+     * NOTE: Keybindings are already registered in ModKeybindings.java
+     * This method only registers the event handlers, NOT the keybindings themselves
      */
     public static void registerKeyEvents() {
-        // Register keybindings
-        activateAbilityKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.thepicklejar.activate_ability",
-                InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_V,
-                "category.thepicklejar.gameplay"
-        ));
-
-        openBowlGuiKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.thepicklejar.open_bowl_gui",
-                InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_B,
-                "category.thepicklejar.gameplay"
-        ));
-
-        // Register client tick event
+        // Register client tick event to check for key presses
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            while (activateAbilityKey.wasPressed()) {
-                handleAbilityKeyPress(client);
+            // Check ability activation key (V)
+            if (ModKeybindings.ACTIVATE_ABILITY_KEY != null && ModKeybindings.ACTIVATE_ABILITY_KEY.isPressed()) {
+                if (!wasAbilityKeyPressed) {
+                    handleAbilityKeyPress(client);
+                    wasAbilityKeyPressed = true;
+                }
+            } else {
+                wasAbilityKeyPressed = false;
             }
 
-            while (openBowlGuiKey.wasPressed()) {
-                handleBowlGuiKeyPress(client);
+            // Check bowl GUI key (B)
+            if (ModKeybindings.OPEN_BOWL_GUI_KEY != null && ModKeybindings.OPEN_BOWL_GUI_KEY.isPressed()) {
+                if (!wasBowlKeyPressed) {
+                    handleBowlGuiKeyPress(client);
+                    wasBowlKeyPressed = true;
+                }
+            } else {
+                wasBowlKeyPressed = false;
             }
         });
     }
@@ -64,8 +63,7 @@ public class KeyEventHandler {
                 heldItem.getItem() == ModItems.ETERNAL_PICKLE_BOWL) {
 
             // Send packet to server to activate ability
-            net.dman.thepicklejar.network.ActivateAbilityPacket packet =
-                    new net.dman.thepicklejar.network.ActivateAbilityPacket(heldItem);
+            ActivateAbilityPacket packet = new ActivateAbilityPacket(heldItem);
             packet.send();
         }
     }

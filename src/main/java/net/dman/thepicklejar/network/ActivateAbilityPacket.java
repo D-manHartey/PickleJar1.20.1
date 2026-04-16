@@ -66,6 +66,7 @@ public class ActivateAbilityPacket implements FabricPacket {
     /**
      * Register packet handlers
      * Call this from your main mod class
+     * FIXED: Corrected method signature - triggerAbilityForItem takes only ItemStack and PlayerEntity
      */
     public static void register() {
         ServerPlayNetworking.registerGlobalReceiver(TYPE, (packet, player, responseSender) -> {
@@ -74,14 +75,9 @@ public class ActivateAbilityPacket implements FabricPacket {
                 ItemStack stack = packet.getStack();
 
                 // Check if item is an eternal pickle
-                if (stack.getItem() instanceof EternalPickleItem pickle) {
-                    // Trigger ability
-                    EternalPickles.triggerAbilityForItem(
-                            player.getWorld(),
-                            player,
-                            stack,
-                            pickle
-                    );
+                if (stack.getItem() instanceof EternalPickleItem) {
+                    // Trigger ability with correct arguments: ItemStack and PlayerEntity
+                    EternalPickles.triggerAbilityForItem(stack, player);
                 }
             });
         });

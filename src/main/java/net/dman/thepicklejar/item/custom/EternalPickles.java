@@ -12,13 +12,22 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
  * EternalPickles - Main class for all eternal pickle abilities
  * Handles ability triggering, cooldown management, and special items like the bowl
+ * FIXED FOR MINECRAFT 1.20.1: Uses static HashMap for cooldown tracking
+ * (Simple, reliable solution that works in all versions)
  */
 public class EternalPickles {
     // Cooldown duration: 60 seconds = 1200 ticks
     public static final int ABILITY_COOLDOWN = 1200;
+
+    // Static HashMap to track cooldowns: playerUUID -> (abilityName -> expirationTime)
+    private static final Map<UUID, Map<String, Long>> COOLDOWNS = new HashMap<>();
 
     /**
      * Trigger ability for an item
@@ -171,98 +180,113 @@ public class EternalPickles {
         return null;
     }
 
-    // ==================== COOLDOWN MANAGEMENT ====================
+    // ==================== COOLDOWN MANAGEMENT (HASHMAP-BASED) ====================
+
+    /**
+     * Get or create the cooldown map for a player
+     */
+    private static Map<String, Long> getPlayerCooldowns(ServerPlayerEntity player) {
+        return COOLDOWNS.computeIfAbsent(player.getUuid(), k -> new HashMap<>());
+    }
 
     /**
      * Check if an ability is on cooldown
+     * FIXED: Uses static HashMap instead of unavailable API methods
      */
     public static boolean isOnCooldown(ServerPlayerEntity player, String abilityName) {
-        String key = "pickle_cooldown_" + abilityName;
-        var tags = player.getCommandTags();
+        try {
+            Map<String, Long> playerCooldowns = getPlayerCooldowns(player);
 
-        for (String tag : tags) {
-            if (tag.startsWith(key)) {
-                try {
-                    long timestamp = Long.parseLong(tag.substring(key.length() + 1));
-                    return System.currentTimeMillis() < timestamp;
-                } catch (NumberFormatException e) {
-                    return false;
-                }
+            if (playerCooldowns.containsKey(abilityName)) {
+                long expirationTime = playerCooldowns.get(abilityName);
+                return System.currentTimeMillis() < expirationTime;
             }
+        } catch (Exception e) {
+            // Silently fail - cooldown system is not critical
         }
         return false;
     }
 
     /**
      * Get remaining cooldown in ticks
+     * FIXED: Uses static HashMap instead of unavailable API methods
      */
     public static int getRemainingCooldown(ServerPlayerEntity player, String abilityName) {
-        String key = "pickle_cooldown_" + abilityName;
-        var tags = player.getCommandTags();
+        try {
+            Map<String, Long> playerCooldowns = getPlayerCooldowns(player);
 
-        for (String tag : tags) {
-            if (tag.startsWith(key)) {
-                try {
-                    long timestamp = Long.parseLong(tag.substring(key.length() + 1));
-                    long remainingMs = timestamp - System.currentTimeMillis();
+            if (playerCooldowns.containsKey(abilityName)) {
+                long expirationTime = playerCooldowns.get(abilityName);
+                long remainingMs = expirationTime - System.currentTimeMillis();
+                if (remainingMs > 0) {
                     return (int) (remainingMs / 50); // Convert ms to ticks (1 tick = 50ms)
-                } catch (NumberFormatException e) {
-                    return 0;
                 }
             }
+        } catch (Exception e) {
+            // Silently fail
         }
         return 0;
     }
 
     /**
      * Set cooldown for an ability
+     * FIXED: Uses static HashMap instead of unavailable API methods
      */
     public static void setCooldown(ServerPlayerEntity player, String abilityName) {
-        String key = "pickle_cooldown_" + abilityName;
+        try {
+            Map<String, Long> playerCooldowns = getPlayerCooldowns(player);
 
-        // Remove old cooldown tag if it exists
-        var tagsToRemove = new java.util.HashSet<String>();
-        for (String tag : player.getCommandTags()) {
-            if (tag.startsWith(key)) {
-                tagsToRemove.add(tag);
-            }
+            // Set the cooldown expiration time
+            long expirationTime = System.currentTimeMillis() + (ABILITY_COOLDOWN * 50); // Convert ticks to ms
+            playerCooldowns.put(abilityName, expirationTime);
+        } catch (Exception e) {
+            // Silently fail - cooldown system is not critical
         }
-        for (String tag : tagsToRemove) {
-            player.getCommandTags().remove(tag);
-        }
-
-        // Add new cooldown tag with timestamp
-        long expirationTime = System.currentTimeMillis() + (ABILITY_COOLDOWN * 50); // Convert ticks to ms
-        String cooldownTag = key + "_" + expirationTime;
-        player.getCommandTags().add(cooldownTag);
     }
 
     /**
-     * Tick cooldowns (decrement all active cooldowns)
+     * Tick cooldowns (clean up expired cooldowns)
      * Call this from ServerTickEvent
+     * FIXED: Uses static HashMap instead of unavailable API methods
      */
     public static void tickCooldowns(PlayerEntity player) {
         if (!(player instanceof ServerPlayerEntity serverPlayer)) return;
 
-        var tagsToRemove = new java.util.HashSet<String>();
-        long currentTime = System.currentTimeMillis();
+        try {
+            UUID playerUuid = serverPlayer.getUuid();
 
-        for (String tag : serverPlayer.getCommandTags()) {
-            if (tag.startsWith("pickle_cooldown_")) {
-                try {
-                    long timestamp = Long.parseLong(tag.substring(tag.lastIndexOf("_") + 1));
-                    if (currentTime >= timestamp) {
-                        tagsToRemove.add(tag);
-                    }
-                } catch (NumberFormatException e) {
-                    // Invalid tag, remove it
-                    tagsToRemove.add(tag);
-                }
+            // If player has no cooldowns, skip
+            if (!COOLDOWNS.containsKey(playerUuid)) {
+                return;
             }
-        }
 
-        for (String tag : tagsToRemove) {
-            serverPlayer.getCommandTags().remove(tag);
+            Map<String, Long> playerCooldowns = COOLDOWNS.get(playerUuid);
+            long currentTime = System.currentTimeMillis();
+
+            // Remove expired cooldowns
+            playerCooldowns.entrySet().removeIf(entry -> currentTime >= entry.getValue());
+
+            // If no cooldowns left, remove the player entry to save memory
+            if (playerCooldowns.isEmpty()) {
+                COOLDOWNS.remove(playerUuid);
+            }
+        } catch (Exception e) {
+            // Silently fail
         }
+    }
+
+    /**
+     * Clear all cooldowns for a player (called when player leaves)
+     * This helps prevent memory leaks
+     */
+    public static void clearPlayerCooldowns(PlayerEntity player) {
+        COOLDOWNS.remove(player.getUuid());
+    }
+
+    /**
+     * Get the current size of the cooldowns map (for debugging)
+     */
+    public static int getCooldownsMapSize() {
+        return COOLDOWNS.size();
     }
 }
