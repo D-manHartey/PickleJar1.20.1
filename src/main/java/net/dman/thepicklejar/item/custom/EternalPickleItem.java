@@ -5,6 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
 
 /*
@@ -48,13 +49,19 @@ public class EternalPickleItem extends Item {
      * Check if this pickle is on cooldown
      */
     protected boolean isOnCooldown(PlayerEntity player, String abilityName) {
-        return EternalPickles.isOnCooldown(player, abilityName);
+        if (!(player instanceof ServerPlayerEntity serverPlayer)) {
+            return false; // Can't check cooldown on client
+        }
+        return EternalPickles.isOnCooldown(serverPlayer, abilityName);
     }
 
     /*
      * Set cooldown for this pickle's ability
      */
     protected void setCooldown(PlayerEntity player, String abilityName) {
-        EternalPickles.setCooldown(player, abilityName);
+        if (!(player instanceof ServerPlayerEntity serverPlayer)) {
+            return; // Can't set cooldown on client
+        }
+        EternalPickles.setCooldown(serverPlayer, abilityName);
     }
 }

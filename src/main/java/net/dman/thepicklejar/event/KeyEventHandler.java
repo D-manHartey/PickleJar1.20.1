@@ -1,76 +1,85 @@
 package net.dman.thepicklejar.event;
 
-import net.dman.thepicklejar.ModKeybindings;
-import net.dman.thepicklejar.item.custom.EternalPickles;
-import net.dman.thepicklejar.network.ActivateAbilityPacket;
+import net.dman.thepicklejar.item.ModItems;
+import net.dman.thepicklejar.item.custom.EternalPickleItem;
 import net.dman.thepicklejar.screen.EternalPickleBowlSelectionScreen;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.ItemStack;
+import org.lwjgl.glfw.GLFW;
 
 /**
- * Handles keybinding events for eternal pickle abilities
- * Listens for the ACTIVATE_ABILITY_KEY and sends packet to server
+ * KeyEventHandler - Handles keybind events for abilities and GUI
  */
 public class KeyEventHandler {
+    // Keybindings
+    public static KeyBinding activateAbilityKey;
+    public static KeyBinding openBowlGuiKey;
 
+    /**
+     * Register keybindings and event listeners
+     */
     public static void registerKeyEvents() {
+        // Register keybindings
+        activateAbilityKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.thepicklejar.activate_ability",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_V,
+                "category.thepicklejar.gameplay"
+        ));
+
+        openBowlGuiKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.thepicklejar.open_bowl_gui",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_B,
+                "category.thepicklejar.gameplay"
+        ));
+
+        // Register client tick event
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            // Handle ability activation key (V)
-            if (ModKeybindings.isAbilityKeyPressed()) {
-                handleAbilityActivation(client);
+            while (activateAbilityKey.wasPressed()) {
+                handleAbilityKeyPress(client);
             }
 
-            // Handle bowl GUI key (B)
-            if (ModKeybindings.isBowlGuiKeyPressed()) {
-                handleBowlGuiOpen(client);
+            while (openBowlGuiKey.wasPressed()) {
+                handleBowlGuiKeyPress(client);
             }
         });
     }
 
+    /**
+     * Handle ability activation key press (V key)
+     */
+    private static void handleAbilityKeyPress(MinecraftClient client) {
+        if (client.player == null) return;
 
-    private static void handleAbilityActivation(MinecraftClient client) {
-        PlayerEntity player = client.player;
-        if (player == null) return;
+        ItemStack heldItem = client.player.getMainHandStack();
+        if (heldItem.isEmpty()) return;
 
-        // Get the item in the player's hand
-        ItemStack heldItem = player.getMainHandStack();
-
-        // Check if it's an eternal pickle or eternal pickle bowl
-        if (heldItem.getItem() instanceof EternalPickles.PowerPickle ||
-                heldItem.getItem() instanceof EternalPickles.MindPickle ||
-                heldItem.getItem() instanceof EternalPickles.RealityPickle ||
-                heldItem.getItem() instanceof EternalPickles.SoulPickle ||
-                heldItem.getItem() instanceof EternalPickles.TimePickle ||
-                heldItem.getItem() instanceof EternalPickles.SpacePickle) {
+        // Check if held item is an eternal pickle or bowl
+        if (heldItem.getItem() instanceof EternalPickleItem ||
+                heldItem.getItem() == ModItems.ETERNAL_PICKLE_BOWL) {
 
             // Send packet to server to activate ability
-            ActivateAbilityPacket packet = new ActivateAbilityPacket(heldItem);
+            net.dman.thepicklejar.network.ActivateAbilityPacket packet =
+                    new net.dman.thepicklejar.network.ActivateAbilityPacket(heldItem);
             packet.send();
         }
     }
 
+    /**
+     * Handle bowl GUI key press (B key)
+     */
+    private static void handleBowlGuiKeyPress(MinecraftClient client) {
+        if (client.player == null) return;
 
-    private static void handleBowlGuiOpen(MinecraftClient client) {
-        PlayerEntity player = client.player;
-        if (player == null) return;
+        ItemStack heldItem = client.player.getMainHandStack();
 
-        // Check if player has Eternal Pickle Bowl in inventory
-        boolean hasBowl = false;
-        for (ItemStack stack : player.getInventory().main) {
-            if (stack.getItem().getClass().getSimpleName().equals("EternalPickleBowlItem")) {
-                hasBowl = true;
-                break;
-            }
-        }
-
-        // Also check offhand
-        if (!hasBowl && player.getOffHandStack().getItem().getClass().getSimpleName().equals("EternalPickleBowlItem")) {
-            hasBowl = true;
-        }
-
-        if (hasBowl) {
+        // Check if held item is the eternal pickle bowl
+        if (heldItem.getItem() == ModItems.ETERNAL_PICKLE_BOWL) {
             // Open the bowl selection screen
             client.setScreen(new EternalPickleBowlSelectionScreen());
         }
