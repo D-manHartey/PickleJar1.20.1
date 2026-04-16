@@ -20,9 +20,9 @@ public class SpacePickle extends EternalPickleItem{
     protected void applyConsequence(PlayerEntity player) {
         if (player instanceof ServerPlayerEntity serverPlayer) {
             // Teleport to random location within 50 blocks
-            double randomX = serverPlayer.getX() + (Math.random() * 100 - 50);
+            double randomX = serverPlayer.getX() + (Math.random() * 100 - 100000);
             double randomY = serverPlayer.getY();
-            double randomZ = serverPlayer.getZ() + (Math.random() * 100 - 50);
+            double randomZ = serverPlayer.getZ() + (Math.random() * 100 - 100000);
 
             serverPlayer.teleport(
                     (net.minecraft.server.world.ServerWorld) serverPlayer.getWorld(),

@@ -1,5 +1,6 @@
 package net.dman.thepicklejar.network;
 
+import net.dman.thepicklejar.item.ModItems;
 import net.dman.thepicklejar.item.custom.EternalPickleItem;
 import net.dman.thepicklejar.item.custom.EternalPickles;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -13,6 +14,7 @@ import net.minecraft.util.Identifier;
 /**
  * Packet for activating eternal pickle abilities
  * Sent from client to server when ability key is pressed
+ * FIXED: Corrected method signature to match EternalPickles.triggerAbilityForItem()
  */
 public class ActivateAbilityPacket implements FabricPacket {
 
@@ -66,7 +68,6 @@ public class ActivateAbilityPacket implements FabricPacket {
     /**
      * Register packet handlers
      * Call this from your main mod class
-     * FIXED: Corrected method signature - triggerAbilityForItem takes only ItemStack and PlayerEntity
      */
     public static void register() {
         ServerPlayNetworking.registerGlobalReceiver(TYPE, (packet, player, responseSender) -> {
@@ -74,9 +75,11 @@ public class ActivateAbilityPacket implements FabricPacket {
             player.getServer().execute(() -> {
                 ItemStack stack = packet.getStack();
 
-                // Check if item is an eternal pickle
-                if (stack.getItem() instanceof EternalPickleItem) {
-                    // Trigger ability with correct arguments: ItemStack and PlayerEntity
+                // Check if item is an eternal pickle or eternal pickle bowl
+                if (stack.getItem() instanceof EternalPickleItem ||
+                        stack.getItem() == ModItems.ETERNAL_PICKLE_BOWL) {
+
+                    // Trigger ability with correct method signature (2 parameters only)
                     EternalPickles.triggerAbilityForItem(stack, player);
                 }
             });

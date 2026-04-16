@@ -22,7 +22,7 @@ public class TimePickle extends EternalPickleItem{
     protected void applyConsequence(PlayerEntity player) {
         if (player instanceof ServerPlayerEntity serverPlayer) {
             serverPlayer.addStatusEffect(
-                    new StatusEffectInstance(StatusEffects.SLOWNESS, 600, 0, false, false, true)
+                    new StatusEffectInstance(StatusEffects.SLOWNESS, 600, 10, false, false, true)
             );
         }
     }

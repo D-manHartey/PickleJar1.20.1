@@ -22,7 +22,7 @@ public class MindPickle extends EternalPickleItem{
     protected void applyConsequence(PlayerEntity player) {
         if (player instanceof ServerPlayerEntity serverPlayer) {
             serverPlayer.addStatusEffect(
-                    new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 600, 0, false, false, true)
+                    new StatusEffectInstance(StatusEffects.NAUSEA, 2400, 7, false, false, true)
             );
         }
     }

@@ -22,7 +22,7 @@ public class SoulPickle extends EternalPickleItem{
     protected void applyConsequence(PlayerEntity player) {
         if (player instanceof ServerPlayerEntity serverPlayer) {
             serverPlayer.addStatusEffect(
-                    new StatusEffectInstance(StatusEffects.WITHER, 600, 0, false, false, true)
+                    new StatusEffectInstance(StatusEffects.LEVITATION, 1800, 7, false, false, true)
             );
         }
     }

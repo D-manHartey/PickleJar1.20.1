@@ -23,7 +23,7 @@ public class PowerPickle extends EternalPickleItem{
     protected void applyConsequence(PlayerEntity player) {
         if (player instanceof ServerPlayerEntity serverPlayer) {
             serverPlayer.addStatusEffect(
-                    new StatusEffectInstance(StatusEffects.WEAKNESS, 600, 0, false, false, true)
+                    new StatusEffectInstance(StatusEffects.WITHER, 600, 0, false, false, true)
             );
         }
     }
