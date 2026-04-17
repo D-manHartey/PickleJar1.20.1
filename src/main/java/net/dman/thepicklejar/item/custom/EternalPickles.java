@@ -148,7 +148,7 @@ public class EternalPickles {
                 triggerTimeAbility(player);
                 return true;
             case 5:
-                triggerSpaceAbility(player);
+                return triggerSpaceAbility(player);
             default:
                 return true;
         }
