@@ -1,9 +1,8 @@
 package net.dman.thepicklejar.event;
 
-import net.dman.thepicklejar.entity.custom.TimeProjectileEntity;
-import net.dman.thepicklejar.item.custom.EternalPickles;
+
 import net.dman.thepicklejar.util.LifeStealManager;
-import net.dman.thepicklejar.util.PhasingManager;
+import net.dman.thepicklejar.util.MobDespawnTracker;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.LivingEntity;
@@ -20,10 +19,11 @@ public class EventListeners {
 
     //Phasing through blocks ability currently scrapped
     public static void registerEvents() {
-        // Register server tick event for phasing and life steal timers
+        // Register server tick event
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             //PhasingManager.tickPhasing();
             LifeStealManager.tickLifeSteal();
+            MobDespawnTracker.tickDespawnTimers(server);
 
             // phasing Movement for all players
             //for (PlayerEntity player : server.getPlayerManager().getPlayerList()) {
@@ -47,8 +47,8 @@ public class EventListeners {
     /*
      * Executes the Space Pickle teleportation ability
      */
-    public static void executeSpaceTeleport(World world, PlayerEntity user) {
-        // Raycast to find the block the player is looking at (max 100 blocks)
+    public static boolean executeSpaceTeleport(World world, PlayerEntity user) {
+        // find the block the player is looking at (max 100 blocks)
         HitResult hitResult = user.raycast(100.0d, 0.0f, false);
 
         if (hitResult.getType() == HitResult.Type.BLOCK) {
@@ -65,6 +65,8 @@ public class EventListeners {
             // Playing of ze sound
             world.playSound(null, user.getX(), user.getY(), user.getZ(),
                     SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f);
+
+            return true;
         } else {
             // If looking at air, teleport 100 blocks in that direction
             Vec3d lookVec = user.getRotationVec(1.0f).normalize().multiply(100.0d);
@@ -80,13 +82,19 @@ public class EventListeners {
             if (safePos != null) {
                 // Teleport to the safe block position (on top of it)
                 user.requestTeleport(safePos.getX() + 0.5, safePos.getY() + 1.0, safePos.getZ() + 0.5);
-            } else {
-                // Fallback: teleport to the original position if no safe block found
-                user.requestTeleport(teleportPos.x, teleportPos.y, teleportPos.z);
-            }
 
-            world.playSound(null, user.getX(), user.getY(), user.getZ(),
-                    SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f);
+                world.playSound(null, user.getX(), user.getY(), user.getZ(),
+                        SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f);
+
+                return true;
+            } else {
+                // No safe block found - teleport failed
+                user.sendMessage(
+                        net.minecraft.text.Text.literal("§cNo valid teleport destination found!"),
+                        false
+                );
+                return false; // Teleport failed - no cooldown
+            }
         }
     }
 
@@ -101,31 +109,12 @@ public class EventListeners {
 
             // Check if the block is solid and the block above is air (safe to stand on)
             if (world.getBlockState(checkPos).isFullCube(world, checkPos) &&
-            !world.getBlockState(checkPos.up()).isAir()) {
+            world.getBlockState(checkPos.up()).isAir()) {
                 return checkPos;
             }
         }
 
         // No safe block found, return null
         return null;
-    }
-
-    /*
-     * Executes the Time Pickle projectile ability
-     */
-    public static void executeTimeProjectile(World world, PlayerEntity user) {
-        if (!world.isClient) {
-            TimeProjectileEntity projectile = new TimeProjectileEntity(world, user);
-            // Set position at eye level
-            projectile.setPos(user.getX(), user.getY() - 0.1, user.getZ());
-            // Fest Projectile
-            projectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 5.0f, 0.0f);
-
-            world.spawnEntity(projectile);
-
-            //play laser sound
-            world.playSound(null, user.getX(), user.getY(), user.getZ(),
-                    SoundEvents.ENTITY_ILLUSIONER_CAST_SPELL, SoundCategory.PLAYERS, 1.0f, 2.0f);
-        }
     }
 }

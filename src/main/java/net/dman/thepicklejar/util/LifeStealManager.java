@@ -17,7 +17,7 @@ public class LifeStealManager {
     public static final int MAX_LIFESTEAL_TICKS = 300;
 
     // 0.5 hearts = 1.0f health points
-    public static final float LIFESTEAL_AMOUNT = 1.0f;
+    public static final float LIFESTEAL_AMOUNT = 6.0f;
 
     /*
      * Start life steal for a player

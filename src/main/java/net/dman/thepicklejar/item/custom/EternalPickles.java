@@ -1,5 +1,6 @@
 package net.dman.thepicklejar.item.custom;
 
+import net.dman.thepicklejar.event.EventListeners;
 import net.dman.thepicklejar.item.ModItems;
 import net.dman.thepicklejar.util.LifeStealManager;
 import net.dman.thepicklejar.util.MobDespawnTracker;
@@ -218,22 +219,23 @@ public class EternalPickles {
     private static void triggerTimeAbility(ServerPlayerEntity player) {
         // ABILITY: Speed IV for 30 seconds
         player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 800, 3, false, false, true));
+        TimePickle.applyRadiusSlowness(player);
     }
 
     private static void triggerSpaceAbility(ServerPlayerEntity player) {
-        // ABILITY: Teleport to looked-at block
-        BlockPos targetBlock = getTargetBlock(player);
-        if (targetBlock != null) {
-            player.teleport(
-                    (net.minecraft.server.world.ServerWorld) player.getWorld(),
-                    targetBlock.getX() + 0.5,
-                    targetBlock.getY() + 0,
-                    targetBlock.getZ() + 0.5,
-                    0,
-                    0
-            );
+        // ABILITY: Teleport to where you're looking (100 blocks away if in air)
+        boolean teleportSuccess = EventListeners.executeSpaceTeleport(player.getWorld(), player);
+
+        if (teleportSuccess) {
+            // Only set cooldown if teleport actually happened
+            COOLDOWNS.computeIfAbsent(player.getUuid(), k -> new HashMap<>())
+                    .put("space_pickle", System.currentTimeMillis() + 60000); // 60 second cooldown
         } else {
-            player.sendMessage(net.minecraft.text.Text.literal("§cNo block in sight!"), false);
+            // Teleport failed - no cooldown applied
+            player.sendMessage(
+                    net.minecraft.text.Text.literal("§cTeleport failed! No valid destination found."),
+                    false
+            );
         }
     }
 
