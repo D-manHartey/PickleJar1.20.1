@@ -21,7 +21,6 @@ import java.util.*;
 /**
  * EternalPickles - Main class for all eternal pickle abilities
  * Handles ability triggering, cooldown management, and special items like the bowl
- *
  * FIXED: Properly handles bowl ability activation and spawns 20 mobs for Reality Pickle
  */
 public class EternalPickles {
@@ -97,8 +96,11 @@ public class EternalPickles {
             // Execute the ability
             executeAbilityByName(serverPlayer, abilityName);
 
-            // Set cooldown
-            setCooldown(serverPlayer, itemName);
+            // Set cooldown - ONLY for non-Space Pickle or if Space Pickle teleport succeeded
+            // For Space Pickle, cooldown is handled inside triggerSpaceAbility()
+            if (!abilityName.equalsIgnoreCase("Space Pickle")) {
+                setCooldown(serverPlayer, itemName);
+            }
 
             // Send confirmation message
             player.sendMessage(
@@ -224,18 +226,12 @@ public class EternalPickles {
 
     private static void triggerSpaceAbility(ServerPlayerEntity player) {
         // ABILITY: Teleport to where you're looking (100 blocks away if in air)
+        // FIXED: Only apply cooldown if teleport is successful
         boolean teleportSuccess = EventListeners.executeSpaceTeleport(player.getWorld(), player);
 
         if (teleportSuccess) {
             // Only set cooldown if teleport actually happened
-            COOLDOWNS.computeIfAbsent(player.getUuid(), k -> new HashMap<>())
-                    .put("space_pickle", System.currentTimeMillis() + 60000); // 60 second cooldown
-        } else {
-            // Teleport failed - no cooldown applied
-            player.sendMessage(
-                    net.minecraft.text.Text.literal("§cTeleport failed! No valid destination found."),
-                    false
-            );
+            setCooldown(player, "SpacePickle");
         }
     }
 
