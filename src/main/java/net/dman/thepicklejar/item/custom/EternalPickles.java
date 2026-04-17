@@ -12,6 +12,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -61,11 +62,12 @@ public class EternalPickles {
                 return;
             }
 
-            // Execute the ability
-            executeAbility(serverPlayer, selectedAbilityIndex);
+            boolean abilitySucceeded = executeAbility(serverPlayer, selectedAbilityIndex);
 
             // Set cooldown
-            setCooldown(serverPlayer, abilityName);
+            if (abilitySucceeded) {
+                setCooldown(serverPlayer, abilityName);
+            }
 
             // Send confirmation message
             player.sendMessage(
@@ -87,18 +89,18 @@ public class EternalPickles {
             if (isOnCooldown(serverPlayer, itemName)) {
                 int remainingSeconds = getRemainingCooldown(serverPlayer, itemName) / 20;
                 player.sendMessage(
-                        net.minecraft.text.Text.literal("§cAbility on cooldown! " + remainingSeconds + "s remaining"),
+                        Text.literal("§cAbility on cooldown! " + remainingSeconds + "s remaining"),
                         false
                 );
                 return;
             }
 
             // Execute the ability
-            executeAbilityByName(serverPlayer, abilityName);
+            boolean abilitySucceeded = executeAbilityByName(serverPlayer, abilityName);
 
             // Set cooldown - ONLY for non-Space Pickle or if Space Pickle teleport succeeded
             // For Space Pickle, cooldown is handled inside triggerSpaceAbility()
-            if (!abilityName.equalsIgnoreCase("Space Pickle")) {
+            if (abilitySucceeded) {
                 setCooldown(serverPlayer, itemName);
             }
 
@@ -128,52 +130,54 @@ public class EternalPickles {
     /**
      * Execute ability by index
      */
-    private static void executeAbility(ServerPlayerEntity player, int abilityIndex) {
+    private static boolean executeAbility(ServerPlayerEntity player, int abilityIndex) {
         switch (abilityIndex) {
             case 0:
                 triggerPowerAbility(player);
-                break;
+                return true;
             case 1:
                 triggerMindAbility(player);
-                break;
+                return true;
             case 2:
                 triggerRealityAbility(player);
-                break;
+                return true;
             case 3:
                 triggerSoulAbility(player);
-                break;
+                return true;
             case 4:
                 triggerTimeAbility(player);
-                break;
+                return true;
             case 5:
                 triggerSpaceAbility(player);
-                break;
+            default:
+                return true;
         }
     }
 
     /**
      * Execute ability by name
      */
-    private static void executeAbilityByName(ServerPlayerEntity player, String abilityName) {
+    private static boolean executeAbilityByName(ServerPlayerEntity player, String abilityName) {
         switch (abilityName.toLowerCase()) {
             case "power pickle":
                 triggerPowerAbility(player);
-                break;
+                return true;
             case "mind pickle":
                 triggerMindAbility(player);
-                break;
+                return true;
             case "reality pickle":
                 triggerRealityAbility(player);
-                break;
+                return true;
             case "soul pickle":
                 triggerSoulAbility(player);
-                break;
+                return true;
             case "time pickle":
                 triggerTimeAbility(player);
-                break;
+                return true;
             case "space pickle":
-                triggerSpaceAbility(player);
-                break;
+                return triggerSpaceAbility(player);
+            default:
+                return true;
         }
     }
 
@@ -224,15 +228,10 @@ public class EternalPickles {
         TimePickle.applyRadiusSlowness(player);
     }
 
-    private static void triggerSpaceAbility(ServerPlayerEntity player) {
+    private static boolean triggerSpaceAbility(ServerPlayerEntity player) {
         // ABILITY: Teleport to where you're looking (100 blocks away if in air)
         // FIXED: Only apply cooldown if teleport is successful
-        boolean teleportSuccess = EventListeners.executeSpaceTeleport(player.getWorld(), player);
-
-        if (teleportSuccess) {
-            // Only set cooldown if teleport actually happened
-            setCooldown(player, "SpacePickle");
-        }
+        return EventListeners.executeSpaceTeleport(player.getWorld(), player);
     }
 
     /**
