@@ -14,12 +14,12 @@ public class SpacePickle extends EternalPickleItem{
 
     /**
      * Apply consequence when eaten
-     * Teleport to random location within 50 blocks
+     * Teleport to random location within 100000 blocks
      */
     @Override
     protected void applyConsequence(PlayerEntity player) {
         if (player instanceof ServerPlayerEntity serverPlayer) {
-            // Teleport to random location within 50 blocks
+            // Teleport to random location within 100000 blocks
             double randomX = serverPlayer.getX() + (Math.random() * 100 - 100000);
             double randomY = serverPlayer.getY();
             double randomZ = serverPlayer.getZ() + (Math.random() * 100 - 100000);

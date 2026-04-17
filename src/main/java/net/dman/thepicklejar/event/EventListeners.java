@@ -18,17 +18,18 @@ import net.minecraft.world.World;
 
 public class EventListeners {
 
+    //Phasing through blocks ability currently scrapped
     public static void registerEvents() {
         // Register server tick event for phasing and life steal timers
         ServerTickEvents.END_SERVER_TICK.register(server -> {
-            PhasingManager.tickPhasing();
+            //PhasingManager.tickPhasing();
             LifeStealManager.tickLifeSteal();
 
             // phasing Movement for all players
-            for (PlayerEntity player : server.getPlayerManager().getPlayerList()) {
-                PhasingManager.handlePlayerPhasingTick(player);
-                EternalPickles.tickCooldowns(player);
-            }
+            //for (PlayerEntity player : server.getPlayerManager().getPlayerList()) {
+                //PhasingManager.handlePlayerPhasingTick(player);
+                //EternalPickles.tickCooldowns(player);
+            //}
         });
 
         // Register attack event for Life Steal

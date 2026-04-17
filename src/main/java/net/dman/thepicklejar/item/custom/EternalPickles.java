@@ -2,10 +2,12 @@ package net.dman.thepicklejar.item.custom;
 
 import net.dman.thepicklejar.item.ModItems;
 import net.dman.thepicklejar.util.LifeStealManager;
+import net.dman.thepicklejar.util.MobDespawnTracker;
 import net.dman.thepicklejar.util.PlayerAbilityManager;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -13,9 +15,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * EternalPickles - Main class for all eternal pickle abilities
@@ -193,17 +193,20 @@ public class EternalPickles {
     // ==================== ABILITY IMPLEMENTATIONS ====================
 
     private static void triggerPowerAbility(ServerPlayerEntity player) {
-        // ABILITY: Strength III for 10 seconds
+        // ABILITY: Strength III & Resistance III
         player.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 300, 2, false, false, true));
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 500, 2, false, false, true));
     }
 
     private static void triggerMindAbility(ServerPlayerEntity player) {
-        // ABILITY: Haste III for 5 minutes
+        // ABILITY: Haste III & Night vision
         player.addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, 6000, 2, false, false, true));
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 6000, 0, false, false, true));
     }
 
     private static void triggerRealityAbility(ServerPlayerEntity player) {
-        // ABILITY: Spawn 20 hostile mobs around the player
+        // ABILITY: Spawn 20 hostile mobs around the player & Invisibility
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, 4800, 0, false, false, true));
         spawnRealityMobs(player);
     }
 
@@ -236,12 +239,16 @@ public class EternalPickles {
 
     /**
      * Spawn 20 mobs around the player in a circle pattern
+     * Mobs despawn after a short time
      */
     private static void spawnRealityMobs(ServerPlayerEntity player) {
         net.minecraft.util.math.Vec3d playerPos = player.getPos();
 
         int mobCount = 20;
         double radius = 6.0; // Distance from player
+
+        // Despawn timer
+        List<MobEntity> spawnedMobs = new ArrayList<>();
 
         for (int i = 0; i < mobCount; i++) {
             double angle = (Math.PI * 2 / mobCount) * i;
@@ -254,13 +261,14 @@ public class EternalPickles {
 
             try {
                 switch (mobType) {
-                    case 0: // Piglin
-                        net.minecraft.entity.mob.PiglinEntity piglin = new net.minecraft.entity.mob.PiglinEntity(
-                                EntityType.PIGLIN,
+                    case 0: // Illusioner
+                        net.minecraft.entity.mob.IllusionerEntity illusioner = new net.minecraft.entity.mob.IllusionerEntity(
+                                EntityType.ILLUSIONER,
                                 player.getWorld()
                         );
-                        piglin.setPosition(x, y, z);
-                        player.getWorld().spawnEntity(piglin);
+                        illusioner.setPosition(x, y, z);
+                        player.getWorld().spawnEntity(illusioner);
+                        spawnedMobs.add(illusioner);
                         break;
 
                     case 1: // Vindicator
@@ -270,6 +278,7 @@ public class EternalPickles {
                         );
                         vindicator.setPosition(x, y, z);
                         player.getWorld().spawnEntity(vindicator);
+                        spawnedMobs.add(vindicator);
                         break;
 
                     case 2: // Evoker
@@ -279,12 +288,15 @@ public class EternalPickles {
                         );
                         evoker.setPosition(x, y, z);
                         player.getWorld().spawnEntity(evoker);
+                        spawnedMobs.add(evoker);
                         break;
                 }
             } catch (Exception e) {
                 // Silently fail for individual mobs
             }
         }
+
+        MobDespawnTracker.trackMobsForDespawn(spawnedMobs);
 
         // Send message to player
         player.sendMessage(

@@ -17,7 +17,7 @@ public class PowerPickle extends EternalPickleItem{
 
     /**
      * Apply consequence when eaten
-     * Weakness effect for 30 seconds
+     * Wither effect
      */
     @Override
     protected void applyConsequence(PlayerEntity player) {

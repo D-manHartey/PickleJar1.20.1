@@ -10,9 +10,9 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * PhasingManager - Implements Origins-style phantom phasing
+ * PhasingManager
  * Players can walk through solid blocks EXCEPT obsidian
- * Based on Origins mod phantom origin mechanics
+ * Currently Scrapped
  */
 public class PhasingManager {
     // Map to track how long players have been phasing (in ticks)

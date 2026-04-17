@@ -16,7 +16,7 @@ public class SoulPickle extends EternalPickleItem{
 
     /**
      * Apply consequence when eaten
-     * Wither effect for 30 seconds
+     * Levitation effect
      */
     @Override
     protected void applyConsequence(PlayerEntity player) {

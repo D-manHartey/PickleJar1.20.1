@@ -16,7 +16,7 @@ public class TimePickle extends EternalPickleItem{
 
     /**
      * Apply consequence when eaten
-     * Slowness effect for 30 seconds
+     * Slowness effect
      */
     @Override
     protected void applyConsequence(PlayerEntity player) {

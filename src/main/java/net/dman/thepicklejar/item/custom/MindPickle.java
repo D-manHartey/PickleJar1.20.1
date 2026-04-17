@@ -16,7 +16,7 @@ public class MindPickle extends EternalPickleItem{
 
     /**
      * Apply consequence when eaten
-     * Mining Fatigue effect for 30 seconds
+     * Nausea effect
      */
     @Override
     protected void applyConsequence(PlayerEntity player) {
