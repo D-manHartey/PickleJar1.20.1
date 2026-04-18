@@ -37,7 +37,7 @@ public class InkblotMalletItem extends SwordItem implements Vanishable {
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(
                 EntityAttributes.GENERIC_ATTACK_DAMAGE,
-                new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", 10, EntityAttributeModifier.Operation.ADDITION)
+                new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", 9.5, EntityAttributeModifier.Operation.ADDITION)
         );
         builder.put(
                 EntityAttributes.GENERIC_ATTACK_SPEED,
