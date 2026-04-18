@@ -74,6 +74,14 @@
   "tooltip.the-pickle-jar.inkblot_mallet": "A song of justice plays within",
   "tooltip.the-pickle-jar.raggidy_scythe": "A weight of guilt pressures you",
 
+  "tooltip.the-pickle-jar.power_pickle.tooltip": "You feel a sense of deterioration holding it...",
+  "tooltip.the-pickle-jar.mind_pickle.tooltip": "Seems to make you smarter",
+  "tooltip.the-pickle-jar.reality_pickle.tooltip": "Was someone there? Must be your imagination",
+  "tooltip.the-pickle-jar.soul_pickle.tooltip": "You can hear a faint whisper",
+  "tooltip.the-pickle-jar.time_pickle.tooltip": "Best not to break it, 'less you want to break time",
+  "tooltip.the-pickle-jar.space_pickle.tooltip": "You can see the Andromeda Galaxy",
+  "tooltip.the-pickle-jar.eternal_pickle_bowl.tooltip": "The ultimate power, ready to reign havoc",
+
   "sounds.the-pickle-jar.phil_block_place": "Philing it up, HEURK",
   "sounds.the-pickle-jar.phil_block_break": "PHIL'LL BE BACK",
   "sounds.the-pickle-jar.phil_block_hit": "D'OW, quit hittin phil",

@@ -1,9 +1,14 @@
 package net.dman.thepicklejar.item.custom;
 
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 /**
  * EternalPickleBowlItem - Utility item that negates penalties from other pickles
@@ -29,7 +34,7 @@ public class EternalPickleBowlItem extends EternalPickleItem {
 
             // Send message
             player.sendMessage(
-                    net.minecraft.text.Text.literal("§6You consumed the Eternal Pickle Bowl!"),
+                    net.minecraft.text.Text.literal("§6You Imbecile! You just ate ultimate power!"),
                     false
             );
         }
@@ -43,5 +48,10 @@ public class EternalPickleBowlItem extends EternalPickleItem {
     @Override
     protected void applyConsequence(PlayerEntity player) {
         // Bowl has no consequence - do nothing
+    }
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable("tooltip.the-pickle-jar.eternal_pickle_bowl.tooltip"));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

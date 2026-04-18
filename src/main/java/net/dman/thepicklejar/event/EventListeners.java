@@ -90,7 +90,7 @@ public class EventListeners {
             } else {
                 // No safe block found - teleport failed
                 user.sendMessage(
-                        net.minecraft.text.Text.literal("§cNo valid teleport destination found!"),
+                        net.minecraft.text.Text.literal("§cCan't teleport to air dingus!"),
                         false
                 );
                 return false; // Teleport failed - no cooldown

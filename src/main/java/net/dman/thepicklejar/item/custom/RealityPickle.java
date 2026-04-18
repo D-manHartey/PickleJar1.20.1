@@ -1,13 +1,18 @@
 package net.dman.thepicklejar.item.custom;
 
 import net.dman.thepicklejar.util.MobDespawnTracker;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,8 +86,13 @@ public class RealityPickle extends EternalPickleItem{
             MobDespawnTracker.trackMobsForDespawn(spawnedMobs);
 
             player.sendMessage(
-                    net.minecraft.text.Text.literal("§5Reality Pickle - Mobs spawned!"),
+                    net.minecraft.text.Text.literal("Illusions Materialized!"),
                     false
             );
+    }
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable("tooltip.the-pickle-jar.reality_pickle.tooltip"));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

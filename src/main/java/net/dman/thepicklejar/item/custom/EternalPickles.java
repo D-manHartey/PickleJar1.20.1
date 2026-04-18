@@ -45,7 +45,7 @@ public class EternalPickles {
             int selectedAbilityIndex = PlayerAbilityManager.getSelectedAbility(serverPlayer);
 
             if (selectedAbilityIndex < 0) {
-                player.sendMessage(net.minecraft.text.Text.literal("§cNo ability selected! Press B to select one."), false);
+                player.sendMessage(net.minecraft.text.Text.literal("§cNo pickle Selected! Press B and pick yo poison."), false);
                 return;
             }
 
@@ -56,7 +56,7 @@ public class EternalPickles {
             if (isOnCooldown(serverPlayer, abilityName)) {
                 int remainingSeconds = getRemainingCooldown(serverPlayer, abilityName) / 20;
                 player.sendMessage(
-                        net.minecraft.text.Text.literal("§cAbility on cooldown! " + remainingSeconds + "s remaining"),
+                        net.minecraft.text.Text.literal("§cPickle Recharging! " + remainingSeconds + "s remaining"),
                         false
                 );
                 return;
@@ -71,7 +71,7 @@ public class EternalPickles {
 
             // Send confirmation message
             player.sendMessage(
-                    net.minecraft.text.Text.literal("§a" + abilityName + " Activated!"),
+                    net.minecraft.text.Text.literal("§a" + abilityName + " Mobilized!"),
                     false
             );
             return;
@@ -89,7 +89,7 @@ public class EternalPickles {
             if (isOnCooldown(serverPlayer, itemName)) {
                 int remainingSeconds = getRemainingCooldown(serverPlayer, itemName) / 20;
                 player.sendMessage(
-                        Text.literal("§cAbility on cooldown! " + remainingSeconds + "s remaining"),
+                        Text.literal("§cPickle Recharging! " + remainingSeconds + "s remaining"),
                         false
                 );
                 return;
@@ -106,7 +106,7 @@ public class EternalPickles {
 
             // Send confirmation message
             player.sendMessage(
-                    net.minecraft.text.Text.literal("§a" + abilityName + " Activated!"),
+                    net.minecraft.text.Text.literal("§a" + abilityName + " Mobilized!"),
                     false
             );
         }
@@ -297,7 +297,7 @@ public class EternalPickles {
 
         // Send message to player
         player.sendMessage(
-                net.minecraft.text.Text.literal("§5Reality Pickle - 20 Mobs Spawned!"),
+                net.minecraft.text.Text.literal("§5Reality Pickle - Illusions Materialized!"),
                 false
         );
     }
