@@ -1,0 +1,12 @@
+{
+  "type": "the-pickle-jar:giardiniera_altering",
+  "ingredients": [
+    { "item": "minecraft:spyglass" },
+    { "item": "the-pickle-jar:golden_pickle" },
+    { "item": "the-pickle-jar:jarred_mind" }
+  ],
+  "output": {
+    "item": "the-pickle-jar:mind_pickle",
+    "count": 1
+  }
+}

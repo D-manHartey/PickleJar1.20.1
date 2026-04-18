@@ -1,0 +1,12 @@
+{
+  "type": "the-pickle-jar:giardiniera_altering",
+  "ingredients": [
+    { "item": "the-pickle-jar:golden_pickle" },
+    { "item": "minecraft:bowl" },
+    { "item": "the-pickle-jar:toon_steel" }
+  ],
+  "output": {
+    "item": "the-pickle-jar:eternal_bowl",
+    "count": 1
+  }
+}

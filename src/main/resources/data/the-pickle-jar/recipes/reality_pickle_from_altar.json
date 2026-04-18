@@ -1,0 +1,12 @@
+{
+  "type": "the-pickle-jar:giardiniera_altering",
+  "ingredients": [
+    { "item": "minecraft:echo_shard" },
+    { "item": "the-pickle-jar:golden_pickle" },
+    { "item": "the-pickle-jar:jarred_reality" }
+  ],
+  "output": {
+    "item": "the-pickle-jar:reality_pickle",
+    "count": 1
+  }
+}

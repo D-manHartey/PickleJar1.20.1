@@ -79,7 +79,7 @@ public class ModCustomTrades {
         TradeOfferHelper.registerVillagerOffers(ModVillagers.ZANY_WORSHIPPER, 1,
                 factories -> {
                     factories.add((entity, random) -> new TradeOffer(
-                            new ItemStack(Items.EMERALD, 10),
+                            new ItemStack(Items.EMERALD, 20),
                             new ItemStack(ModItems.GOLDEN_PICKLE, 1),
                             9, 5, 0.05f));
                     factories.add((entity, random) -> new TradeOffer(

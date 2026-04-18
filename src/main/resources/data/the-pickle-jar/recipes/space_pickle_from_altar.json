@@ -1,0 +1,12 @@
+{
+  "type": "the-pickle-jar:giardiniera_altering",
+  "ingredients": [
+    { "item": "minecraft:end_crystal" },
+    { "item": "the-pickle-jar:golden_pickle" },
+    { "item": "the-pickle-jar:jarred_space" }
+  ],
+  "output": {
+    "item": "the-pickle-jar:space_pickle",
+    "count": 1
+  }
+}

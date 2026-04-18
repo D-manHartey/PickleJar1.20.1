@@ -1,0 +1,12 @@
+{
+  "type": "the-pickle-jar:giardiniera_altering",
+  "ingredients": [
+    { "item": "minecraft:totem_of_undying" },
+    { "item": "the-pickle-jar:golden_pickle" },
+    { "item": "the-pickle-jar:jarred_soul" }
+  ],
+  "output": {
+    "item": "the-pickle-jar:soul_pickle",
+    "count": 1
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "the-pickle-jar:giardiniera_altering",
+  "ingredients": [
+    { "item": "minecraft:turtle_helmet" },
+    { "item": "the-pickle-jar:golden_pickle" },
+    { "item": "the-pickle-jar:jarred_time" }
+  ],
+  "output": {
+    "item": "the-pickle-jar:time_pickle",
+    "count": 1
+  }
+}
