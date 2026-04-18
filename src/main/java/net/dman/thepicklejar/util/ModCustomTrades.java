@@ -81,12 +81,56 @@ public class ModCustomTrades {
                     factories.add((entity, random) -> new TradeOffer(
                             new ItemStack(Items.EMERALD, 20),
                             new ItemStack(ModItems.GOLDEN_PICKLE, 2),
-                            9, 5, 0.05f));
+                            9, 2, 0.05f));
                     factories.add((entity, random) -> new TradeOffer(
                             new ItemStack(Items.EMERALD, 2),
                             new ItemStack(ModBlocks.GREEN_CHRYSANTHEMUM, 1),
-                            15, 3, 0.03f));
+                            15, 1, 0.03f));
 
+                });
+        TradeOfferHelper.registerVillagerOffers(ModVillagers.ZANY_WORSHIPPER, 2,
+                factories -> {
+                    factories.add((entity, random) -> new TradeOffer(
+                            new ItemStack(Items.AMETHYST_SHARD, 40),
+                            new ItemStack(Items.GOLDEN_CARROT, 30),
+                            new ItemStack(ModItems.JARRED_MIND, 1),
+                            2, 35, 0.01f));
+                    factories.add((entity, random) -> new TradeOffer(
+                            new ItemStack(Items.EMERALD, 64),
+                            new ItemStack(Items.CLOCK, 20),
+                            new ItemStack(ModItems.JARRED_TIME, 1),
+                            2, 35, 0.01f));
+
+                });
+        TradeOfferHelper.registerVillagerOffers(ModVillagers.ZANY_WORSHIPPER, 3,
+                factories -> {
+                    factories.add((entity, random) -> new TradeOffer(
+                            new ItemStack(Items.NAME_TAG, 5),
+                            new ItemStack(Items.HEART_OF_THE_SEA, 1),
+                            new ItemStack(ModItems.JARRED_SOUL, 1),
+                            2, 35, 0.01f));
+                    factories.add((entity, random) -> new TradeOffer(
+                            new ItemStack(Items.GOLDEN_APPLE, 30),
+                            new ItemStack(Items.NETHERITE_AXE, 1),
+                            new ItemStack(ModItems.JARRED_POWER, 1),
+                            2, 35, 0.01f));
+
+                });
+        TradeOfferHelper.registerVillagerOffers(ModVillagers.ZANY_WORSHIPPER, 4,
+                factories -> {
+                    factories.add((entity, random) -> new TradeOffer(
+                            new ItemStack(Items.PHANTOM_MEMBRANE, 25),
+                            new ItemStack(Items.PRISMARINE_CRYSTALS, 45),
+                            new ItemStack(ModItems.JARRED_REALITY, 1),
+                            2, 300, 0.01f));
+                });
+        TradeOfferHelper.registerVillagerOffers(ModVillagers.ZANY_WORSHIPPER, 5,
+                factories -> {
+                    factories.add((entity, random) -> new TradeOffer(
+                            new ItemStack(Items.ENDER_EYE, 15),
+                            new ItemStack(ModItems.TOON_STEEL, 15),
+                            new ItemStack(ModItems.JARRED_SPACE, 1),
+                            2, 300, 0.01f));
                 });
     }
 }
