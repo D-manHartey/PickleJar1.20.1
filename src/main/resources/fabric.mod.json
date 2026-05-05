@@ -26,6 +26,9 @@
       ],
       "rei_client": [
         "net.dman.thepicklejar.compat.ThePickleJarREIClientPlugin"
+      ],
+      "emi": [
+        "net.dman.thepicklejar.compat.ThePickleJarEMIClientPlugin"
       ]
     },
 	"mixins": [

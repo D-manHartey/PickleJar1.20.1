@@ -101,7 +101,7 @@ public class GiardinieraAltarRecipe implements Recipe<SimpleInventory> {
         @Override
         public GiardinieraAltarRecipe read(Identifier id, PacketByteBuf buf) {
             int size = buf.readInt();
-            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
+            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(size, Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromPacket(buf));

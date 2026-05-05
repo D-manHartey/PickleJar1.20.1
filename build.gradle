@@ -18,6 +18,10 @@ repositories {
 	// for more information about repositories.
     maven { url "https://maven.shedaniel.me" }
 
+    maven {
+        name = "TerraFormersMC"
+        url "https://maven.terraformersmc.com/releases"
+    }
 }
 
 fabricApi {
@@ -37,6 +41,9 @@ dependencies {
 
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:12.1.770"
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:12.1.770"
+
+    modCompileOnly "dev.emi:emi-fabric:${project.emi_version}:api"
+    modLocalRuntime "dev.emi:emi-fabric:${project.emi_version}"
 	
 }
 
@@ -86,4 +93,12 @@ publishing {
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
 	}
+    loom {
+        runs {
+            client {
+                // Adds EMI to the client run configuration
+                ideConfigGenerated = true
+            }
+        }
+    }
 }

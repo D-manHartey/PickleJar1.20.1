@@ -45,7 +45,8 @@ public class EternalPickles {
             int selectedAbilityIndex = PlayerAbilityManager.getSelectedAbility(serverPlayer);
 
             if (selectedAbilityIndex < 0) {
-                player.sendMessage(net.minecraft.text.Text.literal("§cNo pickle Selected! Press B and pick yo poison."), false);
+                player.sendMessage(net.minecraft.text.Text.literal
+                        ("§cNo pickle Selected! Press B and pick yo poison."), true);
                 return;
             }
 
@@ -57,7 +58,7 @@ public class EternalPickles {
                 int remainingSeconds = getRemainingCooldown(serverPlayer, abilityName) / 20;
                 player.sendMessage(
                         net.minecraft.text.Text.literal("§cPickle Recharging! " + remainingSeconds + "s remaining"),
-                        false
+                        true
                 );
                 return;
             }
@@ -72,7 +73,7 @@ public class EternalPickles {
             // Send confirmation message
             player.sendMessage(
                     net.minecraft.text.Text.literal("§a" + abilityName + " Mobilized!"),
-                    false
+                    true
             );
             return;
         }
@@ -90,7 +91,7 @@ public class EternalPickles {
                 int remainingSeconds = getRemainingCooldown(serverPlayer, itemName) / 20;
                 player.sendMessage(
                         Text.literal("§cPickle Recharging! " + remainingSeconds + "s remaining"),
-                        false
+                        true
                 );
                 return;
             }
@@ -107,7 +108,7 @@ public class EternalPickles {
             // Send confirmation message
             player.sendMessage(
                     net.minecraft.text.Text.literal("§a" + abilityName + " Mobilized!"),
-                    false
+                    true
             );
         }
     }
@@ -298,7 +299,7 @@ public class EternalPickles {
         // Send message to player
         player.sendMessage(
                 net.minecraft.text.Text.literal("§5Reality Pickle - Illusions Materialized!"),
-                false
+                true
         );
     }
 

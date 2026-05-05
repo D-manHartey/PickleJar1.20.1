@@ -78,8 +78,9 @@ public class TimePickle extends EternalPickleItem {
 
         // Send message to player
         player.sendMessage(
-                Text.literal("§9Time Pickle - " + affectedCount + " Dweebs Time Shifted! (35 block radius)"),
-                false
+                Text.literal("§9Time Pickle - " + affectedCount + " Dweebs Time Shifted! (35 block radius)"
+                ),
+                true
         );
     }
     @Override
