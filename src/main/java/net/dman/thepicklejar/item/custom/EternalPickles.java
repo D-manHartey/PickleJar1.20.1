@@ -294,7 +294,7 @@ public class EternalPickles {
             }
         }
 
-        MobDespawnTracker.trackMobsForDespawn(spawnedMobs);
+        MobDespawnTracker.trackMobsForDespawn(spawnedMobs, player.getUuid());
 
         // Send message to player
         player.sendMessage(

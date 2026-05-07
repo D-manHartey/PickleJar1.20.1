@@ -83,11 +83,11 @@ public class RealityPickle extends EternalPickleItem{
                 }
             }
 
-            MobDespawnTracker.trackMobsForDespawn(spawnedMobs);
+            MobDespawnTracker.trackMobsForDespawn(spawnedMobs, player.getUuid());
 
             player.sendMessage(
                     net.minecraft.text.Text.literal("Illusions Materialized!"),
-                    false
+                    true
             );
     }
     @Override
