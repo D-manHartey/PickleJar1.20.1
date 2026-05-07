@@ -4,7 +4,6 @@ import net.dman.thepicklejar.item.custom.EternalPickles;
 import net.dman.thepicklejar.util.EternalPickleManager;
 import net.dman.thepicklejar.util.LifeStealManager;
 import net.dman.thepicklejar.util.MobDespawnTracker;
-import net.dman.thepicklejar.util.PhasingManager;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.player.PlayerEntity;
 
@@ -15,8 +14,6 @@ import net.minecraft.entity.player.PlayerEntity;
 public class ServerTickEvent {
     public static void registerEvents() {
         ServerTickEvents.END_WORLD_TICK.register(world -> {
-            // Tick phasing for all players
-            //PhasingManager.tickPhasing();
 
             LifeStealManager.tickLifeSteal();
 

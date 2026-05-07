@@ -3,6 +3,8 @@ package net.dman.thepicklejar.item.custom;
 import net.dman.thepicklejar.util.MobDespawnTracker;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.*;
@@ -23,6 +25,9 @@ import java.util.List;
  */
 public class RealityPickle extends EternalPickleItem{
 
+    private static final int CONSUME_SILVERFISH_COUNT = 5;
+    private static final double CONSUME_SILVERFISH_RADIUS = 3.5D;
+
     public RealityPickle(Settings settings) {
         super(settings);
     }
@@ -35,7 +40,47 @@ public class RealityPickle extends EternalPickleItem{
     protected void applyConsequence(PlayerEntity player) {
         player.addStatusEffect(new StatusEffectInstance(StatusEffects.DARKNESS,
                 2600, 2, false, false, true));
+
+        if (player instanceof ServerPlayerEntity serverPlayer) {
+            spawnConsumeSilverfish(serverPlayer);
         }
+    }
+
+    private void spawnConsumeSilverfish(ServerPlayerEntity player) {
+        World world = player.getWorld();
+        Vec3d playerPos = player.getPos();
+        List<MobEntity> spawnedSilverfish = new ArrayList<>();
+
+        for (int i = 0; i < CONSUME_SILVERFISH_COUNT; i++) {
+            double angle = (Math.PI * 2.0D / CONSUME_SILVERFISH_COUNT) * i;
+            double x = playerPos.x + Math.cos(angle) * CONSUME_SILVERFISH_RADIUS;
+            double z = playerPos.z + Math.sin(angle) * CONSUME_SILVERFISH_RADIUS;
+            double y = playerPos.y;
+
+            SilverfishEntity silverfish = new SilverfishEntity(EntityType.SILVERFISH, world);
+            silverfish.refreshPositionAndAngles(x, y, z, world.random.nextFloat() * 360.0F, 0.0F);
+            silverfish.setTarget(player);
+            silverfish.setPersistent();
+
+            if (silverfish.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH) != null) {
+                silverfish.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(14.0D);
+                silverfish.setHealth(silverfish.getMaxHealth());
+            }
+            if (silverfish.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE) != null) {
+                silverfish.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).setBaseValue(4.0D);
+            }
+            if (silverfish.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED) != null) {
+                silverfish.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.35D);
+            }
+
+            world.spawnEntity(silverfish);
+            spawnedSilverfish.add(silverfish);
+        }
+
+        MobDespawnTracker.trackMobsForDespawn(spawnedSilverfish);
+
+        player.sendMessage(Text.literal("Reality begins to break around you..."), true);
+    }
 
         /**
          * Spawn mobs around the player
