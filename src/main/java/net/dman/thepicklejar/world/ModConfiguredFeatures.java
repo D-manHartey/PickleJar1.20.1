@@ -34,7 +34,7 @@ public class ModConfiguredFeatures {
 
 
         register(context, PICKLOLIUM_DEPOSIT_KEY, Feature.ORE, new OreFeatureConfig(overworldPickloliumDeposit, 5));
-        register(context, CHUTNEY_DEPOSIT_KEY, Feature.ORE, new OreFeatureConfig(netherChutneyDeposit, 3));
+        register(context, CHUTNEY_DEPOSIT_KEY, Feature.ORE, new OreFeatureConfig(netherChutneyDeposit, 4));
     }
 
 

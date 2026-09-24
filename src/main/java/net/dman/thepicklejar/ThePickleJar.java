@@ -2,6 +2,7 @@ package net.dman.thepicklejar;
 
 import net.dman.thepicklejar.block.ModBlocks;
 import net.dman.thepicklejar.block.entity.ModBlockEntities;
+import net.dman.thepicklejar.effect.ModEffects;
 import net.dman.thepicklejar.event.EventListeners;
 import net.dman.thepicklejar.event.ServerTickEvent;
 import net.dman.thepicklejar.item.ModItemGroups;
@@ -32,6 +33,8 @@ public class ThePickleJar implements ModInitializer {
         ModBlocks.registerModBlocks();
 
         ModRecipes.registerRecipes();
+
+        ModEffects.registerEffects();
 
         FuelRegistry.INSTANCE.add(ModItems.GHERKIN_SOUL, 3500);
         FuelRegistry.INSTANCE.add(ModItems.SALSA_SOUL, 5500);
