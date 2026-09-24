@@ -25,7 +25,7 @@ public class ModPlacedFeatures {
                 ModOrePlacement.modifiersWithCount(5, // Veins per Chunk
                         HeightRangePlacementModifier.uniform(YOffset.fixed(-80), YOffset.fixed(80))));
         register(context, CHUTNEY_DEPOSIT_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.CHUTNEY_DEPOSIT_KEY),
-                ModOrePlacement.modifiersWithCount(3, // Veins per Chunk
+                ModOrePlacement.modifiersWithCount(4, // Veins per Chunk
                         HeightRangePlacementModifier.uniform(YOffset.fixed(-80), YOffset.fixed(80))));
 
     }
