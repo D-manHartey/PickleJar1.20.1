@@ -7,7 +7,10 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
-public class EternalPickleManager {
+public final class EternalPickleManager {
+    private EternalPickleManager() {
+
+    }
 
     public static void checkInventoryPenalties(PlayerEntity player) {
         if (player.getWorld().isClient) return;
@@ -18,10 +21,10 @@ public class EternalPickleManager {
 
         for (int i = 0; i < player.getInventory().size(); i++) {
             ItemStack stack = player.getInventory().getStack(i);
-            if (stack.getItem() instanceof EternalPickleItem) {
-                pickleCount++;
-            } else if (stack.getItem() == ModItems.ETERNAL_PICKLE_BOWL) {
+            if (stack.isOf(ModItems.ETERNAL_PICKLE_BOWL)) {
                 hasEternalBowl = true;
+            } else if (stack.getItem() instanceof EternalPickleItem) {
+                pickleCount += stack.getCount();
             }
         }
 

@@ -1,6 +1,5 @@
 package net.dman.thepicklejar.mixin;
 
-import net.dman.thepicklejar.util.LifeStealManager;
 import net.dman.thepicklejar.util.MobDespawnTracker;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -22,14 +21,6 @@ public abstract class LivingEntityMixin {
             if (MobDespawnTracker.isRealityMobOwner(mob, player.getUuid())) {
                 cir.setReturnValue(false);
             }
-        }
-    }
-
-    @Inject(method = "damage", at = @At("RETURN"))
-    private void onDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (cir.getReturnValue() && source.getAttacker() instanceof PlayerEntity player) {
-            LivingEntity target = (LivingEntity)(Object)this;
-            LifeStealManager.handleAttack(player, target);
         }
     }
 }

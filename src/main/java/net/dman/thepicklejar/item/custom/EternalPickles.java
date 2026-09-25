@@ -1,21 +1,26 @@
 package net.dman.thepicklejar.item.custom;
 
+import net.dman.thepicklejar.effect.ModEffects;
 import net.dman.thepicklejar.event.EventListeners;
 import net.dman.thepicklejar.item.ModItems;
-import net.dman.thepicklejar.util.LifeStealManager;
 import net.dman.thepicklejar.util.MobDespawnTracker;
 import net.dman.thepicklejar.util.PlayerAbilityManager;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.EvokerEntity;
+import net.minecraft.entity.mob.IllusionerEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.VindicatorEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 
 import java.util.*;
 
@@ -200,10 +205,14 @@ public class EternalPickles {
 
     // ==================== ABILITY IMPLEMENTATIONS ====================
 
+    private static final double POWER_FORWARD_RANGE = 18.0D;
+    private static final double POWER_FORWARD_RADIUS = 2.5D;
+    private static final float POWER_FORWARD_DAMAGE = 10.0F;
+    private static final float POWER_REAR_DAMAGE = 2.0F;
+
     private static void triggerPowerAbility(ServerPlayerEntity player) {
-        // ABILITY: Strength III & Resistance III
-        player.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 300, 2, false, false, true));
-        player.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 500, 2, false, false, true));
+        // ABILITY: Directional Warden blast
+
     }
 
     private static void triggerMindAbility(ServerPlayerEntity player) {
@@ -213,14 +222,32 @@ public class EternalPickles {
     }
 
     private static void triggerRealityAbility(ServerPlayerEntity player) {
-        // ABILITY: Spawn 20 hostile mobs around the player & Invisibility
-        player.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, 4800, 0, false, false, true));
+        final int duration = 4_800;
+        // ABILITY: Spawn 20 hostile mobs around the player & Invisibility even with armor
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, 4800, 0, false, false, false));
+        spawnRealityMobs(player);
+
+        player.addStatusEffect(new StatusEffectInstance(ModEffects.REALITY_CLOAK, 4800, 0, false, false, false));
+
         spawnRealityMobs(player);
     }
 
+    private static final double SOUL_RADIUS = 100.0D;
+    private static final int SOUL_VEIL_DURATION = 20 * 20;
+
     private static void triggerSoulAbility(ServerPlayerEntity player) {
-        // ABILITY: Life steal for 2 minutes
-        LifeStealManager.enableLifeSteal(player);
+        // ABILITY: Hides Player Health bar
+        ServerWorld world = player.getServerWorld();
+        double maxDistanceSquared = SOUL_RADIUS * SOUL_RADIUS;
+
+        for (ServerPlayerEntity target : world.getPlayers()) {
+            if (target.squaredDistanceTo(player) <= maxDistanceSquared) {
+                target.addStatusEffect(new StatusEffectInstance(
+                        ModEffects.SOUL_VEIL, 15,
+                        0, false, false, false
+                ));
+            }
+        }
     }
 
     private static void triggerTimeAbility(ServerPlayerEntity player) {
@@ -240,67 +267,31 @@ public class EternalPickles {
      * Mobs despawn after a short time
      */
     private static void spawnRealityMobs(ServerPlayerEntity player) {
-        net.minecraft.util.math.Vec3d playerPos = player.getPos();
-
-        int mobCount = 20;
-        double radius = 6.0; // Distance from player
-
-        // Despawn timer
-        List<MobEntity> spawnedMobs = new ArrayList<>();
-
-        for (int i = 0; i < mobCount; i++) {
-            double angle = (Math.PI * 2 / mobCount) * i;
-            double x = playerPos.x + Math.cos(angle) * radius;
-            double z = playerPos.z + Math.sin(angle) * radius;
-            double y = playerPos.y;
-
-            // Randomly select mob type
-            int mobType = player.getRandom().nextInt(3);
-
-            try {
-                switch (mobType) {
-                    case 0: // Illusioner
-                        net.minecraft.entity.mob.IllusionerEntity illusioner = new net.minecraft.entity.mob.IllusionerEntity(
-                                EntityType.ILLUSIONER,
-                                player.getWorld()
-                        );
-                        illusioner.setPosition(x, y, z);
-                        player.getWorld().spawnEntity(illusioner);
-                        spawnedMobs.add(illusioner);
-                        break;
-
-                    case 1: // Vindicator
-                        net.minecraft.entity.mob.VindicatorEntity vindicator = new net.minecraft.entity.mob.VindicatorEntity(
-                                EntityType.VINDICATOR,
-                                player.getWorld()
-                        );
-                        vindicator.setPosition(x, y, z);
-                        player.getWorld().spawnEntity(vindicator);
-                        spawnedMobs.add(vindicator);
-                        break;
-
-                    case 2: // Evoker
-                        net.minecraft.entity.mob.EvokerEntity evoker = new net.minecraft.entity.mob.EvokerEntity(
-                                EntityType.EVOKER,
-                                player.getWorld()
-                        );
-                        evoker.setPosition(x, y, z);
-                        player.getWorld().spawnEntity(evoker);
-                        spawnedMobs.add(evoker);
-                        break;
-                }
-            } catch (Exception e) {
-                // Silently fail for individual mobs
+        ServerWorld world = player.getServerWorld();
+        Vec3d playerPos = player.getPos();
+        for (int i = 0; i < 20; i++) {
+            double angle = Math.PI * 2.0D * i / 20.0D;
+            MobEntity mob = createRealityMob(world, player.getRandom().nextInt(3));
+            mob.refreshPositionAndAngles(playerPos.x + Math.cos(angle) * 6.0D,
+                    playerPos.y, playerPos.z + Math.sin(angle) * 6.0D, player.getRandom
+                            ().nextFloat() * 360.0F, 0.0F);
+            if (world.spawnEntity(mob)) {
+                mob.setPersistent();
+                mob.disableExperienceDropping();
+                MobDespawnTracker.trackMobForDespawn(mob, player.getUuid());
             }
         }
-
-        MobDespawnTracker.trackMobsForDespawn(spawnedMobs, player.getUuid());
-
         // Send message to player
-        player.sendMessage(
-                net.minecraft.text.Text.literal("§5Reality Pickle - Illusions Materialized!"),
-                true
-        );
+        player.sendMessage(net.minecraft.text.Text.literal("§5Reality Pickle - Illusions Materialized!"),
+                true);
+    }
+
+    private static MobEntity createRealityMob(ServerWorld world, int type) {
+        return switch (type) {
+          case 0 -> new IllusionerEntity(EntityType.ILLUSIONER, world);
+          case 1 -> new VindicatorEntity(EntityType.VINDICATOR, world);
+            default -> new EvokerEntity(EntityType.EVOKER, world);
+        };
     }
 
     /**

@@ -13,8 +13,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 /**
- * Soul Pickle - Grants life steal ability for 2 minutes (ability)
- * Consequence: Wither effect when eaten
+ * Soul Pickle - Hides nearby players' health bars (ability)
+ * Consequence: Levitation effect when eaten
  */
 public class SoulPickle extends EternalPickleItem{
     public SoulPickle(Settings settings) {
