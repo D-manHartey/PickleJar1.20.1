@@ -4,10 +4,13 @@ import net.dman.thepicklejar.block.ModBlocks;
 import net.dman.thepicklejar.block.entity.ModBlockEntities;
 import net.dman.thepicklejar.block.entity.renderer.GiardinieraAltarBlockEntityRenderer;
 import net.dman.thepicklejar.event.KeyEventHandler;
+import net.dman.thepicklejar.particle.BirdParticle;
+import net.dman.thepicklejar.particle.ModParticles;
 import net.dman.thepicklejar.screen.GiardinieraAltarScreen;
 import net.dman.thepicklejar.screen.ModScreenHandlers;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
@@ -27,6 +30,8 @@ public class ThePickleJarClient implements ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.GIARDINIERA_ALTAR_SCREEN_HANDLER, GiardinieraAltarScreen::new);
 
         BlockEntityRendererFactories.register(ModBlockEntities.GIARDINIERA_ALTAR_BLOCK_ENTITY, GiardinieraAltarBlockEntityRenderer::new);
+
+        ParticleFactoryRegistry.getInstance().register(ModParticles.BIRD, BirdParticle.Factory::new);
 
         ModKeybindings.registerKeybindings();
 

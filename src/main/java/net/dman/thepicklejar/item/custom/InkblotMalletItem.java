@@ -2,6 +2,7 @@ package net.dman.thepicklejar.item.custom;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import net.dman.thepicklejar.effect.ModEffects;
 import net.dman.thepicklejar.sound.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -11,6 +12,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
@@ -28,24 +30,25 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class InkblotMalletItem extends SwordItem implements Vanishable {
+    private static final double MINIMUM_SLAM_HEIGHT = 6.0D;
+    private static final int PANCAKED_DURATION = 20 * 8;
     private final float attackDamage;
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
-    public InkblotMalletItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
+    public InkblotMalletItem(ToolMaterial toolMaterial, int attackDamage,
+                             float attackSpeed, Settings settings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
-        this.attackDamage = (float) attackDamage + toolMaterial.getAttackDamage();
-        ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(
-                EntityAttributes.GENERIC_ATTACK_DAMAGE,
-                new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", 9.5, EntityAttributeModifier.Operation.ADDITION)
-        );
-        builder.put(
-                EntityAttributes.GENERIC_ATTACK_SPEED,
-                new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", -3.2F, EntityAttributeModifier.Operation.ADDITION)
-        );
+        this.attackDamage = attackDamage + toolMaterial.getAttackDamage();
+        ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier>
+                builder = ImmutableMultimap.builder();
+        builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID,
+                        "Weapon modifier", 8.5, EntityAttributeModifier.Operation.ADDITION));
+        builder.put(EntityAttributes.GENERIC_ATTACK_SPEED,
+                new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID,
+                        "Weapon modifier", -3.2F, EntityAttributeModifier.Operation.ADDITION));
         this.attributeModifiers = builder.build();
     }
-
 
     public float getAttackDamage() {
         return this.attackDamage;
@@ -68,29 +71,34 @@ public class InkblotMalletItem extends SwordItem implements Vanishable {
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (!attacker.getWorld().isClient) {
-            SoundEvent[] hitSounds = {
+            SoundEvent[] sounds = {
                     ModSounds.INKBLOT_MALLET_HIT_1,
                     ModSounds.INKBLOT_MALLET_HIT_2,
                     ModSounds.INKBLOT_MALLET_HIT_3
             };
-
             Random random = attacker.getRandom();
-            SoundEvent soundToPlay = hitSounds[random.nextInt(hitSounds.length)];
-
             attacker.getWorld().playSound(null, target.getX(), target.getY(), target.getZ(),
-                    soundToPlay, SoundCategory.PLAYERS, 1.0f, 1.0f);
+                    sounds[random.nextInt(sounds.length)],
+                    SoundCategory.PLAYERS, 1.0f, 1.0f);
+
+            if (attacker.getY() - target.getY() >= MINIMUM_SLAM_HEIGHT) {
+                target.addStatusEffect(new StatusEffectInstance(ModEffects.PANCAKED,
+                        PANCAKED_DURATION, 0, false, true, true));
+            }
         }
 
-        stack.damage(1, attacker, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
+        stack.damage(1, attacker, e -> e.sendEquipmentBreakStatus
+                (EquipmentSlot.MAINHAND));
         return true;
     }
 
     @Override
-    public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
+    public boolean postMine(ItemStack stack, World world, BlockState state,
+                            BlockPos pos, LivingEntity miner) {
         if (state.getHardness(world, pos) != 0.0F) {
-            stack.damage(2, miner, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
+            stack.damage(2, miner, e -> e.sendEquipmentBreakStatus
+                    (EquipmentSlot.MAINHAND));
         }
-
         return true;
     }
 
@@ -111,7 +119,6 @@ public class InkblotMalletItem extends SwordItem implements Vanishable {
     }
 
     public int getEnchantability() {
-
         return 1;
 
     }

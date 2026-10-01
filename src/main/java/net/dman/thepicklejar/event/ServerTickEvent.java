@@ -8,7 +8,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 
 public class ServerTickEvent {
     public static void registerEvents() {
-        ServerTickEvents.END_WORLD_TICK.register(server -> {
+        ServerTickEvents.END_SERVER_TICK.register(server -> {
             MobDespawnTracker.tickDespawnTimers(server);
 
             // Check inventory penalties and apply cooldown ticks for each player

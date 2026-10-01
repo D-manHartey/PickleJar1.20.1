@@ -22,6 +22,7 @@ public class ModItemGroups {
                         entries.add(ModItems.RADIOACTIVE_PICKLOLIUM);
                         entries.add(ModItems.RAW_CHUTNEY);
                         entries.add(ModItems.MOLTEN_CHUTNEY);
+                        entries.add(ModItems.EXPIRED_CHUTNEY);
 
                         // Weapons
                         entries.add(ModItems.INKBLOT_MALLET);

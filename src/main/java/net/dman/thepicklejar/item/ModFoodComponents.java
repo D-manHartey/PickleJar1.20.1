@@ -24,6 +24,10 @@ public class ModFoodComponents {
     public static final FoodComponent CUP_O_GREEN_TEA = new FoodComponent.Builder().hunger(2).saturationModifier(4.5f)
             .statusEffect(new StatusEffectInstance(StatusEffects.HASTE, 2000), 1.0f).alwaysEdible().build();
 
+    public static final FoodComponent EXPIRED_CHUTNEY = new FoodComponent.Builder().hunger(1).saturationModifier(1.0F)
+            .statusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 20 * 30, 2), 1.0F)
+            .statusEffect(new StatusEffectInstance(StatusEffects.POISON, 20 * 30, 0), 1.0F).alwaysEdible().build();
+
     // ==================== ETERNAL PICKLES ====================
     // Consequences are handled in EternalPickleItem.finishUsing()
     // These FoodComponents only define hunger/saturation restoration

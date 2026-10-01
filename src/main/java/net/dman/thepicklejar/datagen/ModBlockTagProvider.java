@@ -22,7 +22,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.PICKLOLIUM_DEPOSIT)
                 .add(ModBlocks.PICKLOLIUM_BLOCK)
                 .add(ModBlocks.CHUTNEY_BLOCK)
-                .add(ModBlocks.CHUTNEY_DEPOSIT);
+                .add(ModBlocks.CHUTNEY_DEPOSIT)
+                .add(ModBlocks.GIARDINIERA_ALTAR);
 
         getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL)
                 .add(ModBlocks.PICKLOLIUM_DEPOSIT)
@@ -34,13 +35,15 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.PICKLOLIUM_DEPOSIT)
                 .add(ModBlocks.PICKLOLIUM_BLOCK)
                 .add(ModBlocks.CHUTNEY_BLOCK)
-                .add(ModBlocks.CHUTNEY_DEPOSIT);
+                .add(ModBlocks.CHUTNEY_DEPOSIT)
+                .add(ModBlocks.GIARDINIERA_ALTAR);
 
         getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.PICKLOLIUM_DEPOSIT)
                 .add(ModBlocks.PICKLOLIUM_BLOCK)
                 .add(ModBlocks.CHUTNEY_BLOCK)
-                .add(ModBlocks.CHUTNEY_DEPOSIT);
+                .add(ModBlocks.CHUTNEY_DEPOSIT)
+                .add(ModBlocks.GIARDINIERA_ALTAR);
 
         getOrCreateTagBuilder(TagKey.of(RegistryKeys.BLOCK, new Identifier("fabric", "needs_tool_level_4")))
                 .add(ModBlocks.PICKLOLIUM_DEPOSIT)

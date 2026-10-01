@@ -3,32 +3,25 @@ package net.dman.thepicklejar.event;
 import net.dman.thepicklejar.ModKeybindings;
 import net.dman.thepicklejar.item.ModItems;
 import net.dman.thepicklejar.item.custom.EternalPickleItem;
-import net.dman.thepicklejar.network.ActivateAbilityPacket;
+import net.dman.thepicklejar.network.client.ClientPackets;
 import net.dman.thepicklejar.screen.EternalPickleBowlSelectionScreen;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Hand;
 
-/**
- * KeyEventHandler - Handles keybind events for abilities and GUI
- * FIXED: Uses ModKeybindings instead of registering duplicate keybindings
- * This prevents the "Attempted to register two key bindings with equal ID" error
- */
-public class KeyEventHandler {
+public final class KeyEventHandler {
+    private static boolean wasAbilityKeyPressed;
+    private static boolean wasBowlKeyPressed;
 
-    private static boolean wasAbilityKeyPressed = false;
-    private static boolean wasBowlKeyPressed = false;
+    private KeyEventHandler() {
+    }
 
-    /**
-     * Register keybinding event listeners
-     * NOTE: Keybindings are already registered in ModKeybindings.java
-     * This method only registers the event handlers, NOT the keybindings themselves
-     */
     public static void registerKeyEvents() {
-        // Register client tick event to check for key presses
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             // Check ability activation key (V)
-            if (ModKeybindings.ACTIVATE_ABILITY_KEY != null && ModKeybindings.ACTIVATE_ABILITY_KEY.isPressed()) {
+            if (ModKeybindings.ACTIVATE_ABILITY_KEY != null
+                    && ModKeybindings.ACTIVATE_ABILITY_KEY.isPressed()) {
                 if (!wasAbilityKeyPressed) {
                     handleAbilityKeyPress(client);
                     wasAbilityKeyPressed = true;
@@ -38,7 +31,8 @@ public class KeyEventHandler {
             }
 
             // Check bowl GUI key (B)
-            if (ModKeybindings.OPEN_BOWL_GUI_KEY != null && ModKeybindings.OPEN_BOWL_GUI_KEY.isPressed()) {
+            if (ModKeybindings.OPEN_BOWL_GUI_KEY != null
+                    && ModKeybindings.OPEN_BOWL_GUI_KEY.isPressed()) {
                 if (!wasBowlKeyPressed) {
                     handleBowlGuiKeyPress(client);
                     wasBowlKeyPressed = true;
@@ -49,37 +43,32 @@ public class KeyEventHandler {
         });
     }
 
-    /**
-     * Handle ability activation key press (V key)
-     */
+    //Handle ability activation key press (V key)
     private static void handleAbilityKeyPress(MinecraftClient client) {
         if (client.player == null) return;
-
-        ItemStack heldItem = client.player.getMainHandStack();
-        if (heldItem.isEmpty()) return;
-
-        // Check if held item is an eternal pickle or bowl
-        if (heldItem.getItem() instanceof EternalPickleItem ||
-                heldItem.getItem() == ModItems.ETERNAL_PICKLE_BOWL) {
-
-            // Send packet to server to activate ability
-            ActivateAbilityPacket packet = new ActivateAbilityPacket(heldItem);
-            packet.send();
+        if (isActivatable(client.player.getMainHandStack())) {
+            ClientPackets.sendAbilityActivation(Hand.MAIN_HAND);
+        } else if (isActivatable(client.player.getOffHandStack())) {
+            ClientPackets.sendAbilityActivation(Hand.OFF_HAND);
         }
     }
 
-    /**
-     * Handle bowl GUI key press (B key)
-     */
+    //Handle bowl GUI key press (B key)
     private static void handleBowlGuiKeyPress(MinecraftClient client) {
-        if (client.player == null) return;
-
-        ItemStack heldItem = client.player.getMainHandStack();
-
-        // Check if held item is the eternal pickle bowl
-        if (heldItem.getItem() == ModItems.ETERNAL_PICKLE_BOWL) {
-            // Open the bowl selection screen
+        if (client.player != null && findBowlHand(client) != null) {
             client.setScreen(new EternalPickleBowlSelectionScreen());
         }
+    }
+
+    private static boolean isActivatable(ItemStack stack) {
+        return stack.getItem() instanceof EternalPickleItem || stack.isOf(ModItems.ETERNAL_PICKLE_BOWL);
+    }
+
+    private static Hand findBowlHand(MinecraftClient client) {
+        if (client.player.getMainHandStack().isOf(ModItems.ETERNAL_PICKLE_BOWL))
+            return Hand.MAIN_HAND;
+        if (client.player.getOffHandStack().isOf(ModItems.ETERNAL_PICKLE_BOWL))
+            return Hand.OFF_HAND;
+        return null;
     }
 }

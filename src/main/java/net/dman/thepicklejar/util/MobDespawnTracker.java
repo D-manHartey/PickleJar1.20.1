@@ -16,10 +16,10 @@ import java.util.*;
 public final class MobDespawnTracker {
 
     public static final long DESPAWN_DURATION_MS = 120_000L;
-    private static final String REALITY_MOB_TAG = "thepicklejar_reality_mob";
-    private static final String OWNER_TAG_PREFIX = "thepicklejar_owner_";
-    private static final Map<UUID, Long> trackedMobs = new HashMap<>();
-    private static final Map<UUID, UUID> mobOwners = new HashMap<>();
+    private static final String REALITY_MOB_TAG = "the-pickle-jar_reality_mob";
+    private static final String OWNER_TAG_PREFIX = "the-pickle-jar_owner_";
+    private static final Map<UUID, Long> TRACKED_MOBS = new HashMap<>();
+    private static final Map<UUID, UUID> MOB_OWNERS = new HashMap<>();
 
     private MobDespawnTracker() {
     }
@@ -77,6 +77,11 @@ public final class MobDespawnTracker {
     }
 
     public static void clearAllTrackedMobs() {
+        TRACKED_MOBS.clear();
+        MOB_OWNERS.clear();
+    }
+
+    public static int getTrackedMobCount() {
         return TRACKED_MOBS.size();
     }
 
@@ -116,10 +121,16 @@ public final class MobDespawnTracker {
                 }
             }
         }
-        if (mob instanceof VexEntity vex && vex.getOwner() instanceof MobEntity ownerMob) {
-            ownerUuid = resolveOwnerUuid(ownerMob);
-            if (ownerUuid != null) MOB_OWNERS.put(mob.getUuid(), ownerUuid);
+        if (mob instanceof VexEntity vex) {
+            MobEntity ownerMob = vex.getOwner();
 
+            if (ownerMob != null) {
+                ownerUuid = resolveOwnerUuid(ownerMob);
+
+                if (ownerUuid != null) {
+                    MOB_OWNERS.put(mob.getUuid(), ownerUuid);
+                }
+            }
         }
         return ownerUuid;
     }

@@ -71,7 +71,7 @@ public class ModBlocks {
 
     // Ultimate Workstation
     public static final Block GIARDINIERA_ALTAR = registerBlock("giardiniera_altar",
-            new GiardinieraAltarBlock(FabricBlockSettings.copyOf(Blocks.ENCHANTING_TABLE).nonOpaque()));
+            new GiardinieraAltarBlock(FabricBlockSettings.copyOf(Blocks.ENCHANTING_TABLE).requiresTool().nonOpaque()));
 
 
     private static Block registerBlock(String name, Block block) {

@@ -9,15 +9,20 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
+import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
-import net.minecraft.loot.condition.AnyOfLootCondition;
-import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
+import net.minecraft.loot.condition.*;
+import net.minecraft.loot.entry.AlternativeEntry;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.entry.LootPoolEntry;
 import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
+import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
+import net.minecraft.predicate.NumberRange;
 import net.minecraft.predicate.StatePredicate;
+import net.minecraft.predicate.item.EnchantmentPredicate;
+import net.minecraft.predicate.item.ItemPredicate;
 
 public class ModLootTableProvider extends FabricBlockLootTableProvider {
     public ModLootTableProvider(FabricDataOutput dataOutput) {
@@ -45,7 +50,8 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
 
         addDrop(ModBlocks.PICKLOLIUM_DEPOSIT, copperLikeOreDrops(ModBlocks.PICKLOLIUM_DEPOSIT, ModItems.RAW_PICKLOLIUM));
-        addDrop(ModBlocks.CHUTNEY_DEPOSIT, copperLikeOreDrops(ModBlocks.CHUTNEY_DEPOSIT, ModItems.RAW_CHUTNEY));
+        addDrop(ModBlocks.CHUTNEY_DEPOSIT, chutneyDepositDrops());
+
 
         BlockStatePropertyLootCondition.Builder builder = BlockStatePropertyLootCondition.builder(ModBlocks.PEANUT_CROP).properties(StatePredicate.Builder.create()
                 .exactMatch(PeanutButterCropBlock.AGE, 5));
@@ -71,5 +77,31 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
                                         .builder(UniformLootNumberProvider
                                                 .create(1.0F, 2.0F)))
                                 .apply(ApplyBonusLootFunction.oreDrops(Enchantments.FORTUNE))));
+    }
+
+    private LootTable.Builder chutneyDepositDrops() {
+        LootPool.Builder rawOrSilkPool = LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                .with(AlternativeEntry.builder(
+                        ItemEntry.builder(ModBlocks.CHUTNEY_DEPOSIT).conditionally(MatchToolLootCondition.builder(
+                                ItemPredicate.Builder.create().enchantment(
+                                        new EnchantmentPredicate(Enchantments.SILK_TOUCH,
+                                                NumberRange.IntRange.atLeast(1))))),
+                        ItemEntry.builder(ModItems.RAW_CHUTNEY).conditionally(InvertedLootCondition.builder(
+                                MatchToolLootCondition.builder(ItemPredicate.Builder.create().enchantment(
+                                        new EnchantmentPredicate(Enchantments.SILK_TOUCH,
+                                                NumberRange.IntRange.atLeast(1))))))
+                                .apply(SetCountLootFunction.builder(
+                                        UniformLootNumberProvider.create(1.0F, 2.0F)))
+                                .apply(ApplyBonusLootFunction.oreDrops(Enchantments.FORTUNE))));
+
+        LootPool.Builder expiredBonusPool = LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                .with(ItemEntry.builder(ModItems.EXPIRED_CHUTNEY)
+                        .conditionally(RandomChanceLootCondition.builder(0.35F))
+                        .conditionally(InvertedLootCondition.builder(
+                                MatchToolLootCondition.builder(ItemPredicate.Builder.create().enchantment(
+                                        new EnchantmentPredicate(Enchantments.SILK_TOUCH,
+                                                NumberRange.IntRange.atLeast(1)))))));
+
+        return LootTable.builder().pool(rawOrSilkPool).pool(expiredBonusPool);
     }
 }

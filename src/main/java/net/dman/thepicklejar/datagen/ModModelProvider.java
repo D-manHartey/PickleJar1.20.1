@@ -59,6 +59,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.TOON_STEEL, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAW_CHUTNEY, Models.GENERATED);
         itemModelGenerator.register(ModItems.MOLTEN_CHUTNEY, Models.GENERATED);
+        itemModelGenerator.register(ModItems.EXPIRED_CHUTNEY, Models.GENERATED);
 
         // WIP stuff
         itemModelGenerator.register(ModItems.BROKEN_TELEPHONE, Models.GENERATED);

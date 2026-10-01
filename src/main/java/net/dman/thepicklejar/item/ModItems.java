@@ -23,6 +23,7 @@ public class ModItems {
     public static final Item RADIOACTIVE_PICKLOLIUM = registerItem("rad_pick", new RadioactivePickItem(new FabricItemSettings()));
     public static final Item RAW_CHUTNEY = registerItem("raw_chutney", new Item(new FabricItemSettings()));
     public static final Item MOLTEN_CHUTNEY = registerItem("molten_chutney", new Item(new FabricItemSettings()));
+    public static final Item EXPIRED_CHUTNEY = registerItem("expired_chutney", new Item(new FabricItemSettings().food(ModFoodComponents.EXPIRED_CHUTNEY)));
 
     // WIP stuff
     public static final Item BROKEN_TELEPHONE = registerItem("broken_telephone", new BrokenTelephoneItem(new FabricItemSettings()));

@@ -6,12 +6,18 @@
 	"mixins": [
 		"ExampleMixin",
       "PlayerEntityMixin",
-      "LivingEntityMixin"
+      "LivingEntityMixin",
+		"RealityMobLootMixin"
 	],
   "client": [
     "ItemRendererAccessor",
+	  "GameRendererAccessor",
     "ItemRendererMixin",
-    "ModelLoaderMixin"
+    "ModelLoaderMixin",
+	  "ArmorFeatureRendererMixin",
+	  "LivingEntityRendererMixin",
+	  "InGameHudMixin",
+	  "KeyboardInputMixin"
   ],
   "server": [],
 	"injectors": {

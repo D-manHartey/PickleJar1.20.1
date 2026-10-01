@@ -1,7 +1,7 @@
 package net.dman.thepicklejar.screen;
 
 import net.dman.thepicklejar.ThePickleJar;
-import net.dman.thepicklejar.network.SetBowlAbilityPacket;
+import net.dman.thepicklejar.network.client.ClientPackets;
 import net.dman.thepicklejar.util.PlayerAbilityManager;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -139,7 +139,7 @@ public class EternalPickleBowlSelectionScreen extends Screen {
                 if (mouseX >= slotX && mouseX < slotX + 16 && mouseY >= slotY && mouseY < slotY + 16) {
                     // Set the selected ability
                     PlayerAbilityManager.setSelectedAbilityIndex(i);
-                    new SetBowlAbilityPacket(i).send();
+                    ClientPackets.sendBowlAbilitySelection(i);
 
                     // Mark as selected and show feedback
                     selectedSlot = i;

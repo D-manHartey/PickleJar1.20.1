@@ -1,5 +1,6 @@
 package net.dman.thepicklejar.network;
 
+import net.dman.thepicklejar.item.ModItems;
 import net.dman.thepicklejar.util.PlayerAbilityManager;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.FabricPacket;
@@ -8,10 +9,10 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
 
-public class SetBowlAbilityPacket implements FabricPacket {
-    public static final Identifier ID = new Identifier("thepicklejar", "set_bowl_ability");
-    public static final PacketType<SetBowlAbilityPacket> TYPE = PacketType.create(ID,
-            SetBowlAbilityPacket::new);
+public final class SetBowlAbilityPacket implements FabricPacket {
+    public static final Identifier ID = new Identifier("the-pickle-jar", "set_bowl_ability");
+    public static final PacketType<SetBowlAbilityPacket> TYPE = PacketType.create
+            (ID, SetBowlAbilityPacket::new);
 
     private final int abilityIndex;
 
@@ -33,14 +34,15 @@ public class SetBowlAbilityPacket implements FabricPacket {
         return TYPE;
     }
 
-    public void send() {
-        ClientPlayNetworking.send(this);
-    }
-
     public static void register() {
-        ServerPlayNetworking.registerGlobalReceiver(TYPE, (packet, player, responseSender) -> {
-            player.getServer().execute(() -> PlayerAbilityManager.setSelectedAbility(player,
-                    packet.abilityIndex));
-        });
+        ServerPlayNetworking.registerGlobalReceiver(TYPE,
+                (packet, player, responseSender) ->
+            player.getServer().execute(() -> {
+                boolean holdingBowl = player.getMainHandStack().isOf(ModItems.ETERNAL_PICKLE_BOWL)
+                        || player.getOffHandStack().isOf(ModItems.ETERNAL_PICKLE_BOWL);
+                if (holdingBowl && packet.abilityIndex >= 0 && packet.abilityIndex < 6) {
+                    PlayerAbilityManager.setSelectedAbility(player, packet.abilityIndex);
+                }
+        }));
     }
 }
