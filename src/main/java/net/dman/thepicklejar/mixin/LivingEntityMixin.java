@@ -33,4 +33,13 @@ public abstract class LivingEntityMixin {
             ci.cancel();
         }
     }
+
+    @Inject(method = "updatePotionVisibility", at = @At("TAIL"))
+    private void thepicklejar$applyRealityCloakVisibility(CallbackInfo ci) {
+        LivingEntity self = (LivingEntity) (Object) this;
+
+        if (self.hasStatusEffect(ModEffects.REALITY_CLOAK)) {
+            self.setInvisible(true);
+        }
+    }
 }

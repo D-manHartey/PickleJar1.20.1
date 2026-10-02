@@ -10,19 +10,4 @@ public final class RealityCloakEffect extends StatusEffect {
     public RealityCloakEffect() {
         super(StatusEffectCategory.NEUTRAL, 0xc60404);
     }
-
-    @Override
-    public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
-        super.onApplied(entity, attributes, amplifier);
-        entity.setInvisible(true);
-    }
-
-    @Override
-    public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
-        super.onRemoved(entity, attributes, amplifier);
-
-        if (!entity.hasStatusEffect(StatusEffects.INVISIBILITY)) {
-            entity.setInvisible(false);
-        }
-    }
 }

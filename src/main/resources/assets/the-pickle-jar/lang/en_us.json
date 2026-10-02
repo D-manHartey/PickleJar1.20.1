@@ -70,7 +70,9 @@
   "entity.minecraft.villager.zany_worshipper": "Zany Worshipper",
 
   "effect.the-pickle-jar.pancaked": "Pancaked",
-  "effect.the-pickle-jar.circlingbirdies": "Circlin' Birdies",
+  "effect.the-pickle-jar.circling_birdies": "Circlin' Birdies",
+  "effect.the-pickle-jar.reality_cloak": "Reality Cloak",
+  "effect.the-pickle-jar.soul_veil": "Soul Veil",
 
   "tooltip.the-pickle-jar.broken_telephone.tooltip": "Something powerful is inside, unusable...for now",
   "tooltip.the-pickle-jar.toon_steel.tooltip": "Listen closely, there's raggidy music inside",
