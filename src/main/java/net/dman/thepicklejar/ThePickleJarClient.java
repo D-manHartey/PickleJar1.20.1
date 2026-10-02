@@ -3,6 +3,7 @@ package net.dman.thepicklejar;
 import net.dman.thepicklejar.block.ModBlocks;
 import net.dman.thepicklejar.block.entity.ModBlockEntities;
 import net.dman.thepicklejar.block.entity.renderer.GiardinieraAltarBlockEntityRenderer;
+import net.dman.thepicklejar.client.ClientEffectHandler;
 import net.dman.thepicklejar.event.KeyEventHandler;
 import net.dman.thepicklejar.particle.BirdParticle;
 import net.dman.thepicklejar.particle.ModParticles;
@@ -34,7 +35,8 @@ public class ThePickleJarClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticles.BIRD, BirdParticle.Factory::new);
 
         ModKeybindings.registerKeybindings();
-
         KeyEventHandler.registerKeyEvents();
+        ClientEffectHandler.register();
+
     }
 }

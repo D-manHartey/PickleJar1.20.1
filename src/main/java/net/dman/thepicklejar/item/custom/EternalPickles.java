@@ -37,6 +37,7 @@ import java.util.*;
  */
 public final class EternalPickles {
     public static final int ABILITY_COOLDOWN = 20 * 60;
+    private static final String GLOBAL_PICKLE_COOLDOWN_KEY = "eternal_pickle_ability";
     private static final double POWER_FORWARD_RANGE = 18.0D;
     private static final double POWER_FORWARD_RADIUS = 2.5D;
     private static final float POWER_FORWARD_DAMAGE = 10.0F;
@@ -49,10 +50,6 @@ public final class EternalPickles {
     private EternalPickles() {
     }
 
-    /**
-     * Trigger ability for an item
-     * Called when player presses V key with an item in hand
-     */
     public static void triggerAbilityForItem(ItemStack itemStack, PlayerEntity player) {
         if (!(player instanceof ServerPlayerEntity serverPlayer) || player.getWorld().isClient) {
             return;
@@ -79,10 +76,11 @@ public final class EternalPickles {
     }
 
     private static void triggerAbility(ServerPlayerEntity player, int abilityIndex) {
-        String cooldownKey = cooldownKey(abilityIndex);
         String abilityName = abilityName(abilityIndex);
-            if (isOnCooldown(player, cooldownKey)) {
-                int remainingSeconds = Math.max(1, getRemainingCooldown(player, cooldownKey) / 20);
+
+            if (isOnCooldown(player, GLOBAL_PICKLE_COOLDOWN_KEY)) {
+                int remainingSeconds = Math.max(1, getRemainingCooldown
+                        (player, GLOBAL_PICKLE_COOLDOWN_KEY) / 20);
                 player.sendMessage(Text.literal("§cPickle Recharging! "
                                 + remainingSeconds + "s remaining"), true);
                 return;
@@ -90,7 +88,7 @@ public final class EternalPickles {
             if (!executeAbility(player, abilityIndex)) {
                 return;
             }
-            setCooldown(player, abilityName);
+            setCooldown(player, GLOBAL_PICKLE_COOLDOWN_KEY);
             player.sendMessage(Text.literal("§a" + abilityName +
                             " Mobilized!"), true);
         }
@@ -114,18 +112,6 @@ public final class EternalPickles {
           case 4 -> "Time Pickle";
           case 5 -> "Space Pickle";
             default -> "Unknown";
-        };
-    }
-
-    private static String cooldownKey(int abilityIndex) {
-        return switch (abilityIndex) {
-            case 0 -> "power_pickle";
-            case 1 -> "mind_pickle";
-            case 2 -> "reality_pickle";
-            case 3 -> "soul_pickle";
-            case 4 -> "time_pickle";
-            case 5 -> "space_pickle";
-            default -> "unknown";
         };
     }
 
@@ -197,10 +183,7 @@ public final class EternalPickles {
     private static void triggerRealityAbility(ServerPlayerEntity player) {
         final int duration = 4_800;
         // ABILITY: Spawn 20 hostile mobs around the player & Invisibility even with armor
-        player.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, 4800, 0, false, false, false));
-        spawnRealityMobs(player);
-
-        player.addStatusEffect(new StatusEffectInstance(ModEffects.REALITY_CLOAK, 4800, 0, false, false, false));
+        player.addStatusEffect(new StatusEffectInstance(ModEffects.REALITY_CLOAK, REALITY_DURATION, 0, false, false, false));
 
         spawnRealityMobs(player);
     }
@@ -211,9 +194,8 @@ public final class EternalPickles {
         double maxDistanceSquared = SOUL_RADIUS * SOUL_RADIUS;
 
         for (ServerPlayerEntity target : world.getPlayers()) {
-            if (target.squaredDistanceTo(player) <= maxDistanceSquared) {
-                target.addStatusEffect(new StatusEffectInstance(
-                        ModEffects.SOUL_VEIL, SOUL_VEIL_DURATION,
+            if (target != player && target.squaredDistanceTo(player) <= maxDistanceSquared) {
+                target.addStatusEffect(new StatusEffectInstance(ModEffects.SOUL_VEIL, SOUL_VEIL_DURATION,
                         0, false, false, false
                 ));
             }
@@ -242,16 +224,18 @@ public final class EternalPickles {
         for (int i = 0; i < 20; i++) {
             double angle = Math.PI * 2.0D * i / 20.0D;
             MobEntity mob = createRealityMob(world, player.getRandom().nextInt(3));
-            mob.refreshPositionAndAngles(playerPos.x + Math.cos(angle) * 6.0D,
-                    playerPos.y, playerPos.z + Math.sin(angle) * 6.0D, player.getRandom
-                            ().nextFloat() * 360.0F, 0.0F);
+
+            mob.refreshPositionAndAngles
+                    (playerPos.x + Math.cos(angle) * 6.0D,
+                    playerPos.y, playerPos.z + Math.sin(angle) * 6.0D,
+                            player.getRandom().nextFloat() * 360.0F, 0.0F);
+
             if (world.spawnEntity(mob)) {
                 mob.setPersistent();
                 mob.disableExperienceDropping();
                 MobDespawnTracker.trackMobForDespawn(mob, player.getUuid());
             }
         }
-        // Send message to player
         player.sendMessage(net.minecraft.text.Text.literal("§5Reality Pickle - Illusions Materialized!"),
                 true);
     }
@@ -264,9 +248,6 @@ public final class EternalPickles {
         };
     }
 
-    /**
-     * Get the block the player is looking at
-     */
     private static BlockPos getTargetBlock(PlayerEntity player) {
         HitResult raycast = player.raycast(100, 0, false);
 

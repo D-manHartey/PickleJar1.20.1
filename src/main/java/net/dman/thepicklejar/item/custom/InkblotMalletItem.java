@@ -30,8 +30,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class InkblotMalletItem extends SwordItem implements Vanishable {
-    private static final double MINIMUM_SLAM_HEIGHT = 6.0D;
-    private static final int PANCAKED_DURATION = 20 * 8;
+    private static final float MINIMUM_SLAM_FALL_DISTANCE = 6.0F;
+    private static final int PANCAKED_DURATION = 5 * 8;
     private final float attackDamage;
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
@@ -81,7 +81,8 @@ public class InkblotMalletItem extends SwordItem implements Vanishable {
                     sounds[random.nextInt(sounds.length)],
                     SoundCategory.PLAYERS, 1.0f, 1.0f);
 
-            if (attacker.getY() - target.getY() >= MINIMUM_SLAM_HEIGHT) {
+            if (attacker instanceof PlayerEntity player && player.fallDistance >=
+            MINIMUM_SLAM_FALL_DISTANCE && player.getVelocity().y < 0.0D) {
                 target.addStatusEffect(new StatusEffectInstance(ModEffects.PANCAKED,
                         PANCAKED_DURATION, 0, false, true, true));
             }

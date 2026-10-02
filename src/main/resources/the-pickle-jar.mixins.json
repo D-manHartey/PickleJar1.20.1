@@ -17,7 +17,8 @@
 	  "ArmorFeatureRendererMixin",
 	  "LivingEntityRendererMixin",
 	  "InGameHudMixin",
-	  "KeyboardInputMixin"
+	  "KeyboardInputMixin",
+	  "PlayerEntityRendererMixin"
   ],
   "server": [],
 	"injectors": {

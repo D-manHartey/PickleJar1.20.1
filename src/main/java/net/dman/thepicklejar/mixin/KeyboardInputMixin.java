@@ -14,8 +14,9 @@ public abstract class KeyboardInputMixin {
     @Inject(method = "tick", at = @At("TAIL"))
     private void thepicklejar$reverseBirdiesMovement(
             boolean slowDown, float slowDownFactor, CallbackInfo ci) {
-        if (MinecraftClient.getInstance().player != null
-        || !MinecraftClient.getInstance().player.hasStatusEffect(ModEffects.CIRCLING_BIRDIES)) {
+        MinecraftClient client = MinecraftClient.getInstance();
+
+        if (client.player == null || !client.player.hasStatusEffect(ModEffects.CIRCLING_BIRDIES)) {
             return;
         }
 
