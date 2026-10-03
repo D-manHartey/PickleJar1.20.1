@@ -24,7 +24,8 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.PICKLOLIUM_DEPOSIT);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CHUTNEY_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CHUTNEY_DEPOSIT);
-        BlockStateModelGenerator.BlockTexturePool PhilPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.PHIL_BLOCK);
+        BlockStateModelGenerator.BlockTexturePool
+                PhilPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.PHIL_BLOCK);
 
         // Phil Collection
         PhilPool.button(ModBlocks.PHIL_BUTTON);

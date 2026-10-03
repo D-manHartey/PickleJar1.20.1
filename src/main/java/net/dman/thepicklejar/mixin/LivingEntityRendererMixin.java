@@ -12,9 +12,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntityRenderer.class)
 public abstract class LivingEntityRendererMixin {
-    @Inject(method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
+    @Inject(method = "render",
             at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/render/entity/LivingEntityRenderer;setupTransforms(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/client/util/math/MatrixStack;FFF)V",
+            target = "Lnet/minecraft/client/render/entity/LivingEntityRenderer;scale(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/client/util/math/MatrixStack;F)V",
             shift = At.Shift.AFTER))
     private void thepicklejar$flattenPancakedEntity(
             LivingEntity entity,
@@ -26,6 +26,7 @@ public abstract class LivingEntityRendererMixin {
             CallbackInfo ci
     ) {
         if (entity.hasStatusEffect(ModEffects.PANCAKED)) {
+            matrices.translate(0.0D, 0.75D, 0.0D);
             matrices.scale(1.8F, 0.12F, 1.8F);
         }
     }
