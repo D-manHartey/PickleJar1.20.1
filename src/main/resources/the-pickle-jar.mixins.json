@@ -5,17 +5,16 @@
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
 		"ExampleMixin",
-      "PlayerEntityMixin",
-      "LivingEntityMixin",
+		"PlayerEntityMixin",
+		"LivingEntityMixin",
+		"MobEntityMixin",
 		"RealityMobLootMixin"
 	],
   "client": [
-    "ItemRendererAccessor",
-	  "GameRendererAccessor",
-    "ItemRendererMixin",
-    "ModelLoaderMixin",
+	  "ItemRendererAccessor",
+	  "ItemRendererMixin",
+	  "ModelLoaderMixin",
 	  "ArmorFeatureRendererMixin",
-	  "LivingEntityRendererMixin",
 	  "InGameHudMixin",
 	  "KeyboardInputMixin"
   ],

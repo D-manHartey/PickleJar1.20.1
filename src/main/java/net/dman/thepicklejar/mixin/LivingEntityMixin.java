@@ -18,10 +18,11 @@ public abstract class LivingEntityMixin {
     private void thepicklejar$blockRealityOwnerDamage
             (DamageSource source, float amount,
              CallbackInfoReturnable<Boolean> cir) {
+
         LivingEntity target = (LivingEntity) (Object) this;
-        if (target instanceof PlayerEntity player && source.getAttacker()
-                instanceof MobEntity mob
-        && MobDespawnTracker.isRealityMobOwner(mob, player.getUuid())) {
+        if (target instanceof PlayerEntity player
+                && source.getAttacker() instanceof MobEntity mob
+                && MobDespawnTracker.isRealityMobOwner(mob, player.getUuid())) {
                 cir.setReturnValue(false);
             }
         }
@@ -31,15 +32,6 @@ public abstract class LivingEntityMixin {
         LivingEntity self = (LivingEntity) (Object) this;
         if (self.hasStatusEffect(ModEffects.PANCAKED)) {
             ci.cancel();
-        }
-    }
-
-    @Inject(method = "updatePotionVisibility", at = @At("TAIL"))
-    private void thepicklejar$applyRealityCloakVisibility(CallbackInfo ci) {
-        LivingEntity self = (LivingEntity) (Object) this;
-
-        if (self.hasStatusEffect(ModEffects.REALITY_CLOAK)) {
-            self.setInvisible(true);
         }
     }
 }

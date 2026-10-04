@@ -22,6 +22,15 @@ repositories {
         name = "TerraFormersMC"
         url "https://maven.terraformersmc.com/releases"
     }
+
+	// Pehkui's dependency
+	maven { url "https://jitpack.io" }
+
+	// Satin and Cardinal Components API
+	maven {
+		name = "Ladysnake Mods"
+		url = "https://maven.ladysnake.org/releases"
+	}
 }
 
 fabricApi {
@@ -38,6 +47,17 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	// Pehkui API
+	modApi("com.github.Virtuoel:Pehkui:${project.pehkui_version}") {
+		exclude group: "net.fabricmc.fabric-api"
+	}
+
+	// Cardinal Components API
+	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
+
+	// Satin API
+	modImplementation "org.ladysnake:satin:${project.satin_version}"
 
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:12.1.770"
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:12.1.770"

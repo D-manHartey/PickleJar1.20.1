@@ -11,6 +11,7 @@ public class ModEffects {
     public static final StatusEffect CIRCLING_BIRDIES = new CirclingBirdiesEffect();
     public static final StatusEffect REALITY_CLOAK = new RealityCloakEffect();
     public static final StatusEffect SOUL_VEIL = new SoulVeilEffect();
+    public static final StatusEffect BFFS = new BffsEffect();
 
     private ModEffects() {
 
@@ -26,6 +27,8 @@ public class ModEffects {
                 new Identifier("the-pickle-jar", "reality_cloak"), REALITY_CLOAK);
         Registry.register(Registries.STATUS_EFFECT,
                 new Identifier("the-pickle-jar", "soul_veil"), SOUL_VEIL);
+        Registry.register(Registries.STATUS_EFFECT,
+                new Identifier("the-pickle-jar", "bffs"), BFFS);
 
     }
 }

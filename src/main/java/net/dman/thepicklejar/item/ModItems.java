@@ -104,6 +104,11 @@ public class ModItems {
                     .food(ModFoodComponents.SPACE_PICKLE)
                     .maxCount(1)));
 
+    public static final Item FRIENDSHIP_PICKLE = registerItem("friendship_pickle",
+            new FriendshipPickleItem(new Item.Settings()
+                    .food(ModFoodComponents.FRIENDSHIP_PICKLE)
+                    .maxCount(5)));
+
     // Eternal Bowl
     public static final Item ETERNAL_BOWL = registerItem("eternal_bowl",
             new EternalBowlItem(new FabricItemSettings()));

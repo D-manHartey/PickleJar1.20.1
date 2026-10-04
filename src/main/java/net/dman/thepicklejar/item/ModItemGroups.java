@@ -94,6 +94,7 @@ public class ModItemGroups {
                         entries.add(ModItems.SPACE_PICKLE);
                         entries.add(ModItems.ETERNAL_BOWL);
                         entries.add(ModItems.ETERNAL_PICKLE_BOWL);
+                        entries.add(ModItems.FRIENDSHIP_PICKLE);
 
                     }).build());
 

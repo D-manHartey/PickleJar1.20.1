@@ -100,5 +100,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.ETERNAL_BOWL, Models.GENERATED);
         itemModelGenerator.register(ModItems.ETERNAL_PICKLE_BOWL, Models.GENERATED);
 
+        itemModelGenerator.register(ModItems.FRIENDSHIP_PICKLE, Models.GENERATED);
+
     }
 }

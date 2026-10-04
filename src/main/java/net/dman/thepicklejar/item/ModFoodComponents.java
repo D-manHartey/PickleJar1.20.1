@@ -6,9 +6,10 @@ import net.minecraft.item.FoodComponent;
 
 public class ModFoodComponents {
     // ==================== REGULAR FOOD ====================
-    public static final FoodComponent PICKLE = new FoodComponent.Builder().hunger(4).saturationModifier(2.5f)
+    public static final FoodComponent PICKLE = new FoodComponent.Builder().hunger(6).saturationModifier(2.5f)
             .statusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, 2700), 1.0f).alwaysEdible().build();
 
+    public static final FoodComponent FRIENDSHIP_PICKLE = new FoodComponent.Builder().hunger(3).saturationModifier(1.5F).alwaysEdible().build();
 
     public static final FoodComponent GOLDEN_PICKLE = new FoodComponent.Builder().hunger(6).saturationModifier(3.5f)
             .statusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, 2700), 1.0f)
