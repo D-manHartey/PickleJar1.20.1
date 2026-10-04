@@ -40,8 +40,8 @@ public class ThePickleJar implements ModInitializer {
         FuelRegistry.INSTANCE.add(ModItems.SALSA_SOUL, 5500);
 
         ModLootTableModifiers.modifyLootTables();
-        ModCustomTrades.registerCustomTrades();
 
+        ModCustomTrades.registerCustomTrades();
         ModVillagers.registerVillagers();
         ModSounds.registerSounds();
 
