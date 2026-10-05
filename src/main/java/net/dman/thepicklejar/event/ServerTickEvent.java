@@ -17,7 +17,7 @@ public final class ServerTickEvent {
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             MobDespawnTracker.tickDespawnTimers(server);
 
-            if (++bffsSweepTicks >= 20) {
+            if (++bffsSweepTicks >= 5) {
                 bffsSweepTicks = 0;
                 BffsTargeting.clearProtectedTargets(server);
             }

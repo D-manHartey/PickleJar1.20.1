@@ -8,6 +8,8 @@
 		"PlayerEntityMixin",
 		"LivingEntityMixin",
 		"MobEntityMixin",
+		"HoglinEntityMixin",
+		"WardenEntityMixin",
 		"RealityMobLootMixin"
 	],
   "client": [

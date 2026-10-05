@@ -1,6 +1,7 @@
 package net.dman.thepicklejar.mixin;
 
 import net.dman.thepicklejar.effect.ModEffects;
+import net.dman.thepicklejar.util.BffsTargeting;
 import net.dman.thepicklejar.util.MobDespawnTracker;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -15,17 +16,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
-    private void thepicklejar$blockRealityOwnerDamage
-            (DamageSource source, float amount,
-             CallbackInfoReturnable<Boolean> cir) {
-
+    private void thepicklejar$blockProtectedPlayerDamage(
+            DamageSource source,
+            float amount,
+             CallbackInfoReturnable<Boolean> cir
+    ) {
         LivingEntity target = (LivingEntity) (Object) this;
+
         if (target instanceof PlayerEntity player
-                && source.getAttacker() instanceof MobEntity mob
-                && MobDespawnTracker.isRealityMobOwner(mob, player.getUuid())) {
+                && source.getAttacker() instanceof MobEntity mob) {
+            if (MobDespawnTracker.isRealityMobOwner(mob, player.getUuid())
+                    || BffsTargeting.blocksTarget(mob, player)) {
                 cir.setReturnValue(false);
             }
         }
+    }
 
         @Inject(method = "jump", at = @At("HEAD"), cancellable = true)
     private void thepicklejar$blockPancakedMobJump(CallbackInfo ci) {

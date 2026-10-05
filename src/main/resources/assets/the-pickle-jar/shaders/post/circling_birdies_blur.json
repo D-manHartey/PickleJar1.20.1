@@ -1,17 +1,37 @@
 {
   "targets": [
-    "swap"
+    "picklejar_blur_swap"
   ],
   "passes": [
     {
-      "name": "blit",
+      "name": "the-pickle-jar:circling_birdies_blur",
       "intarget": "minecraft:main",
-      "outtarget": "swap"
+      "outtarget": "picklejar_blur_swap",
+      "uniforms": [
+        {
+          "name": "BlurDir",
+          "values": [1.0, 0.0]
+        },
+        {
+          "name": "Radius",
+          "values": [1.75]
+        }
+      ]
     },
     {
-      "name": "blit",
-      "intarget": "swap",
-      "outtarget": "minecraft:main"
+      "name": "the-pickle-jar:circling_birdies_blur",
+      "intarget": "picklejar_blur_swap",
+      "outtarget": "minecraft:main",
+      "uniforms": [
+        {
+          "name": "BlurDir",
+          "values": [0.0, 1.0]
+        },
+        {
+          "name": "Radius",
+          "values": [1.75]
+        }
+      ]
     }
   ]
 }
