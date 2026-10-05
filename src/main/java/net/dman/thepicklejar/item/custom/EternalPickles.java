@@ -1,10 +1,11 @@
 package net.dman.thepicklejar.item.custom;
 
+import net.dman.thepicklejar.component.ModComponents;
+import net.dman.thepicklejar.component.PicklePowerComponent;
 import net.dman.thepicklejar.effect.ModEffects;
 import net.dman.thepicklejar.event.EventListeners;
 import net.dman.thepicklejar.item.ModItems;
 import net.dman.thepicklejar.util.MobDespawnTracker;
-import net.dman.thepicklejar.util.PlayerAbilityManager;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -22,13 +23,8 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-
-import java.util.*;
 
 /**
  * EternalPickles - Main class for all eternal pickle abilities
@@ -37,20 +33,22 @@ import java.util.*;
  */
 public final class EternalPickles {
     public static final int ABILITY_COOLDOWN = 20 * 60;
-    private static final String GLOBAL_PICKLE_COOLDOWN_KEY = "eternal_pickle_ability";
+
     private static final double POWER_FORWARD_RANGE = 18.0D;
     private static final double POWER_FORWARD_RADIUS = 2.5D;
     private static final float POWER_FORWARD_DAMAGE = 10.0F;
-    private static final float POWER_REAR_DAMAGE = 2.0F;
+    private static final float POWER_REAR_DAMAGE = 3.0F;
+
     private static final double SOUL_RADIUS = 100.0D;
     private static final int SOUL_VEIL_DURATION = 20 * 20;
+
     private static final int REALITY_DURATION = 20 * 240;
-    private static final Map<UUID, Map<String, Long>> COOLDOWNS = new HashMap<>();
 
     private EternalPickles() {
     }
 
     public static void triggerAbilityForItem(ItemStack itemStack, PlayerEntity player) {
+
         if (!(player instanceof ServerPlayerEntity serverPlayer) || player.getWorld().isClient) {
             return;
         }
@@ -66,21 +64,21 @@ public final class EternalPickles {
     }
 
     private static void triggerBowlAbility(ServerPlayerEntity player) {
-        int abilityIndex = PlayerAbilityManager.getSelectedAbility(player);
+        int abilityIndex = ModComponents.PICKLE_POWER.get(player).getSelectedAbility();
         if (abilityIndex < 0 || abilityIndex > 5) {
             player.sendMessage(Text.literal("§cNo pickle Selected! " +
-                    "Press B and pick yo poison."), true);
+                    "Press B and pick ya poison."), true);
             return;
         }
         triggerAbility(player, abilityIndex);
     }
 
     private static void triggerAbility(ServerPlayerEntity player, int abilityIndex) {
-        String abilityName = abilityName(abilityIndex);
+        PicklePowerComponent powers = ModComponents.PICKLE_POWER.get(player);
 
-            if (isOnCooldown(player, GLOBAL_PICKLE_COOLDOWN_KEY)) {
-                int remainingSeconds = Math.max(1, getRemainingCooldown
-                        (player, GLOBAL_PICKLE_COOLDOWN_KEY) / 20);
+            if (powers.isOnCooldown()) {
+                long remainingTicks = powers.getRemainingCooldownTicks();
+                long remainingSeconds = Math.max(1L, (remainingTicks + 19L) / 20L);
                 player.sendMessage(Text.literal("§cPickle Recharging! "
                                 + remainingSeconds + "s remaining"), true);
                 return;
@@ -88,9 +86,9 @@ public final class EternalPickles {
             if (!executeAbility(player, abilityIndex)) {
                 return;
             }
-            setCooldown(player, GLOBAL_PICKLE_COOLDOWN_KEY);
-            player.sendMessage(Text.literal("§a" + abilityName +
-                            " Mobilized!"), true);
+            powers.startCooldown(ABILITY_COOLDOWN);
+            player.sendMessage(Text.literal("§a" + abilityName(abilityIndex) +
+                            " mobilized!"), true);
         }
 
         private static int getAbilityIndexForItem(Item item) {
@@ -111,7 +109,7 @@ public final class EternalPickles {
           case 3 -> "Soul Pickle";
           case 4 -> "Time Pickle";
           case 5 -> "Space Pickle";
-            default -> "Unknown";
+            default -> "Unknown ability";
         };
     }
 
@@ -142,19 +140,23 @@ public final class EternalPickles {
         for (double distance = 1.0D; distance <= POWER_FORWARD_DAMAGE; distance += 1.25D) {
             Vec3d point = origin.add(direction.multiply(distance));
             world.spawnParticles(ParticleTypes.SONIC_BOOM,
-                    point.x, point.y, point.z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+                    point.x, point.y, point.z, 1,
+                    0.0D, 0.0D, 0.0D, 0.0D);
         }
 
-        Box forwardSearch = new Box(origin, origin.add(direction.multiply(POWER_FORWARD_RANGE))).expand(POWER_FORWARD_RADIUS);
+        Box forwardSearch = new Box(
+                origin,
+                origin.add(direction.multiply(POWER_FORWARD_RANGE))).expand(POWER_FORWARD_RADIUS);
 
         for (LivingEntity target : world.getEntitiesByClass(LivingEntity.class, forwardSearch,
-                canditate -> canditate != player && canditate.isAlive())) {
+                candidate -> candidate != player && candidate.isAlive())) {
             Vec3d offset = target.getPos().subtract(origin);
             double forwardDistance = offset.dotProduct(direction);
             double sidewaysSquared = offset.lengthSquared() - forwardDistance * forwardDistance;
 
-            if (forwardDistance < 0.0D || forwardDistance > POWER_FORWARD_RANGE
-            || sidewaysSquared > POWER_FORWARD_RADIUS * POWER_FORWARD_RADIUS) {
+            if (forwardDistance < 0.0D
+                    || forwardDistance > POWER_FORWARD_RANGE
+                    || sidewaysSquared > POWER_FORWARD_RADIUS * POWER_FORWARD_RADIUS) {
                 continue;
             }
 
@@ -163,11 +165,12 @@ public final class EternalPickles {
             target.velocityModified = true;
         }
 
-        Vec3d rearCenter = player.getPos().subtract(direction.multiply(1.5D)).add(0.0D, 0.8D, 0.0D);
+        Vec3d rearCenter = player.getPos()
+                .subtract(direction.multiply(1.5D)).add(0.0D, 0.8D, 0.0D);
         Box rearSearch = new Box(rearCenter, rearCenter).expand(2.0D);
 
         for (LivingEntity target : world.getEntitiesByClass(LivingEntity.class, rearSearch,
-                canditate -> canditate != player && canditate.isAlive())) {
+                candidate -> candidate != player && candidate.isAlive())) {
             target.damage(player.getDamageSources().sonicBoom(player), POWER_REAR_DAMAGE);
             target.addVelocity(-direction.x * 0.40D, 0.08D, -direction.z * 0.40D);
             target.velocityModified = true;
@@ -176,18 +179,19 @@ public final class EternalPickles {
 
     private static void triggerMindAbility(ServerPlayerEntity player) {
         // ABILITY: Haste III & Night vision
-        player.addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, 6000, 2, false, false, true));
-        player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 6000, 0, false, false, true));
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE,
+                6000, 2, false, false, true));
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION,
+                6000, 0, false, false, true));
     }
 
     private static void triggerRealityAbility(ServerPlayerEntity player) {
         final int duration = 4_800;
         // ABILITY: Spawn 20 hostile mobs around the player & Invisibility even with armor
-        player.addStatusEffect(new StatusEffectInstance(ModEffects.REALITY_CLOAK, REALITY_DURATION, 0, false, false, false));
-
+        player.addStatusEffect(new StatusEffectInstance(ModEffects.REALITY_CLOAK, REALITY_DURATION,
+                0, false, false, false));
         spawnRealityMobs(player);
     }
-
     private static void triggerSoulAbility(ServerPlayerEntity player) {
         // ABILITY: Hides Player Health bar
         ServerWorld world = player.getServerWorld();
@@ -204,20 +208,16 @@ public final class EternalPickles {
 
     private static void triggerTimeAbility(ServerPlayerEntity player) {
         // ABILITY: Speed IV for 30 seconds
-        player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 800, 3, false, false, true));
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED,
+                800, 3, false, false, true));
         TimePickle.applyRadiusSlowness(player);
     }
 
     private static boolean triggerSpaceAbility(ServerPlayerEntity player) {
         // ABILITY: Teleport to where you're looking (100 blocks away if in air)
-        // FIXED: Only apply cooldown if teleport is successful
         return EventListeners.executeSpaceTeleport(player.getWorld(), player);
     }
 
-    /**
-     * Spawn 20 mobs around the player in a circle pattern
-     * Mobs despawn after a short time
-     */
     private static void spawnRealityMobs(ServerPlayerEntity player) {
         ServerWorld world = player.getServerWorld();
         Vec3d playerPos = player.getPos();
@@ -246,53 +246,5 @@ public final class EternalPickles {
           case 1 -> new VindicatorEntity(EntityType.VINDICATOR, world);
             default -> new EvokerEntity(EntityType.EVOKER, world);
         };
-    }
-
-    private static BlockPos getTargetBlock(PlayerEntity player) {
-        HitResult raycast = player.raycast(100, 0, false);
-
-        // Check if raycast hit a block
-        if (raycast.getType() == HitResult.Type.BLOCK) {
-            // Cast to BlockHitResult to get block position
-            BlockHitResult blockHit = (BlockHitResult) raycast;
-            return blockHit.getBlockPos();
-        }
-
-        return null;
-    }
-
-    // ==================== COOLDOWN MANAGEMENT ====================
-
-    private static Map<String, Long> getPlayerCooldowns(ServerPlayerEntity player) {
-        return COOLDOWNS.computeIfAbsent(player.getUuid(), ignored -> new HashMap<>());
-    }
-
-    public static boolean isOnCooldown(ServerPlayerEntity player, String abilityKey) {
-        Long expiration = getPlayerCooldowns(player).get(abilityKey);
-        return expiration != null && System.currentTimeMillis() < expiration;
-    }
-
-    public static int getRemainingCooldown(ServerPlayerEntity player, String abilityKey) {
-        Long expiration = getPlayerCooldowns(player).get(abilityKey);
-        return expiration == null ? 0 : (int) Math.max(0L, (expiration -
-                System.currentTimeMillis()) / 50L);
-    }
-
-    public static void setCooldown(ServerPlayerEntity player, String abilityKey) {
-        getPlayerCooldowns(player).put(abilityKey, System.currentTimeMillis
-                () + ABILITY_COOLDOWN * 50L);
-    }
-
-    public static void tickCooldowns(PlayerEntity player) {
-        if (!(player instanceof ServerPlayerEntity serverPlayer)) return;
-        Map<String, Long> cooldowns = COOLDOWNS.get(serverPlayer.getUuid());
-        if (cooldowns == null) return;
-        long now = System.currentTimeMillis();
-        cooldowns.entrySet().removeIf(entry -> now >= entry.getValue());
-        if (cooldowns.isEmpty()) COOLDOWNS.remove(serverPlayer.getUuid());
-    }
-
-    public static void clearPlayerCooldowns(PlayerEntity player) {
-        COOLDOWNS.remove(player.getUuid());
     }
 }

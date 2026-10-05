@@ -2,16 +2,12 @@ package net.dman.thepicklejar.screen;
 
 import net.dman.thepicklejar.ThePickleJar;
 import net.dman.thepicklejar.network.client.ClientPackets;
-import net.dman.thepicklejar.util.PlayerAbilityManager;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-/**
- * EternalPickleBowlSelectionScreen - GUI for selecting which pickle ability to use
- * FIXED: Added selection feedback and proper ability selection
- */
+//GUI for selecting which pickle ability to use
 public class EternalPickleBowlSelectionScreen extends Screen {
     private static final Identifier TEXTURE = new Identifier(ThePickleJar.MOD_ID,
             "textures/gui/eternal_pickle_bowl_gui.png");
@@ -69,7 +65,8 @@ public class EternalPickleBowlSelectionScreen extends Screen {
         this.client.getTextureManager().bindTexture(TEXTURE);
 
         // Main GUI panel
-        context.drawTexture(TEXTURE, this.guiLeft, this.guiTop, 0, 0, PANEL_WIDTH, PANEL_HEIGHT, 256, 256);
+        context.drawTexture(TEXTURE, this.guiLeft, this.guiTop,
+                0, 0, PANEL_WIDTH, PANEL_HEIGHT, 256, 256);
 
         // Draw pickle slots
         hoveredSlot = -1;  // Reset hovered slot
@@ -81,7 +78,9 @@ public class EternalPickleBowlSelectionScreen extends Screen {
             context.fill(slotX, slotY, slotX + 16, slotY + 16, 0xFF8B8B8B);
 
             // Draw pickle sprite
-            context.drawTexture(TEXTURE, slotX, slotY, 0, SPRITE_X[i], SPRITE_Y[i], SPRITE_WIDTH, SPRITE_HEIGHT, 256, 256);
+            context.drawTexture(TEXTURE, slotX, slotY,
+                    0, SPRITE_X[i], SPRITE_Y[i],
+                    SPRITE_WIDTH, SPRITE_HEIGHT, 256, 256);
 
             // Check if hovering
             if (mouseX >= slotX && mouseX < slotX + 16 && mouseY >= slotY && mouseY < slotY + 16) {
@@ -107,7 +106,7 @@ public class EternalPickleBowlSelectionScreen extends Screen {
             long timeSinceSelection = System.currentTimeMillis() - selectionTime;
 
             // Show message for 2 seconds (2000ms)
-            if (timeSinceSelection < 2000) {
+            if (timeSinceSelection < 4000) {
                 String message = "§a✓ " + PICKLE_NAMES[selectedSlot] + " Selected!";
                 int textWidth = this.textRenderer.getWidth(message);
                 int textX = this.centerX - textWidth / 2;
@@ -119,7 +118,6 @@ public class EternalPickleBowlSelectionScreen extends Screen {
                 this.close();
             }
         }
-
         super.render(context, mouseX, mouseY, delta);
     }
 
@@ -138,7 +136,6 @@ public class EternalPickleBowlSelectionScreen extends Screen {
 
                 if (mouseX >= slotX && mouseX < slotX + 16 && mouseY >= slotY && mouseY < slotY + 16) {
                     // Set the selected ability
-                    PlayerAbilityManager.setSelectedAbilityIndex(i);
                     ClientPackets.sendBowlAbilitySelection(i);
 
                     // Mark as selected and show feedback

@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public final class FriendshipPickleItem extends Item {
-    public static final int BFFS_DURATION = 100 * 120 * 10;
+    public static final int BFFS_DURATION = 80 * 100 * 10;
 
     public FriendshipPickleItem(Settings settings) {
         super(settings);
