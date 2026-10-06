@@ -133,6 +133,18 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.PICKLOLIUM), conditionsFromItem(ModItems.PICKLOLIUM))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.GOLDEN_PICKLE)));
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, ModItems.FRIENDSHIP_PICKLE, 1)
+                .pattern("DCD")
+                .pattern("CGC")
+                .pattern("DCD")
+                .input('G', ModItems.GOLDEN_PICKLE)
+                .input('D', Items.DANDELION)
+                .input('C', ModBlocks.GREEN_CHRYSANTHEMUM)
+                .criterion(hasItem(ModItems.GOLDEN_PICKLE), conditionsFromItem(ModItems.GOLDEN_PICKLE))
+                .criterion(hasItem(Items.DANDELION), conditionsFromItem(Items.DANDELION))
+                .criterion(hasItem(ModBlocks.GREEN_CHRYSANTHEMUM), conditionsFromItem(ModBlocks.GREEN_CHRYSANTHEMUM))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.FRIENDSHIP_PICKLE)));
+
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.GHERKIN_SOUL, 4)
                 .pattern(" C ")
                 .pattern("CSC")
