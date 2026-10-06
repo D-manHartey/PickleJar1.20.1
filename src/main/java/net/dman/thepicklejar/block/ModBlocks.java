@@ -1,5 +1,6 @@
 package net.dman.thepicklejar.block;
 
+import dev.architectury.platform.Mod;
 import net.dman.thepicklejar.ThePickleJar;
 import net.dman.thepicklejar.block.custom.GiardinieraAltarBlock;
 import net.dman.thepicklejar.block.custom.PeanutButterCropBlock;
@@ -52,22 +53,22 @@ public class ModBlocks {
             new SlabBlock(FabricBlockSettings.copyOf(Blocks.SHROOMLIGHT).sounds(ModSounds.PHIL_BLOCK_SOUNDS)));
 
     public static final Block PHIL_BUTTON = registerBlock("phil_button",
-            new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OCHRE_FROGLIGHT), BlockSetType.MANGROVE, 10, true));
+            new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OCHRE_FROGLIGHT), ModSounds.PHIL_BLOCK_SET_TYPE, 10, true));
     public static final Block PHIL_PRESSURE_PLATE = registerBlock("phil_pressure_plate",
             new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING,
-                    FabricBlockSettings.copyOf(Blocks.OCHRE_FROGLIGHT), BlockSetType.MANGROVE));
+                    FabricBlockSettings.copyOf(Blocks.OCHRE_FROGLIGHT), ModSounds.PHIL_BLOCK_SET_TYPE));
 
     public static final Block PHIL_FENCE = registerBlock("phil_fence",
             new FenceBlock(FabricBlockSettings.copyOf(Blocks.MANGROVE_FENCE)));
     public static final Block PHIL_FENCE_GATE = registerBlock("phil_fence_gate",
-            new FenceGateBlock(FabricBlockSettings.copyOf(Blocks.MANGROVE_FENCE_GATE), WoodType.MANGROVE));
+            new FenceGateBlock(FabricBlockSettings.copyOf(Blocks.MANGROVE_FENCE_GATE), ModSounds.PHIL_WOOD_TYPE));
     public static final Block PHIL_WALL = registerBlock("phil_wall",
             new WallBlock(FabricBlockSettings.copyOf(Blocks.TUBE_CORAL_FAN)));
 
     public static final Block PHIL_DOOR = registerBlock("phil_door",
-            new DoorBlock(FabricBlockSettings.copyOf(Blocks.MANGROVE_DOOR), BlockSetType.MANGROVE));
+            new DoorBlock(FabricBlockSettings.copyOf(Blocks.MANGROVE_DOOR), ModSounds.PHIL_BLOCK_SET_TYPE));
     public static final Block PHIL_TRAPDOOR = registerBlock("phil_trapdoor",
-            new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.MANGROVE_TRAPDOOR), BlockSetType.MANGROVE));
+            new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.MANGROVE_TRAPDOOR), ModSounds.PHIL_BLOCK_SET_TYPE));
 
     // Ultimate Workstation
     public static final Block GIARDINIERA_ALTAR = registerBlock("giardiniera_altar",

@@ -29,6 +29,66 @@
       "the-pickle-jar:block/phil_block/phil_block_fall"
     ]
   },
+  "phil_button_press": {
+    "subtitle": "sounds.the-pickle-jar.phil_button_press",
+    "sounds": [
+      "the-pickle-jar:block/phil_block/phil_button_press"
+    ]
+  },
+  "phil_button_release": {
+    "subtitle": "sounds.the-pickle-jar.phil_button_release",
+    "sounds": [
+      "the-pickle-jar:block/phil_block/phil_button_release"
+    ]
+  },
+  "phil_door_close": {
+    "subtitle": "sounds.the-pickle-jar.phil_door_close",
+    "sounds": [
+      "the-pickle-jar:block/phil_block/phil_door_close"
+    ]
+  },
+  "phil_door_open": {
+    "subtitle": "sounds.the-pickle-jar.phil_door_open",
+    "sounds": [
+      "the-pickle-jar:block/phil_block/phil_door_open"
+    ]
+  },
+  "phil_fencegate_close": {
+    "subtitle": "sounds.the-pickle-jar.phil_fencegate_close",
+    "sounds": [
+      "the-pickle-jar:block/phil_block/phil_fencegate_close"
+    ]
+  },
+  "phil_fencegate_open": {
+    "subtitle": "sounds.the-pickle-jar.phil_fencegate_open",
+    "sounds": [
+      "the-pickle-jar:block/phil_block/phil_fencegate_open"
+    ]
+  },
+  "phil_pressureplate_press": {
+    "subtitle": "sounds.the-pickle-jar.phil_pressureplate_press",
+    "sounds": [
+      "the-pickle-jar:block/phil_block/phil_pressureplate_press"
+    ]
+  },
+  "phil_pressureplate_release": {
+    "subtitle": "sounds.the-pickle-jar.phil_pressureplate_release",
+    "sounds": [
+      "the-pickle-jar:block/phil_block/phil_pressureplate_release"
+    ]
+  },
+  "phil_trapdoor_close": {
+    "subtitle": "sounds.the-pickle-jar.phil_trapdoor_close",
+    "sounds": [
+      "the-pickle-jar:block/phil_block/phil_trapdoor_close"
+    ]
+  },
+  "phil_trapdoor_open": {
+    "subtitle": "sounds.the-pickle-jar.phil_trapdoor_open",
+    "sounds": [
+      "the-pickle-jar:block/phil_block/phil_trapdoor_open"
+    ]
+  },
   "inkblot_mallet_hit_1": {
     "subtitle": "sounds.the-pickle-jar.inkblot_mallet_hit_1",
     "sounds": [
